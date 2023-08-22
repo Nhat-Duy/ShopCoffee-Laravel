@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryProduct;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,21 @@ Route::get('/', [HomeController::class,'index']);
 //Backend
 Route::get('/admin',[AdminController::class, 'index']);
 Route::get('/dashboard',[AdminController::class, 'show_dashboard']);
+Route::get('/logout',[AdminController::class, 'log_out']);
+Route::post('/admin-dashboard',[AdminController::class, 'dashboard']);
+
+//Danh mục
+Route::get('/danhmuc', [CategoryProduct::class, 'danhmuc']);
+Route::get('/themdanhmuc', [CategoryProduct::class, 'themdanhmuc']);
+Route::get('/suadanhmuc/{id_danhmuc}', [CategoryProduct::class, 'suadanhmuc']);
+Route::get('/xoadanhmuc/{id_danhmuc}', [CategoryProduct::class, 'xoadanhmuc']);
+
+
+Route::post('/luudanhmuc', [CategoryProduct::class, 'luudanhmuc']);
+Route::post('/update_danhmuc/{id_danhmuc}', [CategoryProduct::class, 'update_danhmuc']);
+
+
+
+
+
+

@@ -27,7 +27,15 @@
     <div class="relative flex min-h-screen text-gray-800 antialiased flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
       <div class="relative py-3 sm:w-96 mx-auto text-center">
         <span class="text-2xl font-light ">Đăng nhập Admin</span>
-        <form action="{{('/admin-dashboard')}}" method="post">
+        <br>
+        <?php
+        $message = Session::get('message');
+        if($message){
+          echo $message;
+          Session::put('message', null);
+        } 
+        ?>
+        <form action="{{URL::to('/admin-dashboard')}}" method="post">
           {{ csrf_field() }}
           <div class="mt-4 bg-white shadow-md rounded-lg text-left">
             <div class="h-2 bg-purple-400 rounded-t-md"></div>
@@ -35,7 +43,7 @@
               <label class="block font-semibold"> Tài khoản </label>
               <input type="text" name="admin_email" placeholder="abc@gmail.com" class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md">
               <label class="block mt-3 font-semibold"> Mật khẩu </label>
-              <input type="password" name="admin)password" placeholder="Password" class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md">
+              <input type="password" name="admin_password" placeholder="Password" class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md">
                 <div class="flex justify-between items-baseline">
                   <button type="submit" class="mt-4 bg-purple-400 text-black py-2 px-6 rounded-md hover:bg-purple-600">Login</button>
                   <a href="#" class="text-sm hover:underline">Quên mật khẩu</a>
