@@ -70,4 +70,24 @@ class CategoryProduct extends Controller
         return Redirect::to('danhmuc');
     }
 
+
+    //Kết thúc admin 
+
+    public function show_danhmuc($id_danhmuc){
+        $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
+
+        $all_sp = DB::table('sanpham')->orderBy('id_sp', 'desc')->get();
+
+        $danhmuc_by_id = DB::table('sanpham')
+        ->join('danhmuc', 'sanpham.id_danhmuc', '=', 'danhmuc.id_danhmuc')
+        ->where('sanpham.id_danhmuc', $id_danhmuc)->get();
+
+        $danhmuc_ten = DB::table('danhmuc')->where('danhmuc.id_danhmuc',$id_danhmuc)->limit(1)->get();
+        
+        return view('page.sanpham')
+        ->with('danhmuc',$danhmuc_sp)
+        ->with('danhmuc_by_id',$danhmuc_by_id)
+        ->with('danhmuc_ten',$danhmuc_ten);
+    }
+
 }

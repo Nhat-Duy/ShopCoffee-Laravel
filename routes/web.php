@@ -18,6 +18,16 @@ use Illuminate\Support\Facades\Route;
 */
 //Frontend
 Route::get('/', [HomeController::class,'index']);
+Route::get('/cafe_sp', [HomeController::class,'cafe_sp']);
+Route::get('/chitietsanpham', [HomeController::class,'chitietsanpham']);
+
+
+//Danh mục sản phẩm trang sản phẩm
+Route::get('/danhmuc_sanpham/{id_danhmuc}', [CategoryProduct::class,'show_danhmuc']);
+
+
+
+
 
 
 //Backend
