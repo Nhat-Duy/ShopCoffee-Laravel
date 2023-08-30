@@ -128,7 +128,7 @@
                                   <a href="#" class="dropdownn" data-toggle="modal" data-target="#myModal" ><i class="fa fa-user-o"></i>Nhật Duy</a>
                                   <div class="dropdownn-content">
                                     <a href="" data-toggle="modal" data-target="#profile"><i class="fa fa-user-circle" aria-hidden="true" ></i>My Profile</a>
-                                    <a href="logout.php"  ><i class="fa fa-sign-in" aria-hidden="true"></i>Log out</a>
+                                    <a href="logout.php"  ><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Xuất</a>
                                     
                                   </div>
                                 </div>
@@ -137,8 +137,8 @@
                                 <div class="dropdownn">
                                   <a href="#" class="dropdownn" data-toggle="modal" data-target="#myModal" ><i class="fa fa-user-o"></i> My Account</a>
                                   <div class="dropdownn-content">
-                                    <a href="" data-toggle="modal" data-target="#Modal_login"><i class="fa fa-sign-in" aria-hidden="true" ></i>Login</a>
-                                    <a href="" data-toggle="modal" data-target="#Modal_register"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a>
+                                    <a href="" data-toggle="modal" data-target="#Modal_login"><i class="fa fa-sign-in" aria-hidden="true" ></i>Đăng nhập</a>
+                                    <a href="" data-toggle="modal" data-target="#Modal_register"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng ký</a>
                                   </div>
                                 </div>
                             </li>				
@@ -161,7 +161,7 @@
 							<div class="header-logo">
 								<a href="#" class="logo">
 								<font style="font-style:normal; font-size: 33px;color: aliceblue;font-family: serif">
-                                        Online Shop
+                                        Bell Shop
                                     </font>
 								</a>
 							</div>
@@ -177,8 +177,8 @@
 										<option value="1">Trà Sữa</option>
 										<option value="1">Hồng Trà</option>
 									</select>
-									<input class="input" id="search" type="text" placeholder="Search here">
-									<button type="submit" id="search_btn" class="search-btn">Search</button>
+									<input class="input" id="search" type="text" placeholder="Tìm Kiếm...">
+									<button type="submit" id="search_btn" class="search-btn">Tìm</button>
 								</form>
 							</div>
 						</div>
@@ -305,10 +305,10 @@
                             <div class="col-md-12">
                             
                                 <div class="newsletter">
-                                    <p>Sign Up for the <strong>OFFERUPDATES</strong></p>
+                                    <p>Đăng ký nhận <strong>CẬP NHẬT ƯU ĐÃI</strong></p>
                                     <form id="offer_form" onsubmit="return false">
-                                        <input class="input" type="email" id="email" name="email" placeholder="Enter Your Email">
-                                        <button class="newsletter-btn" value="Sign Up" name="signup_button" type="submit"><i class="fa fa-envelope"></i> Subscribe</button>
+                                        <input class="input" type="email" id="email" name="email" placeholder="Nhập email của bạn...">
+                                        <button class="newsletter-btn" value="Sign Up" name="signup_button" type="submit"><i class="fa fa-envelope"></i> Đặt mua</button>
                                     </form>
                                     <div class="" id="offer_msg">
                                         <!--Alert from signup form-->
@@ -343,12 +343,12 @@
                             <div class="row">
                                 <div class="col-md-3 col-xs-6">
                                     <div class="footer">
-                                        <h3 class="footer-title">About Us</h3>
-                                        <p>This is my Small Database Management System mini project</p>
+                                        <h3 class="footer-title">Về chúng tôi</h3>
+                                        <p>Đây là dự án nhỏ Hệ thống quản lý cơ sở dữ liệu nhỏ của tôi</p>
                                         <ul class="footer-links">
-                                            <li><a href="#"><i class="fa fa-map-marker"></i>Bangalore ,Kumbalagodu</a></li>
-                                            <li><a href="#"><i class="fa fa-phone"></i>+91-9535688928</a></li>
-                                            <li><a href="#"><i class="fa fa-envelope-o"></i>puneethreddy951@gmail.com</a></li>
+                                            <li><a href="#"><i class="fa fa-map-marker"></i>Ninh Kiều, Cần Thơ</a></li>
+                                            <li><a href="#"><i class="fa fa-phone"></i>0364349546</a></li>
+                                            <li><a href="#"><i class="fa fa-envelope-o"></i>duyb1910043@gmail.com</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -363,20 +363,20 @@
                                     </ul>
                                     <span class="copyright">
                                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank">PuneethRdddyHC</a>
+                                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> Copyright ©2023 All rights reserved <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank">PuneethRdddyHC</a>
                                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                     </span>
                                 </div>
         
                                 <div class="col-md-3 col-xs-6">
                                     <div class="footer">
-                                        <h3 class="footer-title">Categories</h3>
+                                        <h3 class="footer-title">Danh mục</h3>
                                         <ul class="footer-links">
-                                            <li><a href="#">Mobiles</a></li>
-                                            <li><a href="#">Men</a></li>
-                                            <li><a href="#">Women</a></li>
-                                            <li><a href="#">Kids</a></li>
-                                            <li><a href="#">Accessories</a></li>
+                                            <li><a href="#">Trà Sữa</a></li>
+                                            <li><a href="#">Hồng Trà</a></li>
+                                            <li><a href="#">Cà Phê</a></li>
+                                            <li><a href="#">Món khác</a></li>
+                                            {{-- <li><a href="#">Accessories</a></li> --}}
                                         </ul>
                                     </div>
                                 </div>

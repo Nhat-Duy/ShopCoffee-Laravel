@@ -28,7 +28,4 @@ class HomeController extends Controller
         return view('page.sanpham')->with('danhmuc',$danhmuc_sp)->with('all_sp', $all_sp);
     }
 
-    public function chitietsanpham(){
-        return view('page.chitietsanpham');
-    }
 }

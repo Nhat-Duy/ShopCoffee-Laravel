@@ -62,11 +62,11 @@
                 <div class="col-md-4 col-xs-6">
                     <a href="product.php?p=78"><div class="shop">
                         <div class="shop-img">
-                            <img src="{{asset('public/frontend/images/shop01.png')}}" alt="">
+                            <img src="{{asset('public/upload/sanpham/trasua152.jpg')}}" height="240" alt="">
                         </div>
                         <div class="shop-body">
-                            <h3>Laptop<br>Collection</h3>
-                            <a href="" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                            <h3>Trà Sữa<br>Bộ sưu tập</h3>
+                            <a href="" class="cta-btn">Mua ngay <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div></a>
                 </div>
@@ -76,11 +76,11 @@
                 <div class="col-md-4 col-xs-6">
                     <a href=""><div class="shop">
                         <div class="shop-img">
-                            <img src="{{asset('public/frontend/images/shop03.png')}}" alt="">
+                            <img src="{{asset('public/upload/sanpham/trasua280.png')}}" height="240" alt="">
                         </div>
                         <div class="shop-body">
-                            <h3>Accessories<br>Collection</h3>
-                            <a href="product.php?p=72" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                            <h3>Hồng Trà<br>Bộ sưu tập</h3>
+                            <a href="product.php?p=72" class="cta-btn">Mua ngay <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div></a>
                 </div>
@@ -90,11 +90,11 @@
                 <div class="col-md-4 col-xs-6">
                     <a href="product.php?p=79"><div class="shop">
                         <div class="shop-img">
-                            <img src="{{asset('public/frontend/images/shop02.png')}}" alt="">
+                            <img src="{{asset('public/upload/sanpham/cafe160.jpg')}}" height="240" alt="">
                         </div>
                         <div class="shop-body">
-                            <h3>Cameras<br>Collection</h3>
-                            <a href="product.php?p=79" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                            <h3>Cà Phê<br>Bộ sưu tập</h3>
+                            <a href="product.php?p=79" class="cta-btn">Mua ngay <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                         </div></a>
                 </div>
@@ -140,7 +140,7 @@
                             <div class="products-slick" data-nav="#slick-nav-1" >
                             @foreach($all_sp as $key => $sanpham)
                             <div class='product'>
-                                <a href='product.php?p=$pro_id'><div class='product-img'>
+                                <a href='{{URL::to('/chitietsanpham/'.$sanpham->id_sp)}}'><div class='product-img'>
                                     <img src='{{URL::to('public/upload/sanpham/'.$sanpham->hinhanh_sp)}}' style='max-height: 170px;' alt=''>
                                     <div class='product-label'>
                                         <span class='sale'>-30%</span>
@@ -203,31 +203,31 @@
                             <li>
                                 <div>
                                     <h3>02</h3>
-                                    <span>Days</span>
+                                    <span>Ngày</span>
                                 </div>
                             </li>
                             <li>
                                 <div>
                                     <h3>10</h3>
-                                    <span>Hours</span>
+                                    <span>Giờ</span>
                                 </div>
                             </li>
                             <li>
                                 <div>
                                     <h3>34</h3>
-                                    <span>Mins</span>
+                                    <span>Phút</span>
                                 </div>
                             </li>
                             <li>
                                 <div>
                                     <h3>60</h3>
-                                    <span>Secs</span>
+                                    <span>Giây</span>
                                 </div>
                             </li>
                         </ul>
-                        <h2 class="text-uppercase">hot deal this week</h2>
-                        <p>New Collection Up to 50% OFF</p>
-                        <a class="primary-btn cta-btn" href="store.php">Shop now</a>
+                        <h2 class="text-uppercase">Ưu đãi cuối tuần</h2>
+                        <p>Sản phẩm mới giảm giá đến 30%</p>
+                        <a class="primary-btn cta-btn" href="store.php">Mua ngay</a>
                     </div>
                 </div>
             </div>

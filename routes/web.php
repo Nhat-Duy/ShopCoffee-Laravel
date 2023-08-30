@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryProduct;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 //Frontend
 Route::get('/', [HomeController::class,'index']);
 Route::get('/cafe_sp', [HomeController::class,'cafe_sp']);
-Route::get('/chitietsanpham', [HomeController::class,'chitietsanpham']);
+Route::get('/chitietsanpham/{id_sp}', [ProductController::class,'chitietsanpham']);
 
 
 //Danh mục sản phẩm trang sản phẩm
@@ -56,6 +57,9 @@ Route::get('/xoasanpham/{id_sp}', [ProductController::class, 'xoasanpham']);
 Route::post('/luusanpham', [ProductController::class, 'luusanpham']);
 Route::post('/update_sanpham/{id_sp}', [ProductController::class, 'update_sanpham']);
 
+//Giỏ hàng
+Route::post('/luugiohang', [CartController::class, 'luugiohang']);
+Route::get('/giohang', [CartController::class, 'show_cart']);
 
 
 

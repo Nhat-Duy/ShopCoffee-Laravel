@@ -113,4 +113,29 @@ class ProductController extends Controller
         Session::put('message', 'Xóa sản phẩm thành công');
         return Redirect::to('sanpham');
     }
+
+    //Kết thúc trang admin
+
+
+    public function chitietsanpham($id_sp){
+
+        $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
+
+        $chitiet_sp = DB::table('sanpham')
+        ->join('danhmuc','danhmuc.id_danhmuc','=','sanpham.id_danhmuc')
+        ->where('sanpham.id_sp', $id_sp)->get();
+
+        foreach ($chitiet_sp as $key => $value){
+            $id_danhmuc = $value->id_danhmuc;
+        }
+
+        $lienquan_sp = DB::table('sanpham')
+        ->join('danhmuc','danhmuc.id_danhmuc','=','sanpham.id_danhmuc')
+        ->where('danhmuc.id_danhmuc', $id_danhmuc)->whereNotIn('sanpham.id_sp', [$id_sp])->limit(4)->get();
+
+        return view('page.sanpham.chitietsanpham')
+        ->with('danhmuc',$danhmuc_sp)
+        ->with('chitiet_sp', $chitiet_sp)
+        ->with('lienquan_sp', $lienquan_sp);
+    }
 }

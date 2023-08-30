@@ -88,6 +88,7 @@ class CategoryProduct extends Controller
         ->with('danhmuc',$danhmuc_sp)
         ->with('danhmuc_by_id',$danhmuc_by_id)
         ->with('danhmuc_ten',$danhmuc_ten);
+        
     }
 
 }
