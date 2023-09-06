@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Online Shopping</title>
+		<title>Người dùng</title>
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
@@ -123,13 +123,24 @@
 					</ul>
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-inr"></i> INR</a></li>
-						<li>
+						<li>    
+                            <?php 
+                                $id_kh = Session::get('id_kh');
+                                if($id_kh != NULL){
+                            
+                            ?>
                                <div class="dropdownn">
                                   <a href="#" class="dropdownn" data-toggle="modal" data-target="#myModal" ><i class="fa fa-user-o"></i>Nhật Duy</a>
                                   <div class="dropdownn-content">
-                                    <a href="" data-toggle="modal" data-target="#profile"><i class="fa fa-user-circle" aria-hidden="true" ></i>My Profile</a>
-                                    <a href="logout.php"  ><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Xuất</a>
-                                    
+                                    <a href="" ><i class="fa fa-user-circle" aria-hidden="true" ></i>My Profile</a>
+                                    <a href="{{URL::to('/dangxuat')}}"  ><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Xuất</a>
+                                    <?php 
+                                    }else{
+                                    ?>
+                                    <a href="{{URL::to('/login_checkout')}}"><i class="fa fa-sign-in" aria-hidden="true" ></i>Đăng nhập</a>
+                                    <?php 
+                                        }
+                                    ?> 
                                   </div>
                                 </div>
 
@@ -137,8 +148,9 @@
                                 <div class="dropdownn">
                                   <a href="#" class="dropdownn" data-toggle="modal" data-target="#myModal" ><i class="fa fa-user-o"></i> My Account</a>
                                   <div class="dropdownn-content">
-                                    <a href="" data-toggle="modal" data-target="#Modal_login"><i class="fa fa-sign-in" aria-hidden="true" ></i>Đăng nhập</a>
-                                    <a href="" data-toggle="modal" data-target="#Modal_register"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng ký</a>
+                                    
+                                  
+                                    <a href="{{URL::to('/sign_up')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng ký</a>
                                   </div>
                                 </div>
                             </li>				
@@ -161,7 +173,7 @@
 							<div class="header-logo">
 								<a href="#" class="logo">
 								<font style="font-style:normal; font-size: 33px;color: aliceblue;font-family: serif">
-                                        Bell Shop
+                                        ND Coffee
                                     </font>
 								</a>
 							</div>
@@ -171,14 +183,15 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
+								<form action="{{URL::to('/timkiem')}}" method="POST">
+                                    {{ csrf_field() }}
 									<select class="input-select">
 										<option value="0">Danh mục</option>
 										<option value="1">Trà Sữa</option>
 										<option value="1">Hồng Trà</option>
 									</select>
-									<input class="input" id="search" type="text" placeholder="Tìm Kiếm...">
-									<button type="submit" id="search_btn" class="search-btn">Tìm</button>
+									<input class="input" name="key" id="search" type="text" placeholder="Tìm Kiếm...">
+									<button type="submit" name="tim" id="search_btn" class="search-btn">Tìm</button>
 								</form>
 							</div>
 						</div>
@@ -189,10 +202,9 @@
 							<div class="header-ctn">
 								<!-- Wishlist -->
 								<div>
-									<a href="https://github.com/puneethreddyhc">
-										<i class="fa fa-github"></i>
-										<span>Github</span>
-										
+									<a href="">
+										<i class="fa fa-heart"></i>
+										<span>Yêu thích</span>
 									</a>
 								</div>
 								<!-- /Wishlist -->
@@ -201,14 +213,14 @@
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
-										<span>Your Cart</span>
+										<span>Giỏ hàng</span>
 										<div class="badge qty">0</div>
 									</a>
 									<div class="cart-dropdown"  >
 										<div class="cart-list" id="cart_product">
 										</div>
 										<div class="cart-btns">
-											<a href="cart.php" style="width:100%;"><i class="fa fa-edit"></i>  edit cart</a>
+											<a href="{{URL::to('/giohang')}}" style="width:100%;"><i class="fa fa-edit"></i>  edit cart</a>
 										</div>
 									</div>
 										

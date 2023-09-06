@@ -19,15 +19,15 @@
                             <div class="col-md-2  col-md-pull-5">
                                 <div id="product-imgs">
                                     <div class="product-preview">
-                                        <img src="{{URL::to('public/frontend/images/shop01.png')}}" alt="">
+                                        <img src="{{URL::to('public/upload/sanpham/trasua276.png')}}" alt="">
                                     </div>
 
                                     <div class="product-preview">
-                                        <img src="{{URL::to('public/frontend/images/shop02.png')}}" alt="">
+                                        <img src="{{URL::to('public/upload/sanpham/trasua315.jpg')}}" alt="">
                                     </div>
 
 									<div class="product-preview">
-                                        <img src="{{URL::to('public/frontend/images/shop03.png')}}" alt="">
+                                        <img src="{{URL::to('public/upload/sanpham/trasua152.jpg')}}" alt="">
                                     </div>
 
                                 </div>

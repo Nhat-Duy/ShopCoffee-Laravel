@@ -28,4 +28,13 @@ class HomeController extends Controller
         return view('page.sanpham')->with('danhmuc',$danhmuc_sp)->with('all_sp', $all_sp);
     }
 
+    public function timkiem(Request $request){
+        $key = $request->key;
+        $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
+
+        $timsanpham = DB::table('sanpham')->where('ten_sp', 'like', '%' .$key. '%')->limit(4)->get();
+
+        return view('page.sanpham.timkiem')->with('danhmuc',$danhmuc_sp)->with('timsanpham',$timsanpham);
+        
+    }
 }

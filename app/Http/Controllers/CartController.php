@@ -27,6 +27,7 @@ class CartController extends Controller
         $data['options']['hinhanh'] = $info_sp->hinhanh_sp;
 
         Cart::add($data);
+        // Cart::destroy();
         return Redirect::to('/giohang');
     }
 
@@ -34,5 +35,19 @@ class CartController extends Controller
 
         $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
         return view('page.giohang.giohang')->with('danhmuc',$danhmuc_sp);
+    }
+
+    public function xoagiohang($rowId){
+        Cart::update($rowId,0);
+        return Redirect::to('/giohang');
+    }
+
+    public function capnhat_giohang(Request $request){
+        $rowId = $request->rowId_cart;
+        $qty = $request->qty;
+
+        Cart::update($rowId,$qty);
+        return Redirect::to('/giohang');
+
     }
 }

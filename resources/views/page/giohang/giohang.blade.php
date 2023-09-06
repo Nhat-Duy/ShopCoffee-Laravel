@@ -10,13 +10,16 @@
                         <div id="issessionset"></div>
                         <?php 
                         $content = Cart::content();
+                        // echo '<pre>';
+                        // print_r($content);
+                        // echo '</pre>';
                         ?>
                         <table id="cart" class="table table-hover table-condensed">
                             <thead>
                                 <tr>
                                     <th style="width:50%">Sản phẩm</th>
                                     <th style="width:10%">Giá</th>
-                                    <th style="width:8%">Quantity</th>
+                                    <th style="width:8%">Số lượng</th>
                                     <th style="width:7%" class="text-center">Tổng</th>
                                     <th style="width:10%"></th>
                                 </tr>
@@ -47,10 +50,12 @@
                                         {{-- <input type="text" class="form-control qty" value="1" > --}}
                                         <div class="qty-label">
                                             <div class="input-number">
-                                                <input name="qty" type="number" value="{{$v_content->qty}}">
-                                                <input name="idsp_hidden" type="hidden" value="1">
-                                                <span class="qty-up">+</span>
-                                                <span class="qty-down">-</span>
+                                                <form action="{{URL::to('/capnhat_giohang')}}" method="POST">
+                                                    {{csrf_field()}}
+                                                    <input name="qty" type="text" value="{{$v_content->qty}}">
+                                                    <input name="rowId_cart" type="hidden" value="{{$v_content->rowId}}">
+                                                    <input type="submit" value="Cập nhật" name="capnhat_giohang" class="btn btn-info btn-sm update">
+                                                </form>
                                             </div>
                                         </div>
                                     </td>
@@ -67,10 +72,16 @@
                                     </td> --}}
                                     <td class="actions" data-th>
                                         <div class="btn-group">
-                                            <a href="" class="btn btn-info btn-sm update" update_id="70">
+                                            {{-- <form id="update-form" action="{{ URL::to('/capnhat_giohang/'.$v_content->rowId) }}" method="POST" style="display: none;">
+                                                {{csrf_field()}}
+                                            </form>
+                                            <a href="#" class="btn btn-info btn-sm update" update_id="70" onclick="event.preventDefault(); document.getElementById('update-form').submit();">
                                                 <i class="fa fa-refresh"></i>
-                                            </a>
-                                            <a href="" class="btn btn-danger btn-sm remove" update_id="70">
+                                            </a> --}}
+                                            {{-- <a href="" class="btn btn-info btn-sm update" update_id="70">
+                                                <i class="fa fa-refresh"></i>
+                                            </a> --}}
+                                            <a href="{{URL::to('/xoagiohang/'.$v_content->rowId)}}" class="btn btn-danger btn-sm remove" update_id="70">
                                                 <i class="fa fa-trash-o"></i>
                                             </a>
                                         </div>
@@ -88,10 +99,23 @@
                                     </td>
                                     <td colspan="2" class="hidden-xs"></td>
                                     <td class="hidden-xs text-center">
-                                        <p>{{number_format(Cart::subtotal()). ' '. 'VNĐ' }}</p>
+                                        <p>{{number_format(Cart::subtotal(0, ',' , '.')). ' '. 'VNĐ' }}</p>
                                     </td>
                                     <td>
-                                        <a href data-toggle="modal" data-target="#Modal_register" class="btn btn-success">Thanh toán</a>
+                                        <?php 
+                                            $id_kh = Session::get('id_kh');
+                                            if($id_kh != NULL){
+                                        
+                                        ?>
+                                            <a href="{{URL::to('/thanhtoan')}}" {{--data-toggle="modal" data-target="#Modal_register"--}} class="btn btn-success">Thanh toán</a>
+                                        <?php 
+                                            }else{
+                                        ?>
+                                            <a href="{{URL::to('/login_checkout')}}" {{--data-toggle="modal" data-target="#Modal_register"--}} class="btn btn-success">Thanh toán</a>
+                                        <?php 
+                                            }
+                                        ?> 
+                                        
                                     </td>
                                 </tr>
                             </tfoot>

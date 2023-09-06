@@ -5,6 +5,8 @@ use App\Http\Controllers\CategoryProduct;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class,'index']);
 Route::get('/cafe_sp', [HomeController::class,'cafe_sp']);
 Route::get('/chitietsanpham/{id_sp}', [ProductController::class,'chitietsanpham']);
+
+Route::post('/timkiem', [HomeController::class,'timkiem']);
 
 
 //Danh mục sản phẩm trang sản phẩm
@@ -58,8 +62,21 @@ Route::post('/luusanpham', [ProductController::class, 'luusanpham']);
 Route::post('/update_sanpham/{id_sp}', [ProductController::class, 'update_sanpham']);
 
 //Giỏ hàng
+Route::post('/capnhat_giohang', [CartController::class, 'capnhat_giohang']);
 Route::post('/luugiohang', [CartController::class, 'luugiohang']);
 Route::get('/giohang', [CartController::class, 'show_cart']);
+Route::get('/xoagiohang/{rowId}', [CartController::class, 'xoagiohang']);
+
+//Checkout
+Route::get('/login_checkout', [CheckoutController::class, 'login_checkout']);
+Route::get('/sign_up', [CheckoutController::class, 'sign_up']);
+Route::get('/thanhtoan', [CheckoutController::class, 'thanhtoan']);
+Route::get('/dangxuat', [CheckoutController::class, 'dangxuat']);
+
+
+Route::post('/themkhachhang', [CheckoutController::class, 'themkhachhang']);
+Route::post('/luuthanhtoan', [CheckoutController::class, 'luuthanhtoan']);
+Route::post('/dangnhap', [CheckoutController::class, 'dangnhap']);
 
 
 
