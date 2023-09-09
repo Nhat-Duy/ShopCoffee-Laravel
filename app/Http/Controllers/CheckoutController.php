@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Redirect;
 
 class CheckoutController extends Controller
 {
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+           return Redirect::to('admin.dashboard');
+        }else{
+           return Redirect::to('admin')->send();
+        }
+    }
+
     public function login_checkout(){
 
         $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
@@ -65,7 +74,51 @@ class CheckoutController extends Controller
     }
 
     public function payment(){
+        $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
 
+        return view('page.checkout.payment')->with('danhmuc',$danhmuc_sp);
+    }
+    public function dat_hang(Request $request){
+        // Lay hinh thuc thanh toan
+        $data = array();
+        $data['hinhthuc_payment'] = $request->option_payment;
+        $data['tinhtrang_payment'] = 'Đang chờ xử lý';
+        
+        $id_payment = DB::table('payment')->insertGetId($data);
+
+        // Chèn vào đơn hàng
+        $donhang_data = array();
+        $donhang_data['id_kh'] = Session::get('id_kh');
+        $donhang_data['id_tt'] = Session::get('id_tt');
+        $donhang_data['id_payment'] = $id_payment;
+        $donhang_data['tong_dh'] = Cart::subtotal();
+        $donhang_data['tinhtrang_dh'] = 'Đang chờ xử lý';
+
+        $id_dh = DB::table('donhang')->insertGetId($donhang_data);
+
+        // Chèn vào chi tiết đơn hàng
+        $content = Cart::content();
+        foreach($content as $v_content){
+            $ctdh_data = array();
+            $ctdh_data['id_dh'] = $id_dh;
+            $ctdh_data['id_sp'] = $v_content->id;
+            $ctdh_data['ten_sp'] = $v_content->name;
+            $ctdh_data['gia_sp'] = $v_content->price;
+            $ctdh_data['soluong_sp'] = $v_content->qty;
+
+            DB::table('chitietdonhang')->insertGetId($ctdh_data);
+        }
+        if($data['hinhthuc_payment'] == 1){
+            echo 'Thanh toán bằng thẻ ATM';
+        }else{
+            Cart::destroy();
+            $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
+
+            return view('page.checkout.tienmat')->with('danhmuc',$danhmuc_sp);
+        }
+            
+    
+        //return Redirect('/payment');
     }
 
     public function dangxuat(){
@@ -86,7 +139,31 @@ class CheckoutController extends Controller
             return Redirect('/login_checkout');
             
         }
-        
+    }
 
+    public function quanlydonhang(){
+        $this->AuthLogin();
+        $donhang = DB::table('donhang')
+        ->join('khachhang','donhang.id_kh','=','khachhang.id_kh')
+        ->select('donhang.*','khachhang.ten_kh')
+        ->orderBy('donhang.id_dh','desc')->get();
+        $quanlydonhang = view('admin.quanlydonhang')->with('donhang', $donhang);
+        return view('admin_layout')->with('admin.quanlydonhang', $quanlydonhang);
+    }
+
+    public function xemdonhang($id_dh){
+        $this->AuthLogin();
+        $donhang_id = DB::table('donhang')
+        ->join('khachhang','donhang.id_kh','=','khachhang.id_kh')
+        ->join('thanhtoan','donhang.id_tt','=','thanhtoan.id_tt')
+        ->join('chitietdonhang','donhang.id_dh','=','chitietdonhang.id_dh')
+        ->select('donhang.*','khachhang.*', 'thanhtoan.*', 'chitietdonhang.*',)
+        ->where('donhang.id_dh',$id_dh)->get();
+        // echo '<pre>';
+        // print_r($donhang_id);
+        // echo '</pre>';
+
+        $quanlychitietdonhang = view('admin.xemdonhang')->with('donhang_id', $donhang_id);
+        return view('admin_layout')->with('admin.xemdonhang', $quanlychitietdonhang);
     }
 }

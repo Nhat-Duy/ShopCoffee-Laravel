@@ -6,6 +6,7 @@
         <div id="cart_checkout">
             <div class="main">
                 <div class="table-responsive">
+                    <h2 class="text-center text-danger">Xem lại giỏ hàng</h2>
                     <form action="">
                         <div id="issessionset"></div>
                         <?php 
@@ -90,39 +91,27 @@
                             </tbody>
                             @endforeach
                             <tfoot>
-                                <tr>
+                            <form action="{{URL::to('/dathang')}}" method="POST">
+                                {{ csrf_field() }}
+                                <tr> 
                                     <td>
-                                        <a href="" class="btn btn-warning">
-                                            <i class="fa fa-angle-left"></i>
-                                            Quay về
-                                        </a>
+                                        <h4>Chọn hình thức thanh toán</h4>
+                                        <span>
+                                            <label><input name="option_payment" value="1" type="checkbox">Trả bằng thẻ ATM</label>
+                                        </span>
+                                        <span>
+                                            <label><input name="option_payment" value="2" type="checkbox">Trả bằng tiền mặt</label>
+                                        </span>
                                     </td>
                                     <td colspan="2" class="hidden-xs"></td>
                                     <td class="hidden-xs text-center">
                                         <p>{{number_format(Cart::subtotal(0, ',' , '.')). ' '. 'VNĐ' }}</p>
                                     </td>
                                     <td>
-                                        <?php 
-                                            $id_kh = Session::get('id_kh');
-                                            $id_tt = Session::get('id_tt');
-                                            if($id_kh != NULL && $id_tt == NULL){
-                                        
-                                        ?>
-                                            <a href="{{URL::to('/thanhtoan')}}" {{--data-toggle="modal" data-target="#Modal_register"--}} class="btn btn-success">Thanh toán</a>
-                                        <?php 
-                                            }elseif($id_kh != NULL && $id_tt != NULL){
-                                        ?>
-                                            <a href="{{URL::to('/payment')}}" {{--data-toggle="modal" data-target="#Modal_register"--}} class="btn btn-success">Thanh toán</a>
-                                        <?php 
-                                            }else{
-                                        ?>
-                                            <a href="{{URL::to('/login_checkout')}}" {{--data-toggle="modal" data-target="#Modal_register"--}} class="btn btn-success">Thanh toán</a>
-                                        <?php 
-                                            }
-                                        ?>
-                                        
+                                        <input type="submit" value="Đặt hàng" name="dathang" class="btn btn-success">
                                     </td>
                                 </tr>
+                            </form>
                             </tfoot>
                             
                         </table>

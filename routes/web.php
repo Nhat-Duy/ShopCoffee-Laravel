@@ -72,11 +72,16 @@ Route::get('/login_checkout', [CheckoutController::class, 'login_checkout']);
 Route::get('/sign_up', [CheckoutController::class, 'sign_up']);
 Route::get('/thanhtoan', [CheckoutController::class, 'thanhtoan']);
 Route::get('/dangxuat', [CheckoutController::class, 'dangxuat']);
-
+Route::get('/payment', [CheckoutController::class, 'payment']);
 
 Route::post('/themkhachhang', [CheckoutController::class, 'themkhachhang']);
 Route::post('/luuthanhtoan', [CheckoutController::class, 'luuthanhtoan']);
 Route::post('/dangnhap', [CheckoutController::class, 'dangnhap']);
+Route::post('/dathang', [CheckoutController::class, 'dat_hang']);
+
+//Quản lý đơn hàng
+Route::get('/quanlydonhang', [CheckoutController::class, 'quanlydonhang']);
+Route::get('/xemdonhang/{id_dh}', [CheckoutController::class, 'xemdonhang']);
 
 
 
