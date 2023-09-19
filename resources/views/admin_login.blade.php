@@ -48,6 +48,8 @@
                   <button type="submit" class="mt-4 bg-purple-400 text-black py-2 px-6 rounded-md hover:bg-purple-600">Login</button>
                   <a href="#" class="text-sm hover:underline">Quên mật khẩu</a>
                 </div>
+                <a href="{{url('/login_google')}}" class="text-sm hover:underline">Login GG</a>
+
             </div>
         </form>
       </div>

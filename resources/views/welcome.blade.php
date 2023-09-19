@@ -7,7 +7,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Người dùng</title>
+        <meta name="description" content="{{$meta_mota}}">
+        <meta name="keywords" content="{{$meta_keywords}}">
+        <meta name="robots" content="">
+		<title>{{$meta_title}}</title>
+        <link rel="canonical" href="{{$url_canonical}}">
+
+
+        <meta property="og:site_name" content="http://localhost/shopcoffee">
+        <meta property="og:description" content="{{$meta_mota}}">
+        <meta property="og:title" content="{{$meta_title}}">
+        <meta property="og:url" content="{{$url_canonical}}">
+        <meta property="og:type" content="website">
+
+
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
@@ -28,6 +41,8 @@
 		<link type="text/css" rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}"/>
 		<link type="text/css" rel="stylesheet" href="{{asset('public/frontend/css/accountbtn.css')}}"/>
 		
+		<link type="text/css" rel="stylesheet" href="{{asset('public/frontend/css/sweetalert.css')}}"/>
+
 		
 		
          
@@ -220,7 +235,7 @@
 										<div class="cart-list" id="cart_product">
 										</div>
 										<div class="cart-btns">
-											<a href="{{URL::to('/giohang')}}" style="width:100%;"><i class="fa fa-edit"></i>  edit cart</a>
+											<a href="{{URL::to('/giohangajax')}}" style="width:100%;"><i class="fa fa-edit"></i>Xem giỏ hàng</a>
 										</div>
 									</div>
 										
@@ -415,9 +430,16 @@
                 <script src="{{asset('public/frontend/js/jquery.zoom.min.js')}}"></script>
                 <script src="{{asset('public/frontend/js/main.js')}}"></script>
                 <script src="{{asset('public/frontend/js/actions.js')}}"></script>
-                <script src="{{asset('public/frontend/js/sweetalert.min')}}"></script>
+                <script src="{{asset('public/frontend/js/sweetalert.js')}}"></script>
                 <script src="{{asset('public/frontend/js/jquery.payform.min.js')}}" charset="utf-8"></script>
-            <script src="js/script.js"></script>
+
+                {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+                <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0" nonce="BIQRpw3q"></script>
+                <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0" nonce="TaeuBJgP"></script>
+                <script src="js/script.js"></script>
+
                 <script>var c = 0;
                 function menu(){
                   if(c % 2 == 0) {
@@ -448,5 +470,40 @@
                     });
                 });
             </script>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.add-to-cart').click(function(){
+                    var id = $(this).data('id');
+                    var id_sp_giohang = $('.id_sp_giohang_' + id).val();
+                    var ten_sp_giohang = $('.ten_sp_giohang_' + id).val();
+                    var hinhanh_sp_giohang = $('.hinhanh_sp_giohang_' + id).val();
+                    var gia_sp_giohang = $('.gia_sp_giohang_' + id).val();
+                    var qty_sp_giohang = $('.qty_sp_giohang_' + id).val();
+                    var _token = $('input[name="_token"]').val();
+
+                    $.ajax({
+                        url: '{{url('/themgiohangajax')}}',
+                        method: 'POST',
+                        data:{id_sp_giohang:id_sp_giohang, ten_sp_giohang:ten_sp_giohang, hinhanh_sp_giohang:hinhanh_sp_giohang, gia_sp_giohang:gia_sp_giohang, qty_sp_giohang:qty_sp_giohang, _token:_token},
+                        success:function(data){
+                            swal({
+                                title: "Are you sure?",
+                                text: "Your will not be able to recover this imaginary file!",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonClass: "btn-danger",
+                                confirmButtonText: "Yes, delete it!",
+                                closeOnConfirm: false
+                                },
+                                function(){
+                                    window.location.href="{{url('/giohangajax')}}";
+                            });
+                        }
+                    });
+                });
+                
+            });
+        </script>
             
                               

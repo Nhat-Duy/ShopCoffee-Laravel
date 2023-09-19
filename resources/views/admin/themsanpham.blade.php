@@ -30,7 +30,7 @@
                   <td >
                       <div class="flex flex-col justify-center">
                         <td class="text-black">Tên sản phẩm</td>
-                        <td><input type="text" name="tensanpham" class="border-2 border-black"></td>  
+                        <td><input type="text" name="tensanpham" class="border-2 border-black" pattern=".{5,}" title="Vui lòng nhập ít nhất 5 ký tự" required></td>  
                       </div>
                   </td>
                 </tr>
@@ -38,7 +38,7 @@
                     <td >
                         <div class="flex flex-col justify-center">
                           <td class="text-black">Giá sản phẩm</td>
-                          <td><input type="text" name="giasanpham" class="border-2 border-black"></td>  
+                          <td><input type="text" name="giasanpham" class="border-2 border-black" pattern="[0-9]+" title="Vui lòng nhập bằng chữ số" required></td>  
                         </div>
                     </td>
                   </tr>
@@ -46,7 +46,7 @@
                     <td >
                         <div class="flex flex-col justify-center">
                           <td class="text-black">Hình ảnh sản phẩm</td>
-                          <td><input type="file" name="hinhanh_sp" class="border-2 border-black"></td>  
+                          <td><input type="file" name="hinhanh_sp" class="border-2 border-black" ></td>  
                         </div>
                     </td>
                   </tr>
@@ -54,7 +54,7 @@
                   <td>
                       <div class="flex flex-col justify-center">
                         <td class="text-black">Mô tả sản phẩm</td>
-                        <td><textarea type="text" name="motasanpham" class="border-2 border-black"></textarea></td>  
+                        <td><textarea type="text" name="motasanpham" id="ckeditor" class="border-2 border-black" required></textarea></td>  
                       </div>
                   </td>
                 </tr>
@@ -62,7 +62,7 @@
                     <td>
                         <div class="flex flex-col justify-center">
                           <td class="text-black">Nội dung sản phẩm</td>
-                          <td><textarea type="text" name="noidungsanpham" class="border-2 border-black"></textarea></td>  
+                          <td><textarea type="text" name="noidungsanpham" class="border-2 border-black" required></textarea></td>  
                         </div>
                     </td>
                 </tr>

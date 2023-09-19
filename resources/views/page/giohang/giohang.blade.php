@@ -81,7 +81,7 @@
                                             {{-- <a href="" class="btn btn-info btn-sm update" update_id="70">
                                                 <i class="fa fa-refresh"></i>
                                             </a> --}}
-                                            <a href="{{URL::to('/xoagiohang/'.$v_content->rowId)}}" class="btn btn-danger btn-sm remove" update_id="70">
+                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này?')" href="{{URL::to('/xoagiohang/'.$v_content->rowId)}}" class="btn btn-danger btn-sm remove" update_id="70">
                                                 <i class="fa fa-trash-o"></i>
                                             </a>
                                         </div>

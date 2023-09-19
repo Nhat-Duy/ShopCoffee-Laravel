@@ -397,4 +397,12 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- main script file  -->
   <script src="{{asset('public/backend/js/soft-ui-dashboard-tailwind.js?v=1.0.5')}}" async></script>
+
+  <script src="{{asset('public/backend/ckeditor/ckeditor.js')}}"></script>
+
+  <script>
+        CKEDITER.replace('ckeditor');
+        CKEDITER.replace('ckeditor1');
+  </script>
+
 </html>

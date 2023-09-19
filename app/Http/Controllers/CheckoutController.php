@@ -52,10 +52,21 @@ class CheckoutController extends Controller
         return Redirect('/thanhtoan');
     }
 
-    public function thanhtoan(){
+    public function thanhtoan(Request $request){
+        //Seo
+        $meta_mota = "Thanh Toán";
+        $meta_keywords = "Thanh Toán";
+        $meta_title = "Thanh Toán";
+        $url_canonical = $request->url();
+        //EndSeo
         $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
 
-        return view('page.checkout.thanhtoan')->with('danhmuc',$danhmuc_sp);
+        return view('page.checkout.thanhtoan')
+        ->with('danhmuc',$danhmuc_sp)
+        ->with('meta_mota', $meta_mota)
+        ->with('meta_keywords', $meta_keywords)
+        ->with('meta_title', $meta_title)
+        ->with('url_canonical', $url_canonical);
     }
 
     public function luuthanhtoan(Request $request){
@@ -73,12 +84,30 @@ class CheckoutController extends Controller
         return Redirect('/payment');
     }
 
-    public function payment(){
+    public function payment(Request $request){
+        //Seo
+        $meta_mota = "Xem lại giỏ hàng";
+        $meta_keywords = "Xem lại giỏ hàng";
+        $meta_title = "Xem lại giỏ hàng";
+        $url_canonical = $request->url();
+        //EndSeo
         $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
 
-        return view('page.checkout.payment')->with('danhmuc',$danhmuc_sp);
+        return view('page.checkout.payment')
+        ->with('danhmuc',$danhmuc_sp)
+        ->with('meta_mota', $meta_mota)
+        ->with('meta_keywords', $meta_keywords)
+        ->with('meta_title', $meta_title)
+        ->with('url_canonical', $url_canonical);
     }
     public function dat_hang(Request $request){
+        //Seo
+        $meta_mota = "Cảm ơn";
+        $meta_keywords = "Cảm ơn";
+        $meta_title = "Cảm ơn";
+        $url_canonical = $request->url();
+        //EndSeo
+
         // Lay hinh thuc thanh toan
         $data = array();
         $data['hinhthuc_payment'] = $request->option_payment;
@@ -114,7 +143,12 @@ class CheckoutController extends Controller
             Cart::destroy();
             $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
 
-            return view('page.checkout.tienmat')->with('danhmuc',$danhmuc_sp);
+            return view('page.checkout.tienmat')
+            ->with('danhmuc',$danhmuc_sp)
+            ->with('meta_mota', $meta_mota)
+            ->with('meta_keywords', $meta_keywords)
+            ->with('meta_title', $meta_title)
+            ->with('url_canonical', $url_canonical);
         }
             
     

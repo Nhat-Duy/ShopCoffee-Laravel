@@ -32,7 +32,7 @@
                     <div class="">
                       <div class="flex flex-col justify-center">
                         <td class="text-black">Tên danh mục</td>
-                        <td><input type="text" value="{{$edit_value->ten_danhmuc}}" name="tendanhmuc" class="border-2 border-black"></td>  
+                        <td><input type="text" value="{{$edit_value->ten_danhmuc}}" name="tendanhmuc" class="border-2 border-black" pattern=".{3,}" title="Vui lòng nhập ít nhất 3 ký tự" required></td>  
                       </div>
                     </div>
                   </td>
@@ -41,7 +41,15 @@
                   <td>
                       <div class="flex flex-col justify-center">
                         <td class="text-black">Mô tả danh mục</td>
-                        <td><textarea type="text" name="motadanhmuc" class="border-2 border-black">{{$edit_value->mota_danhmuc}}</textarea></td>  
+                        <td><textarea type="text" name="motadanhmuc" class="border-2 border-black" required>{{$edit_value->mota_danhmuc}}</textarea></td>  
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                      <div class="flex flex-col justify-center">
+                        <td class="text-black">Từ khóa danh mục</td>
+                        <td><textarea type="text" name="tukhoadanhmuc" class="border-2 border-black" required>{{$edit_value->meta_keywords}}</textarea></td>  
                       </div>
                   </td>
                 </tr>

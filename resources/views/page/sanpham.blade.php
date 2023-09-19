@@ -63,6 +63,14 @@
                 @foreach ($danhmuc_ten as $key => $name)
                     <h3 class="text-center text-danger">Danh mục {{$name->ten_danhmuc}}</h3>
                 @endforeach
+                <div>
+                    {{-- <div class="fb-share-button" data-href="http://localhost/shopcoffee" data-layout="" data-size=""><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$url_canonical}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div> --}}
+                    <div class="fb-like" data-href="{{$url_canonical}}" data-width="" data-layout="" data-action="" data-size="" data-share="true"></div>
+                    {{-- <div class="fb-comments" data-href="{{$url_canonical}}" data-width="" data-numposts="20"></div> --}}
+
+                </div>
+                
+
                 <div class="col-md-9">
                     @foreach($danhmuc_by_id as $key => $sanpham )
                     <a href="{{URL::to('/chitietsanpham/'.$sanpham->id_sp)}}">
@@ -78,7 +86,7 @@
                                 
                                 <div class='product-body' style="height: 170px;">
                                     
-                                    <h3 class='product-name header-cart-item-name'><a href='product.php?p=$pro_id'>{{$sanpham->ten_sp}}</a></h3>
+                                    <h3 class='product-name header-cart-item-name'><a href=''>{{$sanpham->ten_sp}}</a></h3>
                                     <h4 class='product-price header-cart-item-info'>{{number_format($sanpham->gia_sp).' '.'VNĐ'}}</h4>
                                     <div class='product-rating'>
                                         <i class='fa fa-star'></i>
@@ -93,6 +101,7 @@
                                         <button class='quick-view'><i class='fa fa-eye'></i><span class='tooltipp'>Xem chi tiết</span></button>
                                     </div>
                                 </div>
+                                
                                 <div class='add-to-cart'>
                                     <button pid='$pro_id' id='product' class='add-to-cart-btn block2-btn-towishlist' href='#'><i class='fa fa-shopping-cart'></i>Thêm vào giỏ hàng</button>
                                 </div>

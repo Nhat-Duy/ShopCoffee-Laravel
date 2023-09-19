@@ -31,10 +31,6 @@ Route::post('/timkiem', [HomeController::class,'timkiem']);
 Route::get('/danhmuc_sanpham/{id_danhmuc}', [CategoryProduct::class,'show_danhmuc']);
 
 
-
-
-
-
 //Backend
 Route::get('/admin',[AdminController::class, 'index']);
 Route::get('/dashboard',[AdminController::class, 'show_dashboard']);
@@ -57,15 +53,18 @@ Route::get('/themsanpham', [ProductController::class, 'themsanpham']);
 Route::get('/suasanpham/{id_sp}', [ProductController::class, 'suasanpham']);
 Route::get('/xoasanpham/{id_sp}', [ProductController::class, 'xoasanpham']);
 
-
 Route::post('/luusanpham', [ProductController::class, 'luusanpham']);
 Route::post('/update_sanpham/{id_sp}', [ProductController::class, 'update_sanpham']);
 
 //Giỏ hàng
 Route::post('/capnhat_giohang', [CartController::class, 'capnhat_giohang']);
 Route::post('/luugiohang', [CartController::class, 'luugiohang']);
+Route::post('/themgiohangajax', [CartController::class, 'themgiohangajax']);
+
 Route::get('/giohang', [CartController::class, 'show_cart']);
 Route::get('/xoagiohang/{rowId}', [CartController::class, 'xoagiohang']);
+Route::get('/giohangajax', [CartController::class, 'giohangajax']);
+
 
 //Checkout
 Route::get('/login_checkout', [CheckoutController::class, 'login_checkout']);
@@ -83,6 +82,13 @@ Route::post('/dathang', [CheckoutController::class, 'dat_hang']);
 Route::get('/quanlydonhang', [CheckoutController::class, 'quanlydonhang']);
 Route::get('/xemdonhang/{id_dh}', [CheckoutController::class, 'xemdonhang']);
 
+
+// Gửi mail
+Route::get('/gui_mail', [HomeController::class, 'gui_mail']);
+
+//Đăng nhập bằng google
+Route::get('/login_google', [AdminController::class, 'login_google']);
+Route::get('/google/callback', [AdminController::class, 'callback_google']);
 
 
 

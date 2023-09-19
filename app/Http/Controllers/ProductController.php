@@ -117,7 +117,13 @@ class ProductController extends Controller
     //Kết thúc trang admin
 
 
-    public function chitietsanpham($id_sp){
+    public function chitietsanpham(Request $request, $id_sp){
+        //Seo
+        $meta_mota = "Chi tiết sản phẩm";
+        $meta_keywords = "Chi tiết sản phẩm";
+        $meta_title = "Chi tiết sản phẩm";
+        $url_canonical = $request->url();
+        //EndSeo
 
         $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
 
@@ -136,6 +142,10 @@ class ProductController extends Controller
         return view('page.sanpham.chitietsanpham')
         ->with('danhmuc',$danhmuc_sp)
         ->with('chitiet_sp', $chitiet_sp)
-        ->with('lienquan_sp', $lienquan_sp);
+        ->with('lienquan_sp', $lienquan_sp)
+        ->with('meta_mota', $meta_mota)
+        ->with('meta_keywords', $meta_keywords)
+        ->with('meta_title', $meta_title)
+        ->with('url_canonical', $url_canonical);
     }
 }

@@ -31,7 +31,7 @@
                   <td >
                       <div class="flex flex-col justify-center">
                         <td class="text-black">Tên sản phẩm</td>
-                        <td><input type="text" value="{{$pro->ten_sp}}" name="tensanpham" class="border-2 border-black"></td>  
+                        <td><input type="text" value="{{$pro->ten_sp}}" name="tensanpham" class="border-2 border-black" pattern=".{5,}" title="Vui lòng nhập ít nhất 5 ký tự" required></td>  
                       </div>
                   </td>
                 </tr>
@@ -39,7 +39,7 @@
                     <td >
                         <div class="flex flex-col justify-center">
                           <td class="text-black">Giá sản phẩm</td>
-                          <td><input type="text" value="{{$pro->gia_sp}}" name="giasanpham" class="border-2 border-black"></td>  
+                          <td><input type="text" value="{{$pro->gia_sp}}" name="giasanpham" class="border-2 border-black" pattern="[0-9]+" title="Vui lòng nhập bằng chữ số" required></td>  
                         </div>
                     </td>
                   </tr>
@@ -59,7 +59,7 @@
                   <td>
                       <div class="flex flex-col justify-center">
                         <td class="text-black">Mô tả sản phẩm</td>
-                        <td><textarea type="text" name="motasanpham" class="border-2 border-black">{{$pro->mota_sp}}</textarea></td>  
+                        <td><textarea type="text" name="motasanpham" class="border-2 border-black" required>{{$pro->mota_sp}}</textarea></td>  
                       </div>
                   </td>
                 </tr>
@@ -67,7 +67,7 @@
                     <td>
                         <div class="flex flex-col justify-center">
                           <td class="text-black">Nội dung sản phẩm</td>
-                          <td><textarea type="text" name="noidungsanpham" class="border-2 border-black">{{$pro->noidung_sp}}</textarea></td>  
+                          <td><textarea type="text" name="noidungsanpham" class="border-2 border-black" required>{{$pro->noidung_sp}}</textarea></td>  
                         </div>
                     </td>
                 </tr>
