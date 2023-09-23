@@ -6,7 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
-
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\DeliveryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,11 +60,29 @@ Route::post('/update_sanpham/{id_sp}', [ProductController::class, 'update_sanpha
 //Giỏ hàng
 Route::post('/capnhat_giohang', [CartController::class, 'capnhat_giohang']);
 Route::post('/luugiohang', [CartController::class, 'luugiohang']);
+
+Route::post('/update_cart', [CartController::class, 'update_cart']);
 Route::post('/themgiohangajax', [CartController::class, 'themgiohangajax']);
 
 Route::get('/giohang', [CartController::class, 'show_cart']);
 Route::get('/xoagiohang/{rowId}', [CartController::class, 'xoagiohang']);
 Route::get('/giohangajax', [CartController::class, 'giohangajax']);
+
+Route::get('/delete_sp/{id_session}', [CartController::class, 'delete_sp']);
+Route::get('/xoatatca', [CartController::class, 'xoatatca']);
+
+
+//Coupon
+Route::post('/check_coupon', [CartController::class, 'check_coupon']);
+Route::get('/unset_coupon', [CouponController::class, 'unset_coupon']);
+
+//Quản lý Coupon
+Route::get('/coupon', [CouponController::class, 'show_coupon']);
+Route::get('/themcoupon', [CouponController::class, 'themcoupon']);
+Route::get('/xoa_coupon/{id_coupon}', [CouponController::class, 'xoa_coupon']);
+
+
+Route::post('/luucoupon', [CouponController::class, 'luucoupon']);
 
 
 //Checkout
@@ -89,6 +108,11 @@ Route::get('/gui_mail', [HomeController::class, 'gui_mail']);
 //Đăng nhập bằng google
 Route::get('/login_google', [AdminController::class, 'login_google']);
 Route::get('/google/callback', [AdminController::class, 'callback_google']);
+
+// Quản lý vận chuyển
+Route::get('/quanlyvanchuyen', [DeliveryController::class, 'quanlyvanchuyen']);
+Route::post('/select_delivery', [DeliveryController::class, 'select_delivery']);
+Route::post('/insert-delivary', [DeliveryController::class, 'insert_delivary']);
 
 
 

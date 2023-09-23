@@ -73,41 +73,51 @@
 
                 <div class="col-md-9">
                     @foreach($danhmuc_by_id as $key => $sanpham )
-                    <a href="{{URL::to('/chitietsanpham/'.$sanpham->id_sp)}}">
-                        <div class='col-md-3 col-xs-6' >
-                            <div class='product' >
-                                    <div class='product-img'>
-                                        <img src='{{URL::to('public/upload/sanpham/'.$sanpham->hinhanh_sp)}}' style='max-height: 170px;' alt=''>
-                                        <div class='product-label'>
-                                            <span class='sale'>-30%</span>
-                                            <span class='new'>NEW</span>
+                    <form>
+                        @csrf
+                            <input type="hidden" class="id_sp_giohang_{{$sanpham->id_sp}}" value="{{$sanpham->id_sp}}">
+                            <input type="hidden" class="ten_sp_giohang_{{$sanpham->id_sp}}" value="{{$sanpham->ten_sp}}">
+                            <input type="hidden" class="hinhanh_sp_giohang_{{$sanpham->id_sp}}" value="{{$sanpham->hinhanh_sp}}">
+                            <input type="hidden" class="gia_sp_giohang_{{$sanpham->id_sp}}" value="{{$sanpham->gia_sp}}">
+                            <input type="hidden" class="qty_sp_giohang_{{$sanpham->id_sp}}" value="1">
+
+
+                        <a href="{{URL::to('/chitietsanpham/'.$sanpham->id_sp)}}">
+                            <div class='col-md-3 col-xs-6' >
+                                <div class='product' >
+                                        <div class='product-img'>
+                                            <img src='{{URL::to('public/upload/sanpham/'.$sanpham->hinhanh_sp)}}' style='max-height: 170px;' alt=''>
+                                            <div class='product-label'>
+                                                <span class='sale'>-30%</span>
+                                                <span class='new'>NEW</span>
+                                            </div>
+                                        </div>
+                                    
+                                    <div class='product-body' style="height: 170px;">
+                                        
+                                        <h3 class='product-name header-cart-item-name'><a href=''>{{$sanpham->ten_sp}}</a></h3>
+                                        <h4 class='product-price header-cart-item-info'>{{number_format($sanpham->gia_sp).' '.'VNĐ'}}</h4>
+                                        <div class='product-rating'>
+                                            <i class='fa fa-star'></i>
+                                            <i class='fa fa-star'></i>
+                                            <i class='fa fa-star'></i>
+                                            <i class='fa fa-star'></i>
+                                            <i class='fa fa-star'></i>
+                                        </div>
+                                        <div class='product-btns'>
+                                            <button class='add-to-wishlist'><i class='fa fa-heart-o'></i><span class='tooltipp'>Yêu thích</span></button>
+                                            
+                                            <button class='quick-view'><i class='fa fa-eye'></i><span class='tooltipp'>Xem chi tiết</span></button>
                                         </div>
                                     </div>
-                                
-                                <div class='product-body' style="height: 170px;">
                                     
-                                    <h3 class='product-name header-cart-item-name'><a href=''>{{$sanpham->ten_sp}}</a></h3>
-                                    <h4 class='product-price header-cart-item-info'>{{number_format($sanpham->gia_sp).' '.'VNĐ'}}</h4>
-                                    <div class='product-rating'>
-                                        <i class='fa fa-star'></i>
-                                        <i class='fa fa-star'></i>
-                                        <i class='fa fa-star'></i>
-                                        <i class='fa fa-star'></i>
-                                        <i class='fa fa-star'></i>
+                                    <div class='add-to-cart' data-id="{{$sanpham->id_sp}}" name="add-to-cart">
+                                        <button type="button" data-id="{{$sanpham->id_sp}}" name="add-to-cart" class='add-to-cart-btn block2-btn-towishlist' ><i class='fa fa-shopping-cart'></i>Thêm vào giỏ hàng</button>
                                     </div>
-                                    <div class='product-btns'>
-                                        <button class='add-to-wishlist'><i class='fa fa-heart-o'></i><span class='tooltipp'>Yêu thích</span></button>
-                                        
-                                        <button class='quick-view'><i class='fa fa-eye'></i><span class='tooltipp'>Xem chi tiết</span></button>
-                                    </div>
-                                </div>
-                                
-                                <div class='add-to-cart'>
-                                    <button pid='$pro_id' id='product' class='add-to-cart-btn block2-btn-towishlist' href='#'><i class='fa fa-shopping-cart'></i>Thêm vào giỏ hàng</button>
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </form>
                     @endforeach
                 </div>
 

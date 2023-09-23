@@ -488,12 +488,12 @@
                         data:{id_sp_giohang:id_sp_giohang, ten_sp_giohang:ten_sp_giohang, hinhanh_sp_giohang:hinhanh_sp_giohang, gia_sp_giohang:gia_sp_giohang, qty_sp_giohang:qty_sp_giohang, _token:_token},
                         success:function(data){
                             swal({
-                                title: "Are you sure?",
-                                text: "Your will not be able to recover this imaginary file!",
+                                title: "Đã thêm sản phẩm vào giỏ hàng",
+                                text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
                                 type: "warning",
                                 showCancelButton: true,
                                 confirmButtonClass: "btn-danger",
-                                confirmButtonText: "Yes, delete it!",
+                                confirmButtonText: "Đi đến giỏ hàng",
                                 closeOnConfirm: false
                                 },
                                 function(){

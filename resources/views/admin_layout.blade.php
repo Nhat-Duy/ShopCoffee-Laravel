@@ -18,6 +18,9 @@
     <!-- Main Styling -->
     <link href="{{asset('public/backend/css/soft-ui-dashboard-tailwind.css?v=1.0.5')}}" rel="stylesheet" />
 
+		<link type="text/css" rel="stylesheet" href="{{asset('public/frontend/css/sweetalert.css')}}"/>
+
+
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -131,10 +134,10 @@
           </li>
 
           <li class="mt-0.5 w-full">
-            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" href="../pages/rtl.html">
+            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" href="{{URL::to('/coupon')}}">
               <div class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
                 <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <title>settings</title>
+                  <title>Quản lý mã giảm giá</title>
                   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
                       <g transform="translate(1716.000000, 291.000000)">
@@ -148,7 +151,29 @@
                   </g>
                 </svg>
               </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">RTL</span>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Quản lý mã giảm giá</span>
+            </a>
+          </li>
+
+          <li class="mt-0.5 w-full">
+            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" href="{{URL::to('/quanlyvanchuyen')}}">
+              <div class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <title>customer-support</title>
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                      <g transform="translate(1716.000000, 291.000000)">
+                        <g transform="translate(1.000000, 0.000000)">
+                          <path class="fill-slate-800 opacity-60" d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z"></path>
+                          <path class="fill-slate-800" d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
+                          <path class="fill-slate-800" d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Quản lý vận chuyển</span>
             </a>
           </li>
 
@@ -399,10 +424,61 @@
   <script src="{{asset('public/backend/js/soft-ui-dashboard-tailwind.js?v=1.0.5')}}" async></script>
 
   <script src="{{asset('public/backend/ckeditor/ckeditor.js')}}"></script>
+  <script src="{{asset('public/frontend/js/sweetalert.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <script>
         CKEDITER.replace('ckeditor');
         CKEDITER.replace('ckeditor1');
+  </script>
+
+  <script type="text/javascript">
+      $(document).ready(function(){
+        $('.themphivanchuyen').click(function(){
+
+          var city = $('.city').val();
+          var province = $('.province').val();
+          var wards = $('.wards').val();
+          var fee_ship = $('.fee_ship').val();
+          var _token = $('input[name="_token"]').val();
+
+          $.ajax({
+              url : '{{url('/insert-delivary')}}',
+              method: 'POST',
+              data: {city:city, province:province, wards:wards, fee_ship:fee_ship, _token:_token},
+              success:function(data){
+                alert('Thêm phí vận chuyển thành công!');
+              }
+          });
+
+        })
+
+        $('.choose').on('change', function(){
+          var action = $(this).attr('id');
+          var ma_id = $(this).val();
+          var _token = $('input[name="_token"]').val();
+          var result = '';
+
+          // alert(action);
+          // alert(matp);
+          // alert(_token);
+
+          if(action == 'city'){
+            result = 'province';
+          }else{
+            result = 'wards';
+          }
+          $.ajax({
+              url : '{{url('/select_delivery')}}',
+              method: 'POST',
+              data: {action:action, ma_id:ma_id, _token:_token},
+              success:function(data){
+                $('#' + result).html(data);
+              }
+          });
+        });
+      })
+
   </script>
 
 </html>

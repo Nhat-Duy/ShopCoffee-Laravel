@@ -6,9 +6,16 @@
         <div id="cart_checkout">
             <div class="main">
                 <div class="table-responsive">
-                    <form action="">
+                    <form action="{{url('/update_cart')}}" method="POST">
+                        @csrf
                         <div id="issessionset"></div>
-                        
+                        <?php
+                        $message = Session::get('message');
+                        if($message){
+                            echo $message;
+                            Session::put('message', null);
+                        } 
+                        ?>
                         <table id="cart" class="table table-hover table-condensed">
                             <thead>
                                 <tr>
@@ -19,12 +26,13 @@
                                     <th style="width:10%"></th>
                                 </tr>
                             </thead>
+                            @if(Session::get('cart')==true)
                             @foreach (Session::get('cart') as $key => $cart)
                             @php
                                 // print_r(Session::get('cart'));
                             @endphp
                             @php
-                                $total = 2;
+                                $total = 0;
                             @endphp
 
                             @php
@@ -59,19 +67,22 @@
                                         {{-- <input type="text" class="form-control qty" value="1" > --}}
                                         <div class="qty-label">
                                             <div class="input-number">
-                                                <form action="" method="POST">
+                                                {{-- <form action="" method="POST"> --}}
             
-                                                    <input name="qty" type="text" value=" {{$cart['qty_sp']}}">
-                                                    <input name="rowId_cart" type="hidden" value="">
-                                                    <input type="submit" value="Cập nhật" name="capnhat_giohang" class="btn btn-info btn-sm update">
-                                                </form>
+                                                    <input name="cart_qty[{{$cart['id_session']}}]" type="text" value="{{$cart['qty_sp']}}">
+                                                    {{-- <input name="rowId_cart" type="hidden" value=""> --}}
+                                                {{-- </form> --}}
                                             </div>
                                         </div>
                                     </td>
+                                    @php
+                                        $subtotal = $cart['gia_sp'] * $cart['qty_sp'];
+                                        // $total += $subtotal;
+                                    @endphp
                                     <td class="hidden-xs text-center">
                                         <p>
                                             <?php 
-                                            $subtotal = $cart['gia_sp'] * $cart['qty_sp'];
+                                            // $subtotal = $cart['gia_sp'] * $cart['qty_sp'];
                                             echo number_format($subtotal). ' '. 'VNĐ';    
                                             ?>
                                         </p>
@@ -90,7 +101,7 @@
                                             {{-- <a href="" class="btn btn-info btn-sm update" update_id="70">
                                                 <i class="fa fa-refresh"></i>
                                             </a> --}}
-                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này?')" href="" class="btn btn-danger btn-sm remove" update_id="70">
+                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này?')" href="{{URL::to('/delete_sp/'. $cart['id_session'])}}" class="btn btn-danger btn-sm remove" update_id="70">
                                                 <i class="fa fa-trash-o"></i>
                                             </a>
                                         </div>
@@ -98,30 +109,88 @@
                                 </tr>
                             </tbody>
                             @endforeach
+                            
                             <tfoot>
                                 <tr>
                                     <td>
-                                        <a href="" class="btn btn-warning">
-                                            <i class="fa fa-angle-left"></i>
-                                            Quay về
-                                        </a>
+                                        <input type="submit" value="Cập nhật" name="update_cart" class="btn btn-info btn-sm update">
                                     </td>
-                                    <td colspan="2" class="hidden-xs"></td>
+                                    
+                                    {{-- <td colspan="2" class="hidden-xs"></td> --}}
+                                    @if(Session::get('coupon'))
+                                    <td>        
+                                        <a href="{{url('/unset_coupon')}}" class="btn btn-success">Xóa mã khuyến mãi</a>
+                                    </td>
+                                    @endif
+                                    <td>        
+                                        <a href="{{url('/xoatatca')}}" class="btn btn-success">Xóa tất cả</a>
+                                    </td>
                                     <td class="hidden-xs text-center">
-                                        <p><?php 
+                                        <p>Tổng tiền: 
+                                            <?php 
                                             // $subtotal = $cart['gia_sp'] * $cart['qty_sp'];
                                             $total += $subtotal;
                                             echo number_format($total). ' '. 'VNĐ';    
-                                            ?></p>
+                                            ?>
+                                        </p>
+                                        <p>
+                                            @if(Session::get('coupon'))
+                                                @foreach(Session::get('coupon') as $key => $cou)
+                                                    @if($cou['dieukien_coupon'] == 1)
+                                                        Mã giảm: {{$cou['number_coupon']}}%
+                                                        <p>
+                                                            @php
+                                                            $total_coupon = ($total*$cou['number_coupon'])/100;
+                                                            echo '<p>Tổng giảm: '. number_format($total_coupon,0,',','.').'đ</p>';
+                                                            @endphp
+                                                        </p>
+                                                        <p>
+                                                            Tổng đã giảm:  {{number_format($total-$total_coupon,0,',','.').' đ'}}
+                                                        </p>
+                                                    @else
+                                                        Mã giảm: {{number_format($cou['number_coupon'],0,',','.')}} đ  
+                                                        <p>
+                                                            @php
+                                                                $total_coupon = $total-$cou['number_coupon'];
+                                                            @endphp
+                                                        </p>
+                                                        <p>
+                                                            Tổng đã giảm: {{number_format($total_coupon,0,',','.'). ' đ'}}
+                                                        </p>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        </p>
                                     </td>
-                                    <td>        
-                                        <a href="" {{--data-toggle="modal" data-target="#Modal_register"--}} class="btn btn-success">Thanh toán</a>
+                                    @else
+                                    <td>
+                                        @php
+                                        echo 'Làm ơn thêm sản phẩm vào giỏ hàng'
+                                        @endphp
                                     </td>
+                                    
+                                    
+                                    {{-- <td>        
+                                        <a href=""  class="btn btn-success">Thanh toán</a>
+                                    </td> --}}
                                 </tr>
                             </tfoot>
-                            
+                            @endif
                         </table>
                     </form>
+                    <tr>
+                        @if(Session::get('cart'))
+                        <form class="form-inline" method="POST" action="{{url('/check_coupon')}}">
+                            @csrf
+                            <td>
+                                <input style="margin-bottom: 5px; margin-left: 5px; padding: 5px;" type="text" name="coupon" class="form-control" placeholder="Nhập mã giảm giá">
+                                        
+                                <input type="submit" class="btn btn-success check_coupon" value="Tính mã giảm giá" name="check_coupon">
+                                
+                            </td>
+                        </form>
+                        @endif
+                    </tr>
                 </div>
             </div>
         </div>

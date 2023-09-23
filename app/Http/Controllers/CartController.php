@@ -6,12 +6,50 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Cart;
 use Session;
+use App\Models\Coupon;
 use App\Http\Requests;
 use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Support\Facades\Redirect;
 
 class CartController extends Controller
 {   
+    public function check_coupon(Request $request){
+        $data = $request->all();
+        $coupon = Coupon::where('ma_coupon',$data['coupon'])->first();
+        if($coupon){
+            $count_coupon = $coupon->count();
+            if($count_coupon>0){
+                $coupon_session = Session::get('coupon');
+                if($coupon_session==true){
+                    $is_avaiable = 0;
+                    if($is_avaiable == 0){
+                        $cou[] = array(
+                            'ma_coupon' => $coupon->ma_coupon,
+                            'number_coupon' => $coupon->number_coupon,
+                            'dieukien_coupon' => $coupon->dieukien_coupon,
+
+                        );
+                        Session::put('coupon',$cou);
+                    }
+                }else{
+                    $cou[] = array(
+                        'ma_coupon' => $coupon->ma_coupon,
+                        'number_coupon' => $coupon->number_coupon,
+                        'dieukien_coupon' => $coupon->dieukien_coupon,
+
+                    );
+                    Session::put('coupon',$cou);
+                }
+                Session::save();
+                return redirect()->back()->with('message', 'Thêm mã giảm giá thàng công!');
+            }
+        }else{
+            return redirect()->back()->with('message', 'Mã giảm giá không đúng!');
+
+        }
+        
+    }
+
     public function giohangajax(Request $request){
         //Seo
         $meta_mota = "Giỏ hàng";
@@ -69,6 +107,50 @@ class CartController extends Controller
 
         Session::save();
 
+    }
+
+    public function delete_sp($id_session){
+        $cart = Session::get('cart');
+        if($cart == true){
+            foreach($cart as $key => $val){
+                if($val['id_session'] == $id_session){
+                    unset($cart[$key]);
+                }
+            }
+            Session::put('cart',$cart);
+            return Redirect()->back()->with('message', 'Xóa sản phẩm thành công');
+        }else{
+            return Redirect()->back()->with('message', 'Xóa sản phẩm thật bại');
+        }
+    }
+
+    public function update_cart(Request $request){
+        $data = $request->all();
+        $cart = Session::get('cart');
+        if($cart == true){
+            foreach($data['cart_qty'] as $key => $qty){
+                foreach($cart as $session => $val){
+                    if($val['id_session'] == $key){
+                        $cart[$session]['qty_sp'] = $qty;
+                    }
+                }
+            }
+            Session::put('cart', $cart);
+            return Redirect()->back()->with('message', 'Cập nhật sản phẩm thành công!');
+        }else{
+            return Redirect()->back()->with('message', 'Cập nhật sản phẩm thật bại');
+
+        }
+    }
+
+    public function xoatatca(){
+        $cart = Session::get('cart');
+        if($cart == true){
+            Session::forget('cart');
+            Session::forget('coupon');
+            return Redirect()->back()->with('message', 'Xóa hết giỏ thành công!');
+
+        }
     }
 
     public function luugiohang(Request $request){
