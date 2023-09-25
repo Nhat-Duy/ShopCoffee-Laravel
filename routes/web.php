@@ -99,6 +99,7 @@ Route::post('/dathang', [CheckoutController::class, 'dat_hang']);
 
 Route::post('/select_delivery_home', [CheckoutController::class, 'select_delivery_home']);
 Route::post('/caculate_fee', [CheckoutController::class, 'caculate_fee']);
+Route::post('/xacnhandonhang', [CheckoutController::class, 'xacnhandonhang']);
 
 
 

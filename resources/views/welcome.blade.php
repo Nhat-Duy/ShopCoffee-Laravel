@@ -557,5 +557,33 @@
                 });
             });
         </script>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.send_order').click(function(){
+
+                    var ten_tt = $('.ten_tt').val();
+                    var email_tt = $('.email_tt').val();
+                    var sdt_tt = $('.sdt_tt').val();
+                    var diachi_tt = $('.diachi_tt').val();
+                    var notes_tt = $('.notes_tt').val();
+                    var method_tt = $('.method_tt').val();
+
+                    var oder_fee = $('.oder_fee').val();
+                    var oder_coupon = $('.oder_coupon').val();
+                    var _token = $('input[name="_token"]').val();
+
+                    $.ajax({
+                        url: '{{url('/xacnhandonhang')}}',
+                        method: 'POST',
+                        data:{ten_tt:ten_tt, email_tt:email_tt, sdt_tt:sdt_tt, diachi_tt:diachi_tt, notes_tt:notes_tt, oder_fee:oder_fee, oder_coupon:oder_coupon, method_tt:method_tt,  _token:_token},
+                        success:function(){
+                            alert('Đặt hàng thành công');
+                        }
+                    });
+                });
+                
+            });
+        </script>
             
                               

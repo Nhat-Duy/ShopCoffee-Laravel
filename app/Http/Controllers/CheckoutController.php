@@ -11,6 +11,10 @@ use App\Models\Province;
 use App\Models\Wards;
 use App\Models\Feeship;
 
+use App\Models\Thanhtoan;
+use App\Models\Donhang;
+use App\Models\Chitietdonhang;
+
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 
@@ -25,14 +29,45 @@ class CheckoutController extends Controller
         }
     }
 
+    public function xacnhandonhang(Request $request){
+        $data = $request->all();
+        $thanhtoan = new Thanhtoan();
+        $thanhtoan->ten_tt = $data['ten_tt'];
+        $thanhtoan->email_tt = $data['email_tt'];
+        $thanhtoan->sdt_tt = $data['sdt_tt'];
+        $thanhtoan->diachi_tt = $data['diachi_tt'];
+        $thanhtoan->notes_tt = $data['notes_tt'];
+        $thanhtoan->method_tt = $data['method_tt'];
+        $thanhtoan->save();
+        $id_tt = $thanhtoan->id_tt;
+
+        $oder_code = substr(md5(microtime()),rand(0,26),5);
+
+        $donhang = new Donhang();
+        $donhang->id_kh = Session::get('id_kh');
+        $donhang->id_tt = $id_tt;
+        $donhang->tinhtrang_dh = 1;
+        $donhang->ma_dh = $oder_code;
+        $donhang->save();
+
+    }
+
     public function caculate_fee(Request $request){
         $data = $request->all();
         if($data['matp']){
             $feeship = Feeship::where('matp_fee', $data['matp'])->where('maqh_fee', $data['maqh'])->where('xaid_fee', $data['xaid'])->get();
 
-            foreach($feeship as $key => $fee){
-                Session::put('fee', $fee->feeship_fee);
-                Session::save();
+            if($feeship){
+                $count_feeship = $feeship->count();
+                if($count_feeship > 0){
+                    foreach($feeship as $key => $fee){
+                        Session::put('fee', $fee->feeship_fee);
+                        Session::save();
+                    }
+                }else{
+                    Session::put('fee', 5000);
+                    Session::save();
+                }
             }
         }
     }

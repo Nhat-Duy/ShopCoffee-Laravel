@@ -109,10 +109,21 @@
                                     
                                     {{-- <td colspan="2" class="hidden-xs"></td> --}}
                                     @if(Session::get('coupon'))
-                                    <td>        
-                                        <a href="{{url('/unset_coupon')}}" class="btn btn-success">Xóa mã khuyến mãi</a>
-                                    </td>
+                                        <td>        
+                                            <a href="{{url('/unset_coupon')}}" class="btn btn-success">Xóa mã khuyến mãi</a>
+                                        </td>
                                     @endif
+
+                                    @if(Session::get('id_kh'))
+                                        <td>        
+                                            <a href="{{url('/thanhtoan')}}" class="btn btn-success">Đặt hàng</a>
+                                        </td>
+                                        @else
+                                        <td>        
+                                            <a href="{{url('/login_checkout')}}" class="btn btn-success">Đặt hàng</a>
+                                        </td>
+                                    @endif
+
                                     <td>        
                                         <a href="{{url('/xoatatca')}}" class="btn btn-success">Xóa tất cả</a>
                                     </td>
