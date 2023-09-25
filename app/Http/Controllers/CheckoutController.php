@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Cart;
 use Session;
+use App\Models\City;
+use App\Models\Province;
+use App\Models\Wards;
+use App\Models\Feeship;
+
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 
@@ -17,6 +22,42 @@ class CheckoutController extends Controller
            return Redirect::to('admin.dashboard');
         }else{
            return Redirect::to('admin')->send();
+        }
+    }
+
+    public function caculate_fee(Request $request){
+        $data = $request->all();
+        if($data['matp']){
+            $feeship = Feeship::where('matp_fee', $data['matp'])->where('maqh_fee', $data['maqh'])->where('xaid_fee', $data['xaid'])->get();
+
+            foreach($feeship as $key => $fee){
+                Session::put('fee', $fee->feeship_fee);
+                Session::save();
+            }
+        }
+    }
+
+    public function select_delivery_home(Request $request){
+        $data = $request->all();
+        if($data['action']){
+            $output = '';
+            if($data['action'] == 'city'){
+                $select_province = Province::where('matp', $data['ma_id'])->orderby('maqh', 'ASC')->get();
+                    $output.='<option>-- Chọn quận huyện --</option>';
+                foreach($select_province as $key => $province){
+                    $output.='<option value="'.$province->maqh.'">'.$province->name_quanhuyen.'</option>';
+                }
+                
+            }else{
+                
+                $select_wards = Wards::where('maqh', $data['ma_id'])->orderby('xaid', 'ASC')->get();
+                $output.='<option>-- Chọn xã phường --</option>';
+
+                foreach($select_wards as $key => $ward){
+                    $output.='<option value="'.$ward->xaid.'">'.$ward->name_xaphuong.'</option>';
+                }
+            }
+            echo $output;
         }
     }
 
@@ -61,12 +102,16 @@ class CheckoutController extends Controller
         //EndSeo
         $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
 
+        $city = City::orderby('matp', 'ASC')->get();
+
         return view('page.checkout.thanhtoan')
         ->with('danhmuc',$danhmuc_sp)
         ->with('meta_mota', $meta_mota)
         ->with('meta_keywords', $meta_keywords)
         ->with('meta_title', $meta_title)
-        ->with('url_canonical', $url_canonical);
+        ->with('url_canonical', $url_canonical)
+        ->with('city', $city);
+        
     }
 
     public function luuthanhtoan(Request $request){

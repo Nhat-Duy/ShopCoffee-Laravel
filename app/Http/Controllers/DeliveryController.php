@@ -10,6 +10,50 @@ use App\Models\Feeship;
 class DeliveryController extends Controller
 {   
 
+    public function update_delivery(Request $request){
+        $data = $request->all();
+        $fee_ship = Feeship::find($data['feeship_id']);
+        $fee_value = rtrim($data['fee_value'], '.');
+        $fee_ship->feeship_fee = $fee_value;
+        $fee_ship->save();
+    }
+
+    public function select_feeship(){
+        $feeship = Feeship::orderby('id_fee', 'DESC')->get();
+        $output = '';
+        $output .= '<div class= "container mx-auto">
+            <table class="min-w-full border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="py-2 px-4 border-b">Tên thành phố</th>
+                        <th class="py-2 px-4 border-b">Tên quận huyện</th>
+                        <th class="py-2 px-4 border-b">Tên xã phường</th>
+                        <th class="py-2 px-4 border-b">Phí Ship</th>
+                    </tr>
+                </thead>
+                <tbody>
+                ';
+                foreach($feeship as $key => $fee){
+                    $output .= '
+                    <tr>
+                        <td class="py-2 px-4 border-b">'.$fee->city->name_city.'</td>
+                        <td class="py-2 px-4 border-b">'.$fee->province->name_quanhuyen.'</td>
+                        <td class="py-2 px-4 border-b">'.$fee->wards->name_xaphuong.'</td>
+                        <td class="py-2 px-4 border-b feeship_fee_edit" contenteditable data-feeship_id= "'.$fee->id_fee.'">'.number_format($fee->feeship_fee,0,',','.').' </td>
+
+                    </tr>
+                    ';
+                }
+                $output .= '
+                </tbody>
+            </table>
+            </div>
+            ';
+
+            echo $output;
+        
+    }
+
     public function insert_delivary(Request $request){
         $data = $request->all();
         $fee_ship = new Feeship();

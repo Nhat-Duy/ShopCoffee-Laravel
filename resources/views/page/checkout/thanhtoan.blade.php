@@ -98,7 +98,7 @@ span.price {
 
 					
 <section class="section">       
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row-checkout">
 			<div class="col-25">
 				<div class="container-checkout">
@@ -106,7 +106,7 @@ span.price {
                     {{csrf_field()}}
 					<div class="row-checkout">
 					<div class="col-50">
-						<h3>Thanh toán</h3>
+						<h3>Điền thông tin gửi hàng</h3>
 						<label for="fname"><i class="fa fa-user" ></i> Họ và tên</label>
 						<input type="text" id="fname" class="form-control" name="ten_tt" pattern="^[a-zA-Z ]+$"  value="">
 						<label for="email"><i class="fa fa-envelope"></i> Email</label>
@@ -115,7 +115,7 @@ span.price {
 						<input type="text" id="adr" name="sdt_tt" class="form-control" value="" required>
 						<label for="city"><i class="fa fa-institution"></i> Địa chỉ</label>
 						<input type="text" id="city" name="diachi_tt" class="form-control" value="" pattern="^[a-zA-Z ]+$" required>
-						<textarea style="height:200px;" class="form-control"  name="notes_tt" placeholder="Ghi chú đơn hàng"></textarea>
+						<textarea style="height:100px;" class="form-control"  name="notes_tt" placeholder="Ghi chú đơn hàng"></textarea>
 
 						<div class="row">
 						<div class="col-50">
@@ -168,11 +168,11 @@ span.price {
 				    <input type="hidden" name="total_count" value="'.$total_count.'">
 					<input type="hidden" name="total_price" value="'.$total.'">
 					
-					<input type="submit" name="guidonhang" id="submit" value="Tiếp tục thanh toán" class="checkout-btn">
+					<input type="submit" name="guidonhang" id="submit" value="Xác nhận đơn hàng" class="checkout-btn">
 				</form>
 				</div>
 			</div>
-			<div class="col-4">
+			{{-- <div class="col-4">
 				<div class="container-checkout">
 					<h4>Cart 
 					<span class='price' style='color:black'>
@@ -195,9 +195,295 @@ span.price {
 				<hr>
 				<h3>total<span class='price' style='color:black'><b>$$total</b></span></h3>
 				</div>
+			</div> --}}
+		</div>
+	</div>
+
+	<div style="margin-top: 5px" class="container">
+		<div class="row-checkout">
+			<div class="col-25">
+				<div class="container-checkout">
+				<form>
+					@csrf
+					<tbody>
+					  <tr>
+						  <td>
+							  <div class="flex flex-col justify-center">
+								<td class="text-black">Chọn thành phố</td>
+								<td>
+									<select name="city" id="city" class="bg-slate-400 choose city">
+										<option value="">-- Chọn thành phố --</option> 
+										@foreach ($city as $key => $ci)
+										  <option value="{{$ci->matp}}">{{$ci ->name_city}}</option>                                    
+										@endforeach
+									</select>
+								</td>  
+							  </div>
+						  </td>
+					  </tr>
+					  <br>
+					  <tr>
+						  <td>
+							  <div class="flex flex-col justify-center">
+								<td class="text-black">Chọn quận huyện</td>
+								<td>
+									<select name="province" id="province" class="bg-slate-400 choose province">
+										<option value="">-- Chọn quận huyện --</option>
+		
+									</select>
+								</td>  
+							  </div>
+						  </td>
+					  </tr>
+					  <br>
+					  <tr>
+						  <td>
+							  <div class="flex flex-col justify-center">
+								<td class="text-black">Chọn xã phường</td>
+								<td>
+									<select name="wards" id="wards" class="bg-slate-400  wards">
+										<option value="">-- Chọn xã phường --</option>
+									</select>
+								</td>  
+							  </div>
+						  </td>
+					  </tr>
+
+					  {{-- <tr>
+						<td>
+						  <div>
+							<button type="button" name="themphivanchuyen" class="themphivanchuyen relative z-10 inline-block px-4 py-3 mb-0 font-bold text-center text-transparent uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 bg-gradient-to-tl from-red-600 to-rose-400 hover:scale-102 active:opacity-85 bg-x-25 bg-clip-text" ><i class="mr-2 fas fa-plus bg-150 bg-gradient-to-tl from-gray-600 to-rose-400 bg-x-25 bg-clip-text"></i>Thêm</button>
+						</div>
+						</td>
+					  </tr> --}}
+
+						<input type="button" name="caculate_delivery"  value="Tính phí vận chuyển" class="caculate_delivery checkout-btn">
+
+					</tbody>
+				  </form>
+					
+				</div>
+			</div>
+			
 			</div>
 		</div>
 	</div>
+
+	{{-- Xem lại giỏ hàng --}}
+	<div style="margin-top: 5px" class="container-fluid">	
+        <div id="cart_checkout">
+            <div class="main">
+                <div class="table-responsive">
+                    <h2 class="text-center text-danger">Xem lại giỏ hàng</h2>
+                    <form action="{{url('/update_cart')}}" method="POST">
+                        @csrf
+                        <div id="issessionset"></div>
+                        @if(session()->has('message'))
+							<div class="alert alert-success">
+								{{session()->get('message')}}
+							</div>
+							@elseif(session()->has('error'))
+								<div class="alert alert-danger">
+									{{ session()->get('error')}}
+								</div>
+							@endif
+                        <table id="cart" class="table table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th style="width:50%">Sản phẩm</th>
+                                    <th style="width:10%">Giá</th>
+                                    <th style="width:8%">Số lượng</th>
+                                    <th style="width:7%" class="text-center">Tổng</th>
+                                    <th style="width:10%"></th>
+                                </tr>
+                            </thead>
+                            
+                            @if(Session::get('cart')==true)
+                            @php
+                                $total = 0;
+                            @endphp
+                            @foreach (Session::get('cart') as $key => $cart)  
+                            <tbody>
+                                <tr>
+                                    <td data-th="Product">
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                <img src="{{asset('public/upload/sanpham/'. $cart['hinhanh_sp'])}}" style="height: 70px; width: 75px;">
+                                                <h4 class="nomargin product-name header-cart-item-name">
+                                                    <a href=""></a>
+                                                </h4>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div style="max-width=50px;">
+                                                    <p>{{$cart['ten_sp']}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
+                                    <td data-th="Price">
+                                        <input type="text" class="form-control price" value="{{number_format($cart['gia_sp'],0,',','.')}}đ" readonly="readonly">
+                                    </td>
+                                    <td data-th="Quantity">
+                                        {{-- <input type="text" class="form-control qty" value="1" > --}}
+                                        <div class="qty-label">
+                                            <div class="input-number">
+                                                {{-- <form action="" method="POST"> --}}
+            
+                                                    <input name="cart_qty[{{$cart['id_session']}}]" type="text" value="{{$cart['qty_sp']}}">
+                                                    {{-- <input name="rowId_cart" type="hidden" value=""> --}}
+                                                {{-- </form> --}}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    @php
+                                        $subtotal = $cart['gia_sp'] * $cart['qty_sp'];
+                                        $total += $subtotal;
+                                    @endphp
+                                    <td class="hidden-xs text-center">
+                                        <p>
+                                            <?php 
+                                            // $subtotal = $cart['gia_sp'] * $cart['qty_sp'];
+                                            echo number_format($subtotal). ' '. 'VNĐ';    
+                                            ?>
+                                        </p>
+                                    </td>
+                                    {{-- <td data-th="Subtotal">
+                                        <input type="text" class="form-control total" value="{{Cart::subtotal(). ' '. 'VNĐ' }}" readonly="readonly">
+                                    </td> --}}
+                                    <td class="actions" data-th>
+                                        <div class="btn-group">
+                                            {{-- <form id="update-form" action="{{ URL::to('/capnhat_giohang/'.$v_content->rowId) }}" method="POST" style="display: none;">
+                                                {{csrf_field()}}
+                                            </form>
+                                            <a href="#" class="btn btn-info btn-sm update" update_id="70" onclick="event.preventDefault(); document.getElementById('update-form').submit();">
+                                                <i class="fa fa-refresh"></i>
+                                            </a> --}}
+                                            {{-- <a href="" class="btn btn-info btn-sm update" update_id="70">
+                                                <i class="fa fa-refresh"></i>
+                                            </a> --}}
+                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này?')" href="{{URL::to('/delete_sp/'. $cart['id_session'])}}" class="btn btn-danger btn-sm remove" update_id="70">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            @endforeach
+                            
+                            <tfoot>
+                                <tr>
+                                    <td>
+                                        <input type="submit" value="Cập nhật" name="update_cart" class="btn btn-info btn-sm update">
+                                    </td>
+                                    
+                                    {{-- <td colspan="2" class="hidden-xs"></td> --}}
+                                    @if(Session::get('coupon'))
+                                    <td>        
+                                        <a href="{{url('/unset_coupon')}}" class="btn btn-success">Xóa mã khuyến mãi</a>
+                                    </td>
+                                    @endif
+                                    <td>        
+                                        <a href="{{url('/xoatatca')}}" class="btn btn-success">Xóa tất cả</a>
+                                    </td>
+                                    <td class="hidden-xs text-center">
+										<p>Tổng tiền: 
+                                            <?php 
+                                            echo number_format($total). ' '. 'VNĐ';    
+                                            ?>
+                                        </p>
+                                            @if(Session::get('coupon'))
+                                                @foreach(Session::get('coupon') as $key => $cou)
+                                                    @if($cou['dieukien_coupon'] == 1)
+                                                        Mã giảm: {{$cou['number_coupon']}}%
+                                                        <p>
+                                                            @php
+                                                            $total_coupon = ($total*$cou['number_coupon'])/100;
+                                                            echo '<p>Tổng giảm: '. number_format($total_coupon,0,',','.').'đ</p>';
+                                                            @endphp
+                                                        </p>
+														@php
+															$tongdacocoupon = $total-$total_coupon;
+														@endphp
+                                                        <p>
+                                                            Tổng đã giảm:  {{number_format($total-$total_coupon,0,',','.').' đ'}}
+                                                        </p>
+                                                    @else
+                                                        Mã giảm: {{number_format($cou['number_coupon'],0,',','.')}} đ  
+                                                        <p>
+                                                            @php
+                                                                $total_coupon = $total - $cou['number_coupon'];
+                                                            @endphp
+                                                        </p>
+														@php
+															$tongdacocoupon = $total_coupon;
+														@endphp
+                                                        <p>
+                                                            Tổng đã giảm: {{number_format($total_coupon,0,',','.'). ' đ'}}
+                                                        </p>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+
+											@if(Session::get('fee'))
+												<p>Phí vận chuyển: {{number_format(Session::get('fee'),0,',','.'). ' đ'}}</p>
+												@php $tongphivanchuyen = $total + Session::get('fee'); @endphp
+											@endif
+											<p>Tổng còn: </p>
+											@php
+												if(Session::get('fee') && !Session::get('coupon')){
+													$tongsaugiam = $tongphivanchuyen;
+													echo number_format($tongsaugiam,0,',','.'). ' đ';
+												}elseif(!Session::get('fee') && Session::get('coupon')){
+													$tongsaugiam = $tongdacocoupon;
+													echo number_format($tongsaugiam,0,',','.'). ' đ';
+
+												}elseif(Session::get('fee') && Session::get('coupon')){
+													$tongsaugiam = $tongdacocoupon;
+													$tongsaugiam = $tongsaugiam + Session::get('fee');
+													echo number_format($tongsaugiam,0,',','.'). ' đ';
+
+												}elseif(!Session::get('fee') && !Session::get('coupon')){
+													$tongsaugiam = $total;
+													echo number_format($tongsaugiam,0,',','.'). ' đ';
+												}
+											@endphp
+                                    
+                                    </td>
+                                    @else
+                                    <td>
+                                        @php
+                                        echo 'Làm ơn thêm sản phẩm vào giỏ hàng'
+                                        @endphp
+                                    </td>
+                                    
+                                    
+                                    {{-- <td>        
+                                        <a href=""  class="btn btn-success">Thanh toán</a>
+                                    </td> --}}
+                                </tr>
+                            </tfoot>
+                            @endif
+                        </table>
+                    </form>
+                    <tr>
+                        @if(Session::get('cart'))
+                        <form class="form-inline" method="POST" action="{{url('/check_coupon')}}">
+                            @csrf
+                            <td>
+                                <input style="margin-bottom: 5px; margin-left: 5px; padding: 5px;" type="text" name="coupon" class="form-control" placeholder="Nhập mã giảm giá">
+                                        
+                                <input type="submit" class="btn btn-success check_coupon" value="Tính mã giảm giá" name="check_coupon">
+                                
+                            </td>
+                        </form>
+                        @endif
+                    </tr>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 @endsection

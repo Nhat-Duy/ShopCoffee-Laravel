@@ -26,21 +26,12 @@
                                     <th style="width:10%"></th>
                                 </tr>
                             </thead>
+                            
                             @if(Session::get('cart')==true)
-                            @foreach (Session::get('cart') as $key => $cart)
-                            @php
-                                // print_r(Session::get('cart'));
-                            @endphp
                             @php
                                 $total = 0;
                             @endphp
-
-                            @php
-                                // print_r(Session::get('cart'));
-                                
-                                // $total += $subtotal;
-                            @endphp
-                            
+                            @foreach (Session::get('cart') as $key => $cart)  
                             <tbody>
                                 <tr>
                                     <td data-th="Product">
@@ -77,7 +68,7 @@
                                     </td>
                                     @php
                                         $subtotal = $cart['gia_sp'] * $cart['qty_sp'];
-                                        // $total += $subtotal;
+                                        $total += $subtotal;
                                     @endphp
                                     <td class="hidden-xs text-center">
                                         <p>
@@ -128,8 +119,6 @@
                                     <td class="hidden-xs text-center">
                                         <p>Tổng tiền: 
                                             <?php 
-                                            // $subtotal = $cart['gia_sp'] * $cart['qty_sp'];
-                                            $total += $subtotal;
                                             echo number_format($total). ' '. 'VNĐ';    
                                             ?>
                                         </p>

@@ -434,6 +434,34 @@
 
   <script type="text/javascript">
       $(document).ready(function(){
+        fetch_delivery();
+
+        function fetch_delivery(){
+          var _token = $('input[name="_token"]').val();
+          $.ajax({
+              url : '{{url('/select_feeship')}}',
+              method: 'POST',
+              data: {_token:_token},
+              success:function(data){
+                $('#load_delivery').html(data);
+              }
+          });
+        }
+
+        $(document).on('blur', '.feeship_fee_edit', function(){
+            var _token = $('input[name="_token"]').val();
+            var feeship_id = $(this).data('feeship_id');
+            var fee_value = $(this).text();
+            $.ajax({
+              url : '{{url('/update_delivery')}}',
+              method: 'POST',
+              data: {feeship_id:feeship_id, fee_value:fee_value, _token:_token},
+              success:function(data){
+                fetch_delivery();
+              }
+          });
+        });
+
         $('.themphivanchuyen').click(function(){
 
           var city = $('.city').val();
@@ -447,7 +475,7 @@
               method: 'POST',
               data: {city:city, province:province, wards:wards, fee_ship:fee_ship, _token:_token},
               success:function(data){
-                alert('Thêm phí vận chuyển thành công!');
+                fetch_delivery();
               }
           });
 

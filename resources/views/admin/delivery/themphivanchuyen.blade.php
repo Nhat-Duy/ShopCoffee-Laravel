@@ -87,6 +87,9 @@
               </tbody>
             </form>
           </table>
+          <div id="load_delivery">
+
+          </div>
           
         </div>
       </div>

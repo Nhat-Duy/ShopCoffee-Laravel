@@ -13,4 +13,14 @@ class Feeship extends Model
     ];
     protected $primaryKey = 'id_fee';
     protected $table = 'fee_ship';
+
+    public function city(){
+        return $this->belongsTo('App\Models\City', 'matp_fee');
+    }
+    public function province(){
+        return $this->belongsTo('App\Models\Province', 'maqh_fee');
+    }
+    public function wards(){
+        return $this->belongsTo('App\Models\Wards', 'xaid_fee');
+    }
 }

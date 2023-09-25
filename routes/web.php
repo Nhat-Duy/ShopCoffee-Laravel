@@ -97,6 +97,11 @@ Route::post('/luuthanhtoan', [CheckoutController::class, 'luuthanhtoan']);
 Route::post('/dangnhap', [CheckoutController::class, 'dangnhap']);
 Route::post('/dathang', [CheckoutController::class, 'dat_hang']);
 
+Route::post('/select_delivery_home', [CheckoutController::class, 'select_delivery_home']);
+Route::post('/caculate_fee', [CheckoutController::class, 'caculate_fee']);
+
+
+
 //Quản lý đơn hàng
 Route::get('/quanlydonhang', [CheckoutController::class, 'quanlydonhang']);
 Route::get('/xemdonhang/{id_dh}', [CheckoutController::class, 'xemdonhang']);
@@ -112,7 +117,10 @@ Route::get('/google/callback', [AdminController::class, 'callback_google']);
 // Quản lý vận chuyển
 Route::get('/quanlyvanchuyen', [DeliveryController::class, 'quanlyvanchuyen']);
 Route::post('/select_delivery', [DeliveryController::class, 'select_delivery']);
+
 Route::post('/insert-delivary', [DeliveryController::class, 'insert_delivary']);
+Route::post('/select_feeship', [DeliveryController::class, 'select_feeship']);
+Route::post('/update_delivery', [DeliveryController::class, 'update_delivery']);
 
 
 
