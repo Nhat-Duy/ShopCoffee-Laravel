@@ -13,4 +13,8 @@ class Chitietdonhang extends Model
     ];
     protected $primaryKey = 'id_ctdh';
     protected $table = 'chitietdonhang';
+
+    public function sanpham(){
+        return $this->belongsTo('App\Models\Sanpham', 'id_sp');
+    }
 }

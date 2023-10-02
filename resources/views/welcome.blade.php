@@ -490,9 +490,10 @@
                             swal({
                                 title: "Đã thêm sản phẩm vào giỏ hàng",
                                 text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
-                                type: "warning",
+                                // type: "warning",
                                 showCancelButton: true,
-                                confirmButtonClass: "btn-danger",
+                                cancelButtonText: "Xem tiếp",
+                                confirmButtonClass: "btn-success",
                                 confirmButtonText: "Đi đến giỏ hàng",
                                 closeOnConfirm: false
                                 },
@@ -561,24 +562,45 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 $('.send_order').click(function(){
+                    swal({
+                        title: "Xác nhận đặt hàng",
+                        text: "Đơn hàng sẽ không được hoàn trả khi đặt, bạn có muốn đặt không",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Đồng ý mua hàng",
+                        cancelButtonText: "Đóng",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                    function(isConfirm){
+                        if (isConfirm) {
+                            var ten_tt = $('.ten_tt').val();
+                            var email_tt = $('.email_tt').val();
+                            var sdt_tt = $('.sdt_tt').val();
+                            var diachi_tt = $('.diachi_tt').val();
+                            var notes_tt = $('.notes_tt').val();
+                            var method_tt = $('.method_tt').val();
 
-                    var ten_tt = $('.ten_tt').val();
-                    var email_tt = $('.email_tt').val();
-                    var sdt_tt = $('.sdt_tt').val();
-                    var diachi_tt = $('.diachi_tt').val();
-                    var notes_tt = $('.notes_tt').val();
-                    var method_tt = $('.method_tt').val();
+                            var oder_fee = $('.oder_fee').val();
+                            var oder_coupon = $('.oder_coupon').val();
+                            var _token = $('input[name="_token"]').val();
 
-                    var oder_fee = $('.oder_fee').val();
-                    var oder_coupon = $('.oder_coupon').val();
-                    var _token = $('input[name="_token"]').val();
+                            $.ajax({
+                                url: '{{url('/xacnhandonhang')}}',
+                                method: 'POST',
+                                data:{ten_tt:ten_tt, email_tt:email_tt, sdt_tt:sdt_tt, diachi_tt:diachi_tt, notes_tt:notes_tt, oder_fee:oder_fee, oder_coupon:oder_coupon, method_tt:method_tt,  _token:_token},
+                                success:function(){
+                                    swal("Đơn hàng", "Đơn hàng của bạn đã gửi thành công!", "success");
+                                }
+                            });
 
-                    $.ajax({
-                        url: '{{url('/xacnhandonhang')}}',
-                        method: 'POST',
-                        data:{ten_tt:ten_tt, email_tt:email_tt, sdt_tt:sdt_tt, diachi_tt:diachi_tt, notes_tt:notes_tt, oder_fee:oder_fee, oder_coupon:oder_coupon, method_tt:method_tt,  _token:_token},
-                        success:function(){
-                            alert('Đặt hàng thành công');
+                            window.setTimeout(function(){
+                                location.reload();
+                            }, 3000);
+                            
+                        } else {
+                            swal("Đóng", "Đơn hàng chưa được gửi, hãy hoàn tất đơn hàng :)", "error");
                         }
                     });
                 });

@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\OderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,7 +82,6 @@ Route::get('/coupon', [CouponController::class, 'show_coupon']);
 Route::get('/themcoupon', [CouponController::class, 'themcoupon']);
 Route::get('/xoa_coupon/{id_coupon}', [CouponController::class, 'xoa_coupon']);
 
-
 Route::post('/luucoupon', [CouponController::class, 'luucoupon']);
 
 
@@ -104,8 +104,9 @@ Route::post('/xacnhandonhang', [CheckoutController::class, 'xacnhandonhang']);
 
 
 //Quản lý đơn hàng
-Route::get('/quanlydonhang', [CheckoutController::class, 'quanlydonhang']);
-Route::get('/xemdonhang/{id_dh}', [CheckoutController::class, 'xemdonhang']);
+Route::get('/indonhang/{checkout_code}', [OderController::class, 'indonhang']);
+Route::get('/quanlydonhang', [OderController::class, 'quanlydonhang']);
+Route::get('/xemdonhang/{ma_dh}', [OderController::class, 'xemdonhang']);
 
 
 // Gửi mail

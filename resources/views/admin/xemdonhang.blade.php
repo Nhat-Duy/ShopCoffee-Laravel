@@ -28,35 +28,35 @@
                 <tr>
                   <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tên khách hàng</th>
                   <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Số điện thoại</th>
-                  {{-- <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tình trạng đơn hàng</th> --}}
+                  <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Email</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach($donhang_id as $v_content)
+                {{-- @foreach($khachhang as $) --}}
                 <tr>
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="ml-2 text-sm leading-normal">{{$v_content->ten_kh}}</h6>
+                        <h6 class="ml-2 text-sm leading-normal">{{$khachhang->ten_kh}}</h6>
                       </div>
                     </div>
                   </td>
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="ml-2 text-sm leading-normal">{{$v_content->sdt_kh}}</h6>
+                        <h6 class="ml-2 text-sm leading-normal">{{$khachhang->sdt_kh}}</h6>
                       </div>
                     </div>
                   </td>
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="ml-2 text-sm leading-normal"></h6>
+                        <h6 class="ml-2 text-sm leading-normal">{{$khachhang->email_kh}}</h6>
                       </div>
                     </div>
                   </td>
                 </tr>
-                @endforeach
+                {{-- @endforeach --}}
               </tbody>
             </table>
           </div>
@@ -93,37 +93,58 @@
               <thead class="align-bottom">
                 <tr>
                   <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tên người vận chuyển</th>
-                  <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Địa chỉ</th>
-                  <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Số điện thoại</th>
-                  {{-- <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tình trạng đơn hàng</th> --}}
+                  <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Địa chỉ</th>
+                  <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Số điện thoại</th>
+                  <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Notes</th>
+                  <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Hình thức thanh toán</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach($donhang_id as $v_content)
+                {{-- @foreach($donhang_id as $v_content) --}}
                 <tr>
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="ml-2 text-sm leading-normal">{{$v_content->ten_tt}}</h6>
+                        <h6 class="ml-2 text-sm  leading-normal">{{$thanhtoan->ten_tt}}</h6>
                       </div>
                     </div>
                   </td>
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="ml-2 text-sm leading-normal">{{$v_content->diachi_tt}}</h6>
+                        <h6 class="ml-2 text-sm leading-normal">{{$thanhtoan->diachi_tt}}</h6>
                       </div>
                     </div>
                   </td>
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="ml-2 text-sm leading-normal">{{$v_content->sdt_tt}}</h6>
+                        <h6 class="ml-2 text-sm leading-normal">{{$thanhtoan->sdt_tt}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                    <div class="flex px-2 py-1">
+                      <div class="flex flex-col justify-center">
+                        <h6 class="ml-2 text-sm leading-normal">{{$thanhtoan->notes_tt}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                    <div class="flex px-2 py-1">
+                      <div class="flex flex-col justify-center">
+                        <h6 class="ml-2 text-sm leading-normal">
+                        @if($thanhtoan->method_tt == 0)
+                            Chuyển khoản
+                        @else
+                            Tiền mặt
+                        @endif
+                        </h6>
                       </div>
                     </div>
                   </td>
                 </tr>
-                @endforeach
+                {{-- @endforeach --}}
               </tbody>
             </table>
           </div>
@@ -160,48 +181,124 @@
             <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
               <thead class="align-bottom">
                 <tr>
+                  <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Thứ tự</th>
                   <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tên sản phẩm</th>
-                  <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Số lượng</th>
-                  <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Giá</th>
-                  <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tổng tiền</th>
+                  <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Mã giảm giá</th>
+                  <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Phí ship</th>
+                  <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Số lượng</th>
+                  <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Giá</th>
+                  <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tổng tiền</th>
 
                 </tr>
               </thead>
               <tbody>
-                @foreach($donhang_id as $v_content)
+                @php
+                  $i = 0;
+                  $tongall = 0;    
+                @endphp
+                @foreach($chitietdonhang as $chitiet)
+                @php
+                  $i ++;
+                  $tong = $chitiet->gia_sp * $chitiet->soluong_sp;
+                  $tongall += $tong;
+                @endphp
                 <tr>
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="ml-2 text-sm leading-normal">{{$v_content->ten_sp}}</h6>
+                        <h6 class="ml-2 text-sm leading-normal">{{$i}}</h6>
                       </div>
                     </div>
                   </td>
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="ml-2 text-sm leading-normal">{{$v_content->soluong_sp}}</h6>
+                        <h6 class="ml-2 text-sm leading-normal">{{$chitiet->ten_sp}}</h6>
                       </div>
                     </div>
                   </td>
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="ml-2 text-sm leading-normal">{{$v_content->gia_sp}}</h6>
+                        <h6 class="ml-2 text-sm leading-normal">
+                          @if($chitiet->coupon_sp != 'không có mã giảm giá')
+                              {{$chitiet->coupon_sp}}
+                          @else
+                              Không mã giảm giá
+                          @endif
+                        </h6>
                       </div>
                     </div>
                   </td>
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="ml-2 text-sm leading-normal">{{number_format($v_content->tong_dh). ' '. 'VNĐ'}}</h6>
+                        <h6 class="ml-2 text-sm leading-normal">{{number_format($chitiet->feeship_sp). ' '. 'VNĐ'}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                    <div class="flex px-2 py-1">
+                      <div class="flex flex-col justify-center">
+                        <h6 class="ml-2 text-sm leading-normal">{{$chitiet->soluong_sp}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                    <div class="flex px-2 py-1">
+                      <div class="flex flex-col justify-center">
+                        <h6 class="ml-2 text-sm leading-normal">{{number_format($chitiet->gia_sp). ' '. 'VNĐ'}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                    <div class="flex px-2 py-1">
+                      <div class="flex flex-col justify-center">
+                        <h6 class="ml-2 text-sm leading-normal">{{number_format($tong). ' '. 'VNĐ'}}</h6>
                       </div>
                     </div>
                   </td>
                 </tr>
+                
                 @endforeach
+                <tr>
+                  <td></td>
+                  <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                    <div class="flex px-2 py-1">
+                      <div class="flex flex-col justify-center">
+                        <h6 class="ml-2 text-sm leading-normal">
+                           
+                            @php
+                              $tong_coupon = 0;
+                            @endphp
+                          @if($dieukien_coupon == 1)
+
+                            @php
+                              $tong_giamcoupon = ($tongall * $number_coupon)/100;
+                              echo 'Tổng giảm: ' . number_format($tong_giamcoupon). ' '. 'VNĐ';
+                              $tong_coupon = $tongall - $tong_giamcoupon + $chitiet->feeship_sp;
+                            @endphp
+
+                          @else
+
+                            @php
+                            echo 'Tổng giảm: '. number_format($number_coupon). ' '. 'VNĐ';
+                              $tong_coupon = $tongall - $number_coupon + $chitiet->feeship_sp;
+                            @endphp
+
+                          @endif
+                          <br>
+                          Phí ship: {{number_format($chitiet->feeship_sp). ' '. 'VNĐ'}}
+                          <br>
+                          Thanh toán: {{number_format($tong_coupon). ' '. 'VNĐ'}}
+                        </h6>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
+            <a class="ml-2" href="{{url('/indonhang/'. $chitiet->ma_dh)}}">In đơn hàng</a>
           </div>
         </div>
       </div>

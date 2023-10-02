@@ -48,7 +48,29 @@ class CheckoutController extends Controller
         $donhang->id_tt = $id_tt;
         $donhang->tinhtrang_dh = 1;
         $donhang->ma_dh = $oder_code;
+
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $donhang->created_at = now();
         $donhang->save();
+
+        if(Session::get('cart')){
+            foreach(Session::get('cart') as $key => $cart){
+                $chitietdonhang = new Chitietdonhang();
+
+                $chitietdonhang->ma_dh = $oder_code;
+                $chitietdonhang->id_sp = $cart['id_sp'];
+                $chitietdonhang->ten_sp = $cart['ten_sp'];
+                $chitietdonhang->gia_sp = $cart['gia_sp'];
+                $chitietdonhang->soluong_sp = $cart['qty_sp'];
+                $chitietdonhang->coupon_sp = $data['oder_coupon'];
+                $chitietdonhang->feeship_sp = $data['oder_fee'];
+                $chitietdonhang->save();
+            }
+        }
+
+        Session::forget('coupon');
+        Session::forget('fee');
+        Session::forget('cart');
 
     }
 
