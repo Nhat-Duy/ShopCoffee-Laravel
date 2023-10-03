@@ -149,7 +149,6 @@ class CartController extends Controller
             Session::forget('cart');
             Session::forget('coupon');
             return Redirect()->back()->with('message', 'Xóa hết giỏ thành công!');
-
         }
     }
 

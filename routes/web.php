@@ -59,14 +59,14 @@ Route::post('/luusanpham', [ProductController::class, 'luusanpham']);
 Route::post('/update_sanpham/{id_sp}', [ProductController::class, 'update_sanpham']);
 
 //Giỏ hàng
-Route::post('/capnhat_giohang', [CartController::class, 'capnhat_giohang']);
-Route::post('/luugiohang', [CartController::class, 'luugiohang']);
+// Route::post('/capnhat_giohang', [CartController::class, 'capnhat_giohang']);
+// Route::post('/luugiohang', [CartController::class, 'luugiohang']);
 
 Route::post('/update_cart', [CartController::class, 'update_cart']);
 Route::post('/themgiohangajax', [CartController::class, 'themgiohangajax']);
 
-Route::get('/giohang', [CartController::class, 'show_cart']);
-Route::get('/xoagiohang/{rowId}', [CartController::class, 'xoagiohang']);
+// Route::get('/giohang', [CartController::class, 'show_cart']);
+// Route::get('/xoagiohang/{rowId}', [CartController::class, 'xoagiohang']);
 Route::get('/giohangajax', [CartController::class, 'giohangajax']);
 
 Route::get('/delete_sp/{id_session}', [CartController::class, 'delete_sp']);
