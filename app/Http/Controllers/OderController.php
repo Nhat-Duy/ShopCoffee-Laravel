@@ -202,7 +202,7 @@ class OderController extends Controller
             $dieukien_coupon = 2;
             $number_coupon = 0;
         }
-        return view('admin.xemdonhang')->with(compact('chitietdonhang', 'khachhang', 'thanhtoan', 'chitietdonhang_sp', 'dieukien_coupon', 'number_coupon'));
+        return view('admin.xemdonhang')->with(compact('chitietdonhang', 'khachhang', 'thanhtoan', 'chitietdonhang_sp', 'dieukien_coupon', 'number_coupon', 'donhang'));
     }
 
     public function quanlydonhang(){

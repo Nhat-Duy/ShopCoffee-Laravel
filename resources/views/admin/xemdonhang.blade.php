@@ -296,6 +296,43 @@
                     </div>
                   </td>
                 </tr>
+                <tr>
+                  <td>
+                    @foreach($donhang as $key => $don)
+                      @if($don->tinhtrang_dh == 1)
+                        <form>
+                          @csrf
+                          <select class="xulydonhang">
+                            <option value="" >--Chọn xử lý đơn hàng--</option>
+                            <option value="1" id="{{$don->id_dh}}">Chưa xử lý</option>
+                            <option value="2" id="{{$don->id_dh}}">Đã xử lý - Đã giao hàng</option>
+                            <option value="3" id="{{$don->id_dh}}">Hủy đơn hàng - Chưa giao</option>
+                          </select>
+                        </form>
+                      @elseif($don->tinhtrang_dh == 2)
+                        <form>
+                          @csrf
+                          <select class="xulydonhang">
+                            <option value="" >--Chọn xử lý đơn hàng--</option>
+                            <option value="1" id="{{$don->id_dh}}">Chưa xử lý</option>
+                            <option value="2" id="{{$don->id_dh}}" selected>Đã xử lý - Đã giao hàng</option>
+                            <option value="3" id="{{$don->id_dh}}">Hủy đơn hàng - Chưa giao</option>
+                          </select>
+                        </form>
+                      @else
+                        <form>
+                          @csrf
+                          <select class="xulydonhang">
+                            <option value="" >--Chọn xử lý đơn hàng--</option>
+                            <option value="1" id="{{$don->id_dh}}">Chưa xử lý</option>
+                            <option value="2" id="{{$don->id_dh}}">Đã xử lý - Đã giao hàng</option>
+                            <option value="3" id="{{$don->id_dh}}" selected>Hủy đơn hàng - Chưa giao</option>
+                          </select>
+                        </form>
+                      @endif
+                    @endforeach
+                  </td>
+                </tr>
               </tbody>
             </table>
             <a class="ml-2" href="{{url('/indonhang/'. $chitiet->ma_dh)}}">In đơn hàng</a>

@@ -9,6 +9,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\OderController;
+use App\Http\Controllers\WarehouseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -124,6 +125,17 @@ Route::post('/insert-delivary', [DeliveryController::class, 'insert_delivary']);
 Route::post('/select_feeship', [DeliveryController::class, 'select_feeship']);
 Route::post('/update_delivery', [DeliveryController::class, 'update_delivery']);
 
+// Quản lý nguyên liệu
+Route::get('/nguyenlieu', [WarehouseController::class, 'nguyenlieu']);
+Route::get('/themnguyenlieu', [WarehouseController::class, 'themnguyenlieu']);
+Route::get('/nhapkho', [WarehouseController::class, 'nhapkho']);
 
+Route::post('/luunguyenlieu', [WarehouseController::class, 'luunguyenlieu']);
+Route::get('/xoa_nguyenlieu/{id_nl}', [WarehouseController::class, 'xoa_nguyenlieu']);
+
+Route::post('/themvaokho', [WarehouseController::class, 'themvaokho']);
+Route::post('/update_kho', [WarehouseController::class, 'update_kho']);
+Route::get('/xoa_kho/{id_session}', [WarehouseController::class, 'xoa_kho']);
+Route::get('/xoatatca_kho', [WarehouseController::class, 'xoatatca_kho']);
 
 

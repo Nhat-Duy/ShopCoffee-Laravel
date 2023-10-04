@@ -177,12 +177,12 @@
             </a>
           </li>
 
-          <li class="w-full mt-4">
+          {{-- <li class="w-full mt-4">
             <h6 class="pl-6 ml-2 font-bold leading-tight uppercase text-xs opacity-60">Account pages</h6>
-          </li>
+          </li> --}}
 
           <li class="mt-0.5 w-full">
-            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" href="../pages/profile.html">
+            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" href="{{url('/nguyenlieu')}}">
               <div class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
                 <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>customer-support</title>
@@ -199,12 +199,12 @@
                   </g>
                 </svg>
               </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Profile</span>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Nguyên liệu</span>
             </a>
           </li>
 
           <li class="mt-0.5 w-full">
-            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" href="../pages/sign-in.html">
+            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" href="{{url('/nhapkho')}}">
               <div class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
                 <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>document</title>
@@ -220,7 +220,7 @@
                   </g>
                 </svg>
               </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Sign In</span>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Quản lý nhập kho</span>
             </a>
           </li>
 
@@ -430,6 +430,52 @@
   <script>
         CKEDITER.replace('ckeditor');
         CKEDITER.replace('ckeditor1');
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('.nhapkho').click(function(){
+            var id = $(this).data('id');
+            var id_nl_giohang = $('.id_nl_giohang_' + id).val();
+            var ten_nl_giohang = $('.ten_nl_giohang_' + id).val();
+            var gia_nl_giohang = $('.gia_nl_giohang_' + id).val();
+            var donvi_nl_giohang = $('.donvi_nl_giohang_' + id).val();
+            var qty_nl_giohang = $('.qty_nl_giohang_' + id).val();
+            var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                url: '{{url('/themvaokho')}}',
+                method: 'POST',
+                data:{id_nl_giohang:id_nl_giohang, ten_nl_giohang:ten_nl_giohang, gia_nl_giohang:gia_nl_giohang, donvi_nl_giohang:donvi_nl_giohang, qty_nl_giohang:qty_nl_giohang, _token:_token},
+                success:function(data){
+                    swal({
+                        title: "Đã thêm sản phẩm vào kho",
+                        text: "Bạn có thể thêm tiếp hoặc tới kho để tiến hành xác nhận",
+                        showCancelButton: true,
+                        cancelButtonText: "Xem tiếp",
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "Đi đến kho",
+                        closeOnConfirm: false
+                        },
+                        function(){
+                            window.location.href="{{url('/nhapkho')}}";
+                    });
+                }
+            });
+        });
+        
+    });
+  </script>
+
+  <script type="text/javascript">
+        $('.xulydonhang').change(function(){
+          var tinhtrang_dh = $(this).val();
+          var id_dh = $(this).children(":selected").attr("id");
+          var _token = $('input[name="_token"]').val();
+          alert(tinhtrang_dh);
+          alert(id_dh);
+          alert(_token);
+        })
   </script>
 
   <script type="text/javascript">

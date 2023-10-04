@@ -41,7 +41,7 @@ class CategoryProduct extends Controller
 
         DB::table('danhmuc')->insert($data);
         Session::put('message', 'Thêm danh mục sản phẩm thành công');
-        return Redirect::to('themdanhmuc');
+        return Redirect::to('danhmuc');
         
     }
 
@@ -78,8 +78,6 @@ class CategoryProduct extends Controller
 
     public function show_danhmuc(Request $request, $id_danhmuc){
 
-        
-
         $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
 
         $all_sp = DB::table('sanpham')->orderBy('id_sp', 'desc')->get();
@@ -88,7 +86,7 @@ class CategoryProduct extends Controller
         ->join('danhmuc', 'sanpham.id_danhmuc', '=', 'danhmuc.id_danhmuc')
         ->where('sanpham.id_danhmuc', $id_danhmuc)->get();
 
-        foreach($danhmuc_by_id as $key => $val){
+        foreach($danhmuc_sp as $key => $val){
             //Seo
                 $meta_mota = $val->mota_danhmuc;
                 $meta_keywords = $val->meta_keywords;

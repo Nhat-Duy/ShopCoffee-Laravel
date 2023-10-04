@@ -32,7 +32,13 @@
 
                                 </div>
                             </div>
-              
+					<form>
+						@csrf
+						<input type="hidden" class="id_sp_giohang_{{$value->id_sp}}" value="{{$value->id_sp}}">
+                        <input type="hidden" class="ten_sp_giohang_{{$value->id_sp}}" value="{{$value->ten_sp}}">
+                        <input type="hidden" class="hinhanh_sp_giohang_{{$value->id_sp}}" value="{{$value->hinhanh_sp}}">
+                        <input type="hidden" class="gia_sp_giohang_{{$value->id_sp}}" value="{{$value->gia_sp}}">
+                        <input type="hidden" class="qty_sp_giohang_{{$value->id_sp}}" value="1">		
                     <div class="col-md-5">
 						<div class="product-details">
 							<h2 class="product-name">{{$value->ten_sp}}</h2>
@@ -53,9 +59,6 @@
 							</div>
 							<p>{{$value->mota_sp}}</p>
 
-							
-							<form action="{{URL::to('/luugiohang')}}" method="POST">
-								{{csrf_field() }}
 								<div class="add-to-cart">
 									<div class="qty-label">
 										Số lượng
@@ -66,11 +69,11 @@
 											<span class="qty-down">-</span>
 										</div>
 									</div>
-									<div class="btn-group" style="margin-left: 25px; margin-top: 15px">
-										<button class="add-to-cart-btn" type="submit" ><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+									<div class="add-to-cart btn-group" data-id="{{$value->id_sp}}" name="add-to-cart" style="margin-left: 25px; margin-top: 15px">
+										<button class="add-to-cart-btn"  type="button" data-id="{{$value->id_sp}}" name="add-to-cart" ><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 									</div>
 								</div>
-							</form>
+							
 							<ul class="product-btns">
 								<li><a href="#"><i class="fa fa-heart-o"></i> Yêu thích</a></li>
 							</ul>
@@ -90,6 +93,7 @@
 
 						</div>
 					</div>
+				</form>
 				@endforeach		
 					
 					<!-- /Product main img -->
