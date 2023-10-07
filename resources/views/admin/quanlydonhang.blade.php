@@ -69,8 +69,10 @@
                         <h6 class="ml-2 text-sm leading-normal">
                           @if($ord->tinhtrang_dh == 1)
                               Đơn hàng mới 
-                          @else
+                          @elseif($ord->tinhtrang_dh == 2)
                               Đã xử lý
+                          @else
+                              Hủy đơn hàng
                           @endif
                         </h6>
                       </div>

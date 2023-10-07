@@ -17,6 +17,14 @@ use App\Models\Admin;
 class WarehouseController extends Controller
 {   
 
+    public function xoadonnhaphang($id_nh){
+        $nhaphang = Nhaphang::find($id_nh);
+        $nhaphang->delete();
+
+        Session::put('message', 'Xóa đơn nhập hàng thành công');
+        return Redirect::to('quanlynhaphang');
+    }
+
     public function xemchitietnhaphang($ma_nh){
         $chitietnhaphang = Chitietnhaphang::where('ma_nh', $ma_nh)->get();
 

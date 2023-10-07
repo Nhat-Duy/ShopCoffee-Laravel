@@ -107,6 +107,7 @@ Route::post('/xacnhandonhang', [CheckoutController::class, 'xacnhandonhang']);
 Route::get('/indonhang/{checkout_code}', [OderController::class, 'indonhang']);
 Route::get('/quanlydonhang', [OderController::class, 'quanlydonhang']);
 Route::get('/xemdonhang/{ma_dh}', [OderController::class, 'xemdonhang']);
+Route::post('/update_tinhtrang', [OderController::class, 'update_tinhtrang']);
 
 
 // Gửi mail
@@ -138,6 +139,7 @@ Route::get('/xoa_kho/{id_session}', [WarehouseController::class, 'xoa_kho']);
 Route::get('/xoatatca_kho', [WarehouseController::class, 'xoatatca_kho']);
 Route::get('/quanlynhaphang', [WarehouseController::class, 'quanlynhaphang']);
 Route::get('/xemchitietnhaphang/{ma_nh}', [WarehouseController::class, 'xemchitietnhaphang']);
+Route::get('/xoadonnhaphang/{id_nh}', [WarehouseController::class, 'xoadonnhaphang']);
 
 Route::post('/xacnhannhapkho', [WarehouseController::class, 'xacnhannhapkho']);
 

@@ -14,6 +14,13 @@ use Barryvdh\DomPDF\PDF;
 class OderController extends Controller
 {   
 
+    public function update_tinhtrang(Request $request){
+        $data = $request->all();
+        $donhang = Donhang::find($data['id_dh']);
+        $donhang->tinhtrang_dh = $data['tinhtrang_dh'];
+        $donhang->save();
+    }
+
     public function indonhang($checkout_code){
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($this->print_order_convert($checkout_code));

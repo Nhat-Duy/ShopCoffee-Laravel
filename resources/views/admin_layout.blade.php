@@ -472,9 +472,26 @@
           var tinhtrang_dh = $(this).val();
           var id_dh = $(this).children(":selected").attr("id");
           var _token = $('input[name="_token"]').val();
-          alert(tinhtrang_dh);
-          alert(id_dh);
-          alert(_token);
+          
+          //lay ra so luong
+          quantity = [];
+          $("input[name='soluongbansanpham']").each(function(){
+            quantity.push($(this).val());
+          });
+          // lay ra product id
+          order_product_id = [];
+          $("input[name='order_product_id']").each(function(){
+            order_product_id.push($(this).val());
+          });
+
+          $.ajax({
+              url : '{{url('/update_tinhtrang')}}',
+              method: 'POST',
+              data: {tinhtrang_dh:tinhtrang_dh, id_dh:id_dh, _token:_token},
+              success:function(data){
+                alert('Cập nhật tình trạng thành công!');
+              }
+          });
         })
   </script>
 
