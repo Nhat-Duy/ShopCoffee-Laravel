@@ -62,12 +62,11 @@ Route::post('/update_sanpham/{id_sp}', [ProductController::class, 'update_sanpha
 //Giỏ hàng
 // Route::post('/capnhat_giohang', [CartController::class, 'capnhat_giohang']);
 // Route::post('/luugiohang', [CartController::class, 'luugiohang']);
-
+// Route::get('/giohang', [CartController::class, 'show_cart']);
+// Route::get('/xoagiohang/{rowId}', [CartController::class, 'xoagiohang']);
 Route::post('/update_cart', [CartController::class, 'update_cart']);
 Route::post('/themgiohangajax', [CartController::class, 'themgiohangajax']);
 
-// Route::get('/giohang', [CartController::class, 'show_cart']);
-// Route::get('/xoagiohang/{rowId}', [CartController::class, 'xoagiohang']);
 Route::get('/giohangajax', [CartController::class, 'giohangajax']);
 
 Route::get('/delete_sp/{id_session}', [CartController::class, 'delete_sp']);
@@ -91,12 +90,12 @@ Route::get('/login_checkout', [CheckoutController::class, 'login_checkout']);
 Route::get('/sign_up', [CheckoutController::class, 'sign_up']);
 Route::get('/thanhtoan', [CheckoutController::class, 'thanhtoan']);
 Route::get('/dangxuat', [CheckoutController::class, 'dangxuat']);
-Route::get('/payment', [CheckoutController::class, 'payment']);
+// Route::get('/payment', [CheckoutController::class, 'payment']);
 
 Route::post('/themkhachhang', [CheckoutController::class, 'themkhachhang']);
 Route::post('/luuthanhtoan', [CheckoutController::class, 'luuthanhtoan']);
 Route::post('/dangnhap', [CheckoutController::class, 'dangnhap']);
-Route::post('/dathang', [CheckoutController::class, 'dat_hang']);
+// Route::post('/dathang', [CheckoutController::class, 'dat_hang']);
 
 Route::post('/select_delivery_home', [CheckoutController::class, 'select_delivery_home']);
 Route::post('/caculate_fee', [CheckoutController::class, 'caculate_fee']);
@@ -137,5 +136,8 @@ Route::post('/themvaokho', [WarehouseController::class, 'themvaokho']);
 Route::post('/update_kho', [WarehouseController::class, 'update_kho']);
 Route::get('/xoa_kho/{id_session}', [WarehouseController::class, 'xoa_kho']);
 Route::get('/xoatatca_kho', [WarehouseController::class, 'xoatatca_kho']);
+Route::get('/quanlynhaphang', [WarehouseController::class, 'quanlynhaphang']);
+Route::get('/xemchitietnhaphang/{ma_nh}', [WarehouseController::class, 'xemchitietnhaphang']);
 
+Route::post('/xacnhannhapkho', [WarehouseController::class, 'xacnhannhapkho']);
 

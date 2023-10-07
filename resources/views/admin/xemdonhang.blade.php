@@ -72,7 +72,7 @@
         <div class="max-w-full px-3 mb-4 lg:mb-0 lg:w-full lg:flex-none">
             <div class="relative flex flex-col min-w-0 mt-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
               <div class="p-4 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                <h6 class="mb-0 text-center">Thông tin vận chuyển</h6>
+                <h6 class="mb-0 text-center">Thông tin người nhận hàng</h6>
                 <div class="flex flex-wrap -mx-3">
                   <div class="flex items-center flex-none w-1/2 max-w-full px-3">
                   </div>
@@ -92,7 +92,7 @@
             <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
               <thead class="align-bottom">
                 <tr>
-                  <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tên người vận chuyển</th>
+                  <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tên người nhận hàng</th>
                   <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Địa chỉ</th>
                   <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Số điện thoại</th>
                   <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Notes</th>

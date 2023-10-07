@@ -11,7 +11,7 @@
                     <h6 class="mb-0">Nhập Kho</h6>
                   </div>
                   <div class="flex-none w-1/2 max-w-full px-3 text-right">
-                    <a class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25" href="{{URL::to('quanlynhapkho')}}"> <i class="fas fa-plus"> </i>&nbsp;&nbsp;Quản lý nhập kho</a>
+                    <a class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25" href="{{URL::to('quanlynhaphang')}}"> <i class="fas fa-plus"> </i>&nbsp;&nbsp;Quản lý nhập hàng</a>
                   </div>
                 </div>
                 <?php
@@ -109,11 +109,7 @@
                             {{-- <a class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700"><i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i><input type="submit" value="Cập nhật" name="update_cart" class="btn btn-info btn-sm update"></a> --}}
                         </div>
                     </td>
-                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                        <div class="ml-auto">
-                            <a class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700" href=""><i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Nhập vào kho</a>
-                        </div>
-                    </td>
+                    
                     <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                       <div class="ml-auto">
                         <p>Thành tiền: <?php 
@@ -130,6 +126,14 @@
                 </tr>
               </tfoot>
             </table>
+          </form>
+          <form action="{{url('/xacnhannhapkho')}}" method="POST">
+            @csrf
+            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+              <div class="ml-auto">
+                  <a class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25" > <i class="fas fa-plus"> </i>&nbsp;&nbsp;<input type="submit" value="Nhập vào kho" name="xacnhannhapkho" class="btn btn-info btn-sm update"></a>
+              </div>
+          </td>
           </form>
           </div>
         </div>

@@ -8,10 +8,65 @@ use Cart;
 use Session;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+
 use App\Models\Nguyenlieu;
+use App\Models\Nhaphang;
+use App\Models\Chitietnhaphang;
+use App\Models\Admin;
 
 class WarehouseController extends Controller
 {   
+
+    public function xemchitietnhaphang($ma_nh){
+        $chitietnhaphang = Chitietnhaphang::where('ma_nh', $ma_nh)->get();
+
+        $nhaphang = Nhaphang::where('ma_nh', $ma_nh)->get();
+        foreach($nhaphang as $key => $ord){
+            $admin_id = $ord->admin_id;
+        }
+        $admin = Admin::where('admin_id', $admin_id)->first();
+
+        $chitietnhaphang_sp = Chitietnhaphang::with('nguyenlieu')->where('ma_nh', $ma_nh)->get();
+
+        return view('admin.nguyenlieu.xemnhaphang')->with(compact('chitietnhaphang', 'nhaphang', 'admin', 'chitietnhaphang_sp'));
+    }
+
+    public function quanlynhaphang(){
+        $nhaphang = Nhaphang::orderBy('created_at', 'DESC')->get();
+
+        return view('admin.nguyenlieu.quanlynhaphang')->with(compact('nhaphang'));
+    }
+
+    public function xacnhannhapkho(Request $request){
+
+        $oder_code = substr(md5(microtime()),rand(0,26),5);
+
+        $nhaphang = new Nhaphang();
+        $nhaphang->admin_id = Session::get('admin_id');
+        $nhaphang->tinhtrang_nh = 1;
+        $nhaphang->ma_nh = $oder_code;
+
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $nhaphang->created_at = now();
+        $nhaphang->save();
+
+        if(Session::get('kho')){
+            foreach(Session::get('kho') as $key => $kho){
+                $chitietnhaphang = new Chitietnhaphang();
+
+                $chitietnhaphang->ma_nh = $oder_code;
+                $chitietnhaphang->id_nl = $kho['id_nl'];
+                $chitietnhaphang->ten_nl = $kho['ten_nl'];
+                $chitietnhaphang->gia_nl = $kho['gia_nl'];
+                $chitietnhaphang->donvi_nl = $kho['donvi_nl'];
+                $chitietnhaphang->soluong_nl = $kho['qty_nl'];
+                $chitietnhaphang->save();
+            }
+        }
+        Session::forget('kho');
+        return Redirect()->back()->with('message', 'Nhập hàng thành công!');
+
+    }
 
     public function xoatatca_kho(){
         $kho = Session::get('kho');
