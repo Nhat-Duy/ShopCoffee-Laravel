@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="apple-touch-icon" sizes="76x76" href="public/backend/img/apple-icon.png" />
     <link rel="icon" type="image/png" href="public/backend/img/favicon.png" />
-    <title>Soft UI Dashboard Tailwind</title>
+    <title>Đăng ký Admin</title>
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Font Awesome Icons -->
@@ -26,7 +26,7 @@
     <!-- component -->
     <div class="relative flex min-h-screen text-gray-800 antialiased flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
       <div class="relative py-3 sm:w-96 mx-auto text-center">
-        <span class="text-2xl font-light ">Đăng nhập Admin</span>
+        <span class="text-2xl font-light ">Đăng ký Admin</span>
         <br>
         <?php
         $message = Session::get('message');
@@ -35,21 +35,24 @@
           Session::put('message', null);
         } 
         ?>
-        <form action="{{URL::to('/admin-dashboard')}}" method="post">
+        <form action="{{URL::to('/dangky_admin')}}" method="post">
           {{ csrf_field() }}
           <div class="mt-4 bg-white shadow-md rounded-lg text-left">
             <div class="h-2 bg-purple-400 rounded-t-md"></div>
             <div class="px-8 py-6 ">
-              <label class="block font-semibold"> Tài khoản </label>
-              <input type="text" name="admin_email" placeholder="abc@gmail.com" class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md">
+                <label class="block font-semibold"> Tên </label>
+              <input type="text" name="admin_name" placeholder="Điền tên..." value="{{old('admin_name')}}" class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md">
+              <label class="block font-semibold"> Email </label>
+              <input type="text" name="admin_email" placeholder="abc@gmail.com" value="{{old('admin_email')}}" class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md">
+              <label class="block font-semibold"> Phone </label>
+              <input type="text" name="admin_phone" placeholder="Điền số điện thoại..." value="{{old('admin_phone')}}" class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md">
               <label class="block mt-3 font-semibold"> Mật khẩu </label>
               <input type="password" name="admin_password" placeholder="Password" class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md">
                 <div class="flex justify-between items-baseline">
-                  <button type="submit" class="mt-4 bg-purple-400 text-black py-2 px-6 rounded-md hover:bg-purple-600">Login</button>
+                  <button type="submit" class="mt-4 bg-purple-400 text-black py-2 px-6 rounded-md hover:bg-purple-600">Đăng ký</button>
                   <a href="#" class="text-sm hover:underline">Quên mật khẩu</a>
                 </div>
                 <a href="{{url('/login_google')}}" class="text-sm hover:underline">Login GG</a> |
-                <a href="{{url('/show_dangky_admin')}}" class="text-sm hover:underline">Đăng ký Admin</a> |
                 <a href="{{url('/show_dangnhap_auth')}}" class="text-sm hover:underline">Đăng nhập Auth</a>
             </div>
         </form>

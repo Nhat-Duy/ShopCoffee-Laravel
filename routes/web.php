@@ -10,6 +10,8 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\OderController;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -143,3 +145,13 @@ Route::get('/xoadonnhaphang/{id_nh}', [WarehouseController::class, 'xoadonnhapha
 
 Route::post('/xacnhannhapkho', [WarehouseController::class, 'xacnhannhapkho']);
 
+// Phân quyền
+Route::get('/show_dangky_admin', [AuthController::class, 'show_dangky_admin']);
+Route::post('/dangky_admin', [AuthController::class, 'dangky_admin']);
+Route::get('/show_dangnhap_auth', [AuthController::class, 'show_dangnhap_auth']);
+Route::post('/dangnhap_auth', [AuthController::class, 'dangnhap_auth']);
+Route::get('/logout_auth', [AuthController::class, 'logout_auth']);
+
+//Quan ly User
+Route::get('/user', [UserController::class, 'index']);
+Route::post('/capquyen', [UserController::class, 'capquyen']);

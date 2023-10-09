@@ -12,12 +12,13 @@ use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\MXH;
 use App\Models\Login;
+use Illuminate\Support\Facades\Auth;
 
 
 class AdminController extends Controller
 {   
     public function AuthLogin(){
-        $admin_id = Session::get('admin_id');
+        $admin_id = Auth::id();
         if($admin_id){
            return Redirect::to('admin.dashboard');
         }else{
@@ -26,7 +27,7 @@ class AdminController extends Controller
     }
 
     public function index(){
-        return view('admin_login');
+        return view('admin.auth.dangnhapauth');
     }
     public function show_dashboard(){
         $this->AuthLogin();
@@ -50,18 +51,6 @@ class AdminController extends Controller
             Session::put('message', 'Mật khẩu hoặc tài khoản sai vui lòng nhập lại!');
             return Redirect::to('/admin');
         }
-        // $admin_email = $request->admin_email;
-        // $admin_password = md5($request->admin_password);
-
-        // $result = DB::table('admin')->where('admin_email', $admin_email)->where('admin_password', $admin_password)->first();
-        // if($result){
-        //     Session::put('admin_name', $result->admin_name);
-        //     Session::put('admin_id', $result->admin_id);
-        //     return Redirect::to('/dashboard');
-        // }else{
-        //     Session::put('message', 'Tài khoản hoặc mật khẩu sai. Vui lòng nhập lại!');
-        //     return Redirect::to('/admin');
-        // }
     }
     public function log_out(){
         $this->AuthLogin();
