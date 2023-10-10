@@ -54,6 +54,7 @@
                         <div class="flex flex-col justify-center">
                             <h6 class="ml-2 text-sm leading-normal">{{$user->admin_email}}</h6>
                             <input type="hidden" name="admin_email" value="{{$user->admin_email}}">
+                            <input type="hidden" name="admin_id" value="{{$user->admin_id}}">
                         </div>
                         </div>
                     </td>
@@ -95,6 +96,7 @@
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="ml-auto">
                         {{-- <a class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700" href=""><i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Edit</a> --}}
+                        <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="relative z-10 inline-block px-4 py-3 mb-0 font-bold text-center text-transparent uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 bg-gradient-to-tl from-red-600 to-rose-400 hover:scale-102 active:opacity-85 bg-x-25 bg-clip-text" href="{{URL::to('/xoa_user/'. $user->admin_id)}}"><i class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-rose-400 bg-x-25 bg-clip-text"></i>Delete</a>
                         <a class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25" > <i class="fas fa-plus"> </i>&nbsp;&nbsp;<input type="submit" value="Cấp quyền" name="" class="btn btn-info btn-sm "></a>
                     </div>
                   </td>

@@ -170,6 +170,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 
+        App\Providers\BladeServiceProvider::class,
+
         Laravel\Socialite\SocialiteServiceProvider::class, //cho provider
         
     ])->toArray(),

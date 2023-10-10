@@ -43,23 +43,27 @@ Route::get('/logout',[AdminController::class, 'log_out']);
 Route::post('/admin-dashboard',[AdminController::class, 'dashboard']);
 
 //Danh mục
-Route::get('/danhmuc', [CategoryProduct::class, 'danhmuc']);
-Route::get('/themdanhmuc', [CategoryProduct::class, 'themdanhmuc']);
-Route::get('/suadanhmuc/{id_danhmuc}', [CategoryProduct::class, 'suadanhmuc']);
-Route::get('/xoadanhmuc/{id_danhmuc}', [CategoryProduct::class, 'xoadanhmuc']);
+Route::group(['middleware' => 'admin.author'], function(){
+    Route::get('/danhmuc', [CategoryProduct::class, 'danhmuc']);
+    Route::get('/themdanhmuc', [CategoryProduct::class, 'themdanhmuc']);
+    Route::get('/suadanhmuc/{id_danhmuc}', [CategoryProduct::class, 'suadanhmuc']);
+    Route::get('/xoadanhmuc/{id_danhmuc}', [CategoryProduct::class, 'xoadanhmuc']);
 
 
-Route::post('/luudanhmuc', [CategoryProduct::class, 'luudanhmuc']);
-Route::post('/update_danhmuc/{id_danhmuc}', [CategoryProduct::class, 'update_danhmuc']);
+    Route::post('/luudanhmuc', [CategoryProduct::class, 'luudanhmuc']);
+    Route::post('/update_danhmuc/{id_danhmuc}', [CategoryProduct::class, 'update_danhmuc']);
+});
 
 //Sản phẩm
-Route::get('/sanpham', [ProductController::class, 'sanpham']);
-Route::get('/themsanpham', [ProductController::class, 'themsanpham']);
-Route::get('/suasanpham/{id_sp}', [ProductController::class, 'suasanpham']);
-Route::get('/xoasanpham/{id_sp}', [ProductController::class, 'xoasanpham']);
+Route::group(['middleware' => 'admin.author'], function(){
+    Route::get('/sanpham', [ProductController::class, 'sanpham']);
+    Route::get('/themsanpham', [ProductController::class, 'themsanpham']);
+    Route::get('/suasanpham/{id_sp}', [ProductController::class, 'suasanpham']);
+    Route::get('/xoasanpham/{id_sp}', [ProductController::class, 'xoasanpham']);
 
-Route::post('/luusanpham', [ProductController::class, 'luusanpham']);
-Route::post('/update_sanpham/{id_sp}', [ProductController::class, 'update_sanpham']);
+    Route::post('/luusanpham', [ProductController::class, 'luusanpham']);
+    Route::post('/update_sanpham/{id_sp}', [ProductController::class, 'update_sanpham']);
+});
 
 //Giỏ hàng
 // Route::post('/capnhat_giohang', [CartController::class, 'capnhat_giohang']);
@@ -103,14 +107,13 @@ Route::post('/select_delivery_home', [CheckoutController::class, 'select_deliver
 Route::post('/caculate_fee', [CheckoutController::class, 'caculate_fee']);
 Route::post('/xacnhandonhang', [CheckoutController::class, 'xacnhandonhang']);
 
-
-
 //Quản lý đơn hàng
-Route::get('/indonhang/{checkout_code}', [OderController::class, 'indonhang']);
-Route::get('/quanlydonhang', [OderController::class, 'quanlydonhang']);
-Route::get('/xemdonhang/{ma_dh}', [OderController::class, 'xemdonhang']);
-Route::post('/update_tinhtrang', [OderController::class, 'update_tinhtrang']);
-
+Route::group(['middleware' => 'admin.author'], function(){
+    Route::get('/indonhang/{checkout_code}', [OderController::class, 'indonhang']);
+    Route::get('/quanlydonhang', [OderController::class, 'quanlydonhang']);
+    Route::get('/xemdonhang/{ma_dh}', [OderController::class, 'xemdonhang']);
+    Route::post('/update_tinhtrang', [OderController::class, 'update_tinhtrang']);
+});
 
 // Gửi mail
 Route::get('/gui_mail', [HomeController::class, 'gui_mail']);
@@ -128,23 +131,24 @@ Route::post('/select_feeship', [DeliveryController::class, 'select_feeship']);
 Route::post('/update_delivery', [DeliveryController::class, 'update_delivery']);
 
 // Quản lý nguyên liệu
-Route::get('/nguyenlieu', [WarehouseController::class, 'nguyenlieu']);
-Route::get('/themnguyenlieu', [WarehouseController::class, 'themnguyenlieu']);
-Route::get('/nhapkho', [WarehouseController::class, 'nhapkho']);
+Route::group(['middleware' => 'admin.author'], function(){
+    Route::get('/nguyenlieu', [WarehouseController::class, 'nguyenlieu']);
+    Route::get('/themnguyenlieu', [WarehouseController::class, 'themnguyenlieu']);
+    Route::get('/nhapkho', [WarehouseController::class, 'nhapkho']);
 
-Route::post('/luunguyenlieu', [WarehouseController::class, 'luunguyenlieu']);
-Route::get('/xoa_nguyenlieu/{id_nl}', [WarehouseController::class, 'xoa_nguyenlieu']);
+    Route::post('/luunguyenlieu', [WarehouseController::class, 'luunguyenlieu']);
+    Route::get('/xoa_nguyenlieu/{id_nl}', [WarehouseController::class, 'xoa_nguyenlieu']);
 
-Route::post('/themvaokho', [WarehouseController::class, 'themvaokho']);
-Route::post('/update_kho', [WarehouseController::class, 'update_kho']);
-Route::get('/xoa_kho/{id_session}', [WarehouseController::class, 'xoa_kho']);
-Route::get('/xoatatca_kho', [WarehouseController::class, 'xoatatca_kho']);
-Route::get('/quanlynhaphang', [WarehouseController::class, 'quanlynhaphang']);
-Route::get('/xemchitietnhaphang/{ma_nh}', [WarehouseController::class, 'xemchitietnhaphang']);
-Route::get('/xoadonnhaphang/{id_nh}', [WarehouseController::class, 'xoadonnhaphang']);
+    Route::post('/themvaokho', [WarehouseController::class, 'themvaokho']);
+    Route::post('/update_kho', [WarehouseController::class, 'update_kho']);
+    Route::get('/xoa_kho/{id_session}', [WarehouseController::class, 'xoa_kho']);
+    Route::get('/xoatatca_kho', [WarehouseController::class, 'xoatatca_kho']);
+    Route::get('/quanlynhaphang', [WarehouseController::class, 'quanlynhaphang']);
+    Route::get('/xemchitietnhaphang/{ma_nh}', [WarehouseController::class, 'xemchitietnhaphang']);
+    Route::get('/xoadonnhaphang/{id_nh}', [WarehouseController::class, 'xoadonnhaphang']);
 
-Route::post('/xacnhannhapkho', [WarehouseController::class, 'xacnhannhapkho']);
-
+    Route::post('/xacnhannhapkho', [WarehouseController::class, 'xacnhannhapkho']);
+});
 // Phân quyền
 Route::get('/show_dangky_admin', [AuthController::class, 'show_dangky_admin']);
 Route::post('/dangky_admin', [AuthController::class, 'dangky_admin']);
@@ -153,5 +157,8 @@ Route::post('/dangnhap_auth', [AuthController::class, 'dangnhap_auth']);
 Route::get('/logout_auth', [AuthController::class, 'logout_auth']);
 
 //Quan ly User
-Route::get('/user', [UserController::class, 'index']);
-Route::post('/capquyen', [UserController::class, 'capquyen']);
+Route::group(['middleware' => 'auth.roles'], function(){
+    Route::get('/user', [UserController::class, 'index']);
+    Route::get('/xoa_user/{admin_id}', [UserController::class, 'xoa_user']);
+    Route::post('/capquyen', [UserController::class, 'capquyen']);
+});
