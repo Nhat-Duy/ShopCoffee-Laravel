@@ -34,7 +34,7 @@ return [
     'google' => [
         'client_id' => '369326839384-s6hf9q7lqnojrq4olvsnk8qvn98513ic.apps.googleusercontent.com',
         'client_secret' => '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',
-        'redirect' => 'http://localhost/shopcoffee/google/callback'
+        'redirect' => env('GOOGLE_URL'),
     ]
 
 ];

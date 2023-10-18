@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 use Session;
 use App\Http\Requests;
+use App\Models\Khachhang;
 use Illuminate\Support\Facades\Redirect;
 
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\MXH;
+use App\Models\MXH_Khachhang;
 use App\Models\Login;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,6 +26,59 @@ class AdminController extends Controller
         }else{
            return Redirect::to('admin')->send();
         }
+    }
+
+    public function loginkhachhang_google(){
+        config(['services.google.redirect' => env('GOOGLE_CLIENT_URL')]);
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function callback_khachhang_google(){
+        config(['services.google.redirect' => env('GOOGLE_CLIENT_URL')]);
+        $users = Socialite::driver('google')->stateless()->user();
+
+        $authUser = $this->findOrCreateKhachhang($users, 'google');
+
+        if($authUser){
+            $account_name = Khachhang::where('id_kh', $authUser->user)->first();
+            Session::put('id_kh', $account_name->id_kh);
+            Session::put('ten_kh', $account_name->ten_kh);
+        }elseif($khachhang_new){
+            $account_name = Khachhang::where('id_kh', $authUser->user)->first();
+            Session::put('id_kh', $account_name->id_kh);
+            Session::put('ten_kh', $account_name->ten_kh);
+        }
+        
+        return redirect('/')->with('message', 'Đăng nhập tài khoản thành công');
+    }
+
+    public function findOrCreateKhachhang($users, $provider) {
+        $authUser = MXH_Khachhang::where('provider_user_id', $users->id)->first();
+        if ($authUser) {
+            return $authUser;
+        }
+        
+        $khachhang = Khachhang::where('email_kh', $users->email)->first();
+    
+        if (!$khachhang) {
+            $khachhang = Khachhang::create([
+                'ten_kh' => $users->name,
+                'email_kh' => $users->email,
+                'matkhau_kh' => '',
+                'sdt_kh' => ''
+            ]);
+        }
+        $khachhang_new = new MXH_Khachhang([
+            'provider_user_id' => $users->id,
+            'provider_user_email' => $users->email,
+            'provider' => strtoupper($provider)
+        ]);
+
+        $khachhang_new->khachhang()->associate($khachhang);
+
+        $khachhang_new->save();
+    
+        return $khachhang_new;
     }
 
     public function index(){

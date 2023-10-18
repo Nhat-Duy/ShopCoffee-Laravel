@@ -13,9 +13,18 @@ use App\Models\Nguyenlieu;
 use App\Models\Nhaphang;
 use App\Models\Chitietnhaphang;
 use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 
 class WarehouseController extends Controller
 {   
+    // public function AuthLogin(){
+    //     $admin_id = Session::get('admin_id');
+    //     if($admin_id){
+    //        return Redirect::to('admin.dashboard');
+    //     }else{
+    //        return Redirect::to('admin')->send();
+    //     }
+    // }
 
     public function xoadonnhaphang($id_nh){
         $nhaphang = Nhaphang::find($id_nh);
@@ -46,11 +55,12 @@ class WarehouseController extends Controller
     }
 
     public function xacnhannhapkho(Request $request){
-
         $oder_code = substr(md5(microtime()),rand(0,26),5);
+        
+        $admin = Admin::where('admin_id', Auth::id())->first();
 
         $nhaphang = new Nhaphang();
-        $nhaphang->admin_id = Session::get('admin_id');
+        $nhaphang->admin_id = $admin->admin_id;
         $nhaphang->tinhtrang_nh = 1;
         $nhaphang->ma_nh = $oder_code;
 

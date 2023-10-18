@@ -108,7 +108,7 @@ span.price {
 					<div class="col-50">
 						<h3>Điền thông tin gửi hàng</h3>
 						<label for="fname"><i class="fa fa-user" ></i> Họ và tên</label>
-						<input type="text" id="fname" class="form-control ten_tt" name="ten_tt" pattern="^[a-zA-Z ]+$"  value="">
+						<input type="text" id="fname" class="form-control ten_tt" name="ten_tt" pattern="^[a-zA-Z ]+$"  value="" >
 						<label for="email"><i class="fa fa-envelope"></i> Email</label>
 						<input type="text" id="email" name="email_tt" class="form-control email_tt" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$" value="" required>
 						<label for="adr"><i class="fa fa-address-card-o"></i> Số điện thoại</label>

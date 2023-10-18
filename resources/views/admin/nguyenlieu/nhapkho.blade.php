@@ -127,6 +127,7 @@
               </tfoot>
             </table>
           </form>
+          {{-- @foreach ($admin as $key => $ad) --}}
           <form action="{{url('/xacnhannhapkho')}}" method="POST">
             @csrf
             <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
@@ -135,6 +136,7 @@
               </div>
           </td>
           </form>
+          {{-- @endforeach --}}
           </div>
         </div>
       </div>

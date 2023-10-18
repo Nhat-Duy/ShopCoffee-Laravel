@@ -14,6 +14,11 @@ use App\Models\Feeship;
 use App\Models\Thanhtoan;
 use App\Models\Donhang;
 use App\Models\Chitietdonhang;
+use App\Models\Khachhang;
+use App\Models\Coupon;
+
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -31,6 +36,18 @@ class CheckoutController extends Controller
 
     public function xacnhandonhang(Request $request){
         $data = $request->all();
+
+        // Lấy coupon 
+        if($data['oder_coupon'] != 'không có mã giảm giá'){
+            $coupon = Coupon::where('ma_coupon', $data['oder_coupon'])->first();
+            // $coupon->coupon_used = $coupon->coupon_used.','.Session::get('id_kh');
+            // $coupon->coupon_time = $coupon->coupon_time - 1;
+            $coupon_mail = $coupon->ma_coupon;
+            // $coupon->save();
+        }else{
+            $coupon_mail = 'không có';
+        }
+
         $thanhtoan = new Thanhtoan();
         $thanhtoan->ten_tt = $data['ten_tt'];
         $thanhtoan->email_tt = $data['email_tt'];
@@ -39,7 +56,7 @@ class CheckoutController extends Controller
         $thanhtoan->notes_tt = $data['notes_tt'];
         $thanhtoan->method_tt = $data['method_tt'];
         $thanhtoan->save();
-        $id_tt = $thanhtoan->id_tt;
+        $id_tt = $thanhtoan->id_tt; 
 
         $oder_code = substr(md5(microtime()),rand(0,26),5);
 
@@ -68,10 +85,47 @@ class CheckoutController extends Controller
             }
         }
 
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
+        $title_mail = "Đơn hàng xác nhận ngày".' '.$now;
+
+        $khachhang = Khachhang::find(Session::get('id_kh'));
+
+        $data['email'] = $khachhang->email_kh;
+
+        // Lấy giỏ hàng
+        if(Session::get('cart') == true){
+            foreach(Session::get('cart') as $key => $cart_email){
+                $cart_array[] = array(
+                    'ten_sp' => $cart_email['ten_sp'],
+                    'gia_sp' => $cart_email['gia_sp'],
+                    'qty_sp' => $cart_email['qty_sp'],
+                );
+            }
+        }
+        // Lấy địa chỉ vận chuyển
+        $thanhtoan_array = array(
+            'ten_kh' => $khachhang->ten_kh,  
+            'ten_tt' => $data['ten_tt'],  
+            'email_tt' => $data['email_tt'],  
+            'sdt_tt' => $data['sdt_tt'],  
+            'diachi_tt' => $data['diachi_tt'],  
+            'notes_tt' => $data['notes_tt'],  
+            'method_tt' => $data['method_tt']
+        );
+        //Lấy mã coupon 
+        $ordercode_mail = array(
+            'ma_coupon' => $coupon_mail,
+            'order_code' => $oder_code
+        );
+
+        Mail::send('page.mail.mail_order', ['cart_array'=>$cart_array, 'thanhtoan_array'=>$thanhtoan_array, 'code'=>$ordercode_mail],
+            function($message) use ($title_mail, $data){
+                $message->to($data['email'])->subject($title_mail);
+                $message->from($data['email'], $title_mail);
+        });
         Session::forget('coupon');
         Session::forget('fee');
         Session::forget('cart');
-
     }
 
     public function caculate_fee(Request $request){

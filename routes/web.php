@@ -122,6 +122,10 @@ Route::get('/gui_mail', [HomeController::class, 'gui_mail']);
 Route::get('/login_google', [AdminController::class, 'login_google']);
 Route::get('/google/callback', [AdminController::class, 'callback_google']);
 
+//Đăng nhập bằng google frontend
+Route::get('/loginkhachhang_google', [AdminController::class, 'loginkhachhang_google']);
+Route::get('/khachhang/google/callback', [AdminController::class, 'callback_khachhang_google']);
+
 // Quản lý vận chuyển
 Route::get('/quanlyvanchuyen', [DeliveryController::class, 'quanlyvanchuyen']);
 Route::post('/select_delivery', [DeliveryController::class, 'select_delivery']);
