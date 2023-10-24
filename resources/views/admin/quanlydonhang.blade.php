@@ -68,11 +68,15 @@
                       <div class="flex flex-col justify-center">
                         <h6 class="ml-2 text-sm leading-normal">
                           @if($ord->tinhtrang_dh == 1)
-                              Đơn hàng mới 
+                              Chờ thanh toán 
                           @elseif($ord->tinhtrang_dh == 2)
-                              Đã xử lý
+                              Vận chuyển
+                          @elseif($ord->tinhtrang_dh == 3)
+                              Đang giao
+                          @elseif($ord->tinhtrang_dh == 4)
+                              Hoàn thành
                           @else
-                              Hủy đơn hàng
+                              Đơn hàng bị hủy
                           @endif
                         </h6>
                       </div>

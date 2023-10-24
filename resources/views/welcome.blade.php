@@ -139,14 +139,14 @@
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-inr"></i> INR</a></li>
 						<li>    
-                            <?php 
+                            <?php
                                 $id_kh = Session::get('id_kh');
                                 if($id_kh != NULL){
                             ?>
                                <div class="dropdownn">
                                   <a href="#" class="dropdownn" data-toggle="modal" data-target="#myModal" ><i class="fa fa-user-o"></i>{{Session::get('ten_kh')}}</a>
                                   <div class="dropdownn-content">
-                                    <a href="" ><i class="fa fa-user-circle" aria-hidden="true" ></i>My Profile</a>
+                                    <a href="{{URL::to('/lichsudonhang')}}" ><i class="fa fa-user-circle" aria-hidden="true" ></i>Đơn hàng của tôi</a>
                                     <a href="{{URL::to('/dangxuat')}}"  ><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Xuất</a>
                                     <?php 
                                     }else{
@@ -271,7 +271,7 @@
                         <a href="{{URL::to('/danhmuc_sanpham/3')}}">Sản phẩm</a>
                     </li>
                     <li>
-                        <a href="{{URL::to('/cafe_sp')}}">Giới thiệu</a>
+                        <a href="{{URL::to('/')}}">Giới thiệu</a>
                     </li>
                 </ul>
             </div>

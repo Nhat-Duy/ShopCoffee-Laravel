@@ -16,6 +16,8 @@ use App\Models\Donhang;
 use App\Models\Chitietdonhang;
 use App\Models\Khachhang;
 use App\Models\Coupon;
+use App\Models\Diachi;
+use Illuminate\Support\Facades\Auth;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -77,6 +79,7 @@ class CheckoutController extends Controller
                 $chitietdonhang->ma_dh = $oder_code;
                 $chitietdonhang->id_sp = $cart['id_sp'];
                 $chitietdonhang->ten_sp = $cart['ten_sp'];
+                $chitietdonhang->hinhanh_sp = $cart['hinhanh_sp'];
                 $chitietdonhang->gia_sp = $cart['gia_sp'];
                 $chitietdonhang->soluong_sp = $cart['qty_sp'];
                 $chitietdonhang->coupon_sp = $data['oder_coupon'];
@@ -211,17 +214,24 @@ class CheckoutController extends Controller
         $meta_title = "Thanh Toán";
         $url_canonical = $request->url();
         //EndSeo
+
         $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
-
+        $diachi = Diachi::where('id_kh', Session::get('id_kh'))->orderBy('id_dc', 'DESC')->limit(1)->get();
         $city = City::orderby('matp', 'ASC')->get();
-
+        $diachi1 = Diachi::where('id_kh', Session::get('id_kh'))->get();
+        foreach($diachi1 as $key => $dia1){
+            $id_kh = $dia1->id_kh;
+        }
+        $khachhang = Khachhang::where('id_kh', $id_kh)->first();
         return view('page.checkout.thanhtoan')
         ->with('danhmuc',$danhmuc_sp)
         ->with('meta_mota', $meta_mota)
         ->with('meta_keywords', $meta_keywords)
         ->with('meta_title', $meta_title)
         ->with('url_canonical', $url_canonical)
-        ->with('city', $city);
+        ->with('city', $city)
+        ->with('khachhang', $khachhang)
+        ->with('diachi', $diachi);
         
     }
 
@@ -355,5 +365,35 @@ class CheckoutController extends Controller
 
         $quanlychitietdonhang = view('admin.xemdonhang')->with('donhang_id', $donhang_id);
         return view('admin_layout')->with('admin.xemdonhang', $quanlychitietdonhang);
+    }
+// Địa chỉ 
+    public function themdiachi(Request $request){
+        //Seo
+        $meta_mota = "Cảm ơn";
+        $meta_keywords = "Cảm ơn";
+        $meta_title = "Cảm ơn";
+        $url_canonical = $request->url();
+        //EndSeo
+        $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
+
+            return view('page.diachi.themdiachi')
+            ->with('danhmuc',$danhmuc_sp)
+            ->with('meta_mota', $meta_mota)
+            ->with('meta_keywords', $meta_keywords)
+            ->with('meta_title', $meta_title)
+            ->with('url_canonical', $url_canonical);
+    }
+
+    public function luudiachi(Request $request){
+        $data = $request->all();
+
+        $diachi = new Diachi();
+        $diachi->id_kh = Session::get('id_kh');
+        $diachi->diachi_dc = $data['diachi_dc'];
+        $diachi->save();
+
+        Session::put('message', 'Thêm địa chỉ thành công');
+        return Redirect::to('thanhtoan');
+        
     }
 }

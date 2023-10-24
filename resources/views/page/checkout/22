@@ -107,22 +107,18 @@ span.price {
 					<div class="row-checkout">
 					<div class="col-50">
 						<h3>Điền thông tin gửi hàng</h3>
-
 						<label for="fname"><i class="fa fa-user" ></i> Họ và tên</label>
-						<input type="text" id="fname" class="form-control ten_tt" name="ten_tt" pattern="^[a-zA-Z ]+$"  value="{{$khachhang->ten_kh}}">
+						<input type="text" id="fname" class="form-control ten_tt" name="ten_tt" pattern="^[a-zA-Z ]+$"  value="" >
 						<label for="email"><i class="fa fa-envelope"></i> Email</label>
-						<input type="text" id="email" name="email_tt" class="form-control email_tt" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$" value="{{$khachhang->email_kh}}" required>
+						<input type="text" id="email" name="email_tt" class="form-control email_tt" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$" value="" required>
 						<label for="adr"><i class="fa fa-address-card-o"></i> Số điện thoại</label>
-						<input type="text" id="adr" name="sdt_tt" class="form-control sdt_tt" value="{{$khachhang->sdt_kh}}" required>
-
-                        
-                        <label for="city"><i class="fa fa-institution"></i> Địa chỉ: 
+						<input type="text" id="adr" name="sdt_tt" class="form-control sdt_tt" value="" required>
+						<label for="city"><i class="fa fa-institution"></i> Địa chỉ: 
                             <a href="{{url('/themdiachi')}}" value="Cập nhật" name="update_cart" class="btn btn-info btn-sm update">Nhập địa chỉ</a>
                             <a href="{{url('/thaydoidiachi')}}" value="Cập nhật" name="update_cart" class="btn btn-info btn-sm update">Thay đổi</a>
                         </label>
-
                         @foreach($diachi as $key => $dia)
-                            <input type="text" id="city" name="diachi_tt" class="form-control diachi_tt" value="{{$dia->diachi_dc}}" pattern="^[a-zA-Z ]+$" required>
+                        <input type="text" id="city" name="diachi_tt" class="form-control diachi_tt" value="{{$dia->diachi_dc}}" pattern="^[a-zA-Z ]+$" required>
                         @endforeach
 						
 						<textarea style="height:100px; margin-top: 10px " class="form-control notes_tt"  name="notes_tt" placeholder="Ghi chú đơn hàng"></textarea>
@@ -179,6 +175,7 @@ span.price {
                     {{-- Oder-Fee --}}
                     @if(Session::get('fee'))
 					    <input type="hidden" name="oder_fee" class="oder_fee" value="{{Session::get('fee')}}">
+                    
                     @else
 					    <input type="hidden" name="oder_fee" class="oder_fee" value="5000">
                     @endif

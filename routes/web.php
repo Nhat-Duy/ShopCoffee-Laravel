@@ -29,6 +29,7 @@ Route::get('/', [HomeController::class,'index']);
 Route::get('/cafe_sp', [HomeController::class,'cafe_sp']);
 Route::get('/chitietsanpham/{id_sp}', [ProductController::class,'chitietsanpham']);
 
+
 Route::post('/timkiem', [HomeController::class,'timkiem']);
 
 
@@ -107,7 +108,19 @@ Route::post('/select_delivery_home', [CheckoutController::class, 'select_deliver
 Route::post('/caculate_fee', [CheckoutController::class, 'caculate_fee']);
 Route::post('/xacnhandonhang', [CheckoutController::class, 'xacnhandonhang']);
 
+Route::get('/themdiachi', [CheckoutController::class, 'themdiachi']);
+Route::post('/luudiachi', [CheckoutController::class, 'luudiachi']);
+
+
 //Quản lý đơn hàng
+Route::get('/lichsudonhang', [OderController::class, 'lichsudonhang']);
+Route::get('/chothanhtoan', [OderController::class, 'chothanhtoan']);
+Route::get('/vanchuyen', [OderController::class, 'vanchuyen']);
+Route::get('/danggiao', [OderController::class, 'danggiao']);
+Route::get('/hoanthanh', [OderController::class, 'hoanthanh']);
+Route::get('/huydon', [OderController::class, 'huydon']);
+Route::get('/xemchitietdonhang/{ma_dh}', [OderController::class, 'xemchitietdonhang']);
+
 Route::group(['middleware' => 'admin.author'], function(){
     Route::get('/indonhang/{checkout_code}', [OderController::class, 'indonhang']);
     Route::get('/quanlydonhang', [OderController::class, 'quanlydonhang']);
