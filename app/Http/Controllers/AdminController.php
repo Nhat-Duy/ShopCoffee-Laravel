@@ -49,7 +49,7 @@ class AdminController extends Controller
             Session::put('ten_kh', $account_name->ten_kh);
         }
         
-        return redirect('/')->with('message', 'Đăng nhập tài khoản thành công');
+        return redirect('thanhtoan')->with('message', 'Đăng nhập tài khoản thành công');
     }
 
     public function findOrCreateKhachhang($users, $provider) {

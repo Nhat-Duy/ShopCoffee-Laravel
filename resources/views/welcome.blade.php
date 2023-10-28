@@ -147,6 +147,7 @@
                                   <a href="#" class="dropdownn" data-toggle="modal" data-target="#myModal" ><i class="fa fa-user-o"></i>{{Session::get('ten_kh')}}</a>
                                   <div class="dropdownn-content">
                                     <a href="{{URL::to('/lichsudonhang')}}" ><i class="fa fa-user-circle" aria-hidden="true" ></i>Đơn hàng của tôi</a>
+                                    <a href="{{URL::to('/thanhtoan')}}" ><i class="fa fa-user-circle" aria-hidden="true" ></i>Thanh toán</a>
                                     <a href="{{URL::to('/dangxuat')}}"  ><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Xuất</a>
                                     <?php 
                                     }else{
@@ -594,9 +595,9 @@
                                 }
                             });
 
-                            window.setTimeout(function(){
-                                location.reload();
-                            }, 3000);
+                            // window.setTimeout(function(){
+                            //     location.reload();
+                            // }, 3000);
                             
                         } else {
                             swal("Đóng", "Đơn hàng chưa được gửi, hãy hoàn tất đơn hàng :)", "error");

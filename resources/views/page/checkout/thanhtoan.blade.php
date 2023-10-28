@@ -98,141 +98,7 @@ span.price {
 
 					
 <section class="section">       
-	<div class="container">
-		<div class="row-checkout">
-			<div class="col-25">
-				<div class="container-checkout">
-				<form method="POST">
-                    @csrf
-					<div class="row-checkout">
-					<div class="col-50">
-						<h3>Điền thông tin gửi hàng</h3>
-
-						<label for="fname"><i class="fa fa-user" ></i> Họ và tên</label>
-						<input type="text" id="fname" class="form-control ten_tt" name="ten_tt" pattern="^[a-zA-Z ]+$"  value="{{$khachhang->ten_kh}}">
-						<label for="email"><i class="fa fa-envelope"></i> Email</label>
-						<input type="text" id="email" name="email_tt" class="form-control email_tt" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$" value="{{$khachhang->email_kh}}" required>
-						<label for="adr"><i class="fa fa-address-card-o"></i> Số điện thoại</label>
-						<input type="text" id="adr" name="sdt_tt" class="form-control sdt_tt" value="{{$khachhang->sdt_kh}}" required>
-
-                        
-                        <label for="city"><i class="fa fa-institution"></i> Địa chỉ: 
-                            <a href="{{url('/themdiachi')}}" value="Cập nhật" name="update_cart" class="btn btn-info btn-sm update">Nhập địa chỉ</a>
-                            <a href="{{url('/thaydoidiachi')}}" value="Cập nhật" name="update_cart" class="btn btn-info btn-sm update">Thay đổi</a>
-                        </label>
-
-                        @foreach($diachi as $key => $dia)
-                            <input type="text" id="city" name="diachi_tt" class="form-control diachi_tt" value="{{$dia->diachi_dc}}" pattern="^[a-zA-Z ]+$" required>
-                        @endforeach
-						
-						<textarea style="height:100px; margin-top: 10px " class="form-control notes_tt"  name="notes_tt" placeholder="Ghi chú đơn hàng"></textarea>
-
-						<div class="row">
-						<div class="col-50">
-							{{-- <label for="state">State</label>
-							<input type="text" id="state" name="state" class="form-control" pattern="^[a-zA-Z ]+$" required> --}}
-						</div>
-						{{-- <div class="col-50">
-							<label for="zip">Zip</label>
-							<input type="text" id="zip" name="zip" class="form-control" pattern="^[0-9]{6}(?:-[0-9]{4})?$" required>
-						</div> --}}
-						</div>
-					</div>
-					
-					
-					{{-- <div class="col-50">
-						<h3>Payment</h3>
-						<label for="fname">Accepted Cards</label>
-						<div class="icon-container">
-							<i class="fa fa-cc-visa" style="color:navy;"></i>
-							<i class="fa fa-cc-amex" style="color:blue;"></i>
-							<i class="fa fa-cc-mastercard" style="color:red;"></i>
-							<i class="fa fa-cc-discover" style="color:orange;"></i>
-						</div>
-						
-						
-						<label for="cname">Name on Card</label>
-						<input type="text" id="cname" name="cardname" class="form-control" pattern="^[a-zA-Z ]+$" required>
-						
-						<div class="form-group" id="card-number-field">
-							<label for="cardNumber">Card Number</label>
-							<input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
-                    	</div>
-						<label for="expdate">Exp Date</label>
-						<input type="text" id="expdate" name="expdate" class="form-control" pattern="^((0[1-9])|(1[0-2]))\/(\d{2})$" placeholder="12/22"required>
-						
-
-						<div class="row">
-						
-							<div class="col-50">
-								<div class="form-group CVV">
-									<label for="cvv">CVV</label>
-									<input type="text" class="form-control" name="cvv" id="cvv" required>
-								</div>
-							</div>
-						</div>
-					</div> --}}
-					</div>
-					{{-- <label><input type="CHECKBOX" name="" class="roomselect" value="conform" required> Địa chỉ giao hàng giống như địa chỉ thanh toán
-					</label>	 --}}
-
-                    {{-- Oder-Fee --}}
-                    @if(Session::get('fee'))
-					    <input type="hidden" name="oder_fee" class="oder_fee" value="{{Session::get('fee')}}">
-                    @else
-					    <input type="hidden" name="oder_fee" class="oder_fee" value="5000">
-                    @endif
-
-                    {{-- Oder-Coupon --}}
-                    @if(Session::get('coupon'))
-                        @foreach(Session::get('coupon') as $key => $cou)
-                            <input type="hidden" name="oder_coupon" class="oder_coupon" value="{{$cou['ma_coupon']}}">
-                        @endforeach
-                    @else                
-                        <input type="hidden" name="oder_coupon" class="oder_coupon" value="không có mã giảm giá">
-                    @endif
-				    
-					<br>
-                    <div class="flex flex-col justify-center">
-                        <td class="text-black">Chọn hình thức thanh toán</td>
-                        <td>
-                            <select name="method_tt" id="city" class="bg-slate-400 method_tt">
-                                <option value="0">-- Chuyển khoản --</option> 
-                                <option value="1">-- Tiền mặt --</option> 
-                                {{-- <option value="2">-- Chuyển khoản --</option>  --}}
-                            </select>
-                        </td>  
-                    </div>
-					<input type="button" name="send_order" value="Xác nhận đơn hàng" class="checkout-btn send_order">
-				</form>
-				</div>
-			</div>
-			{{-- <div class="col-4">
-				<div class="container-checkout">
-					<h4>Cart 
-					<span class='price' style='color:black'>
-					<i class='fa fa-shopping-cart'></i> 
-					<b>$total_count</b>
-					</span>
-				</h4>
-
-					<table class='table table-condensed'>
-					<thead><tr>
-					<th >no</th>
-					<th >product title</th>
-					<th >	qty	</th>
-					<th >	amount</th></tr>
-					</thead>
-					<tbody>
-						<tr><td><p>$item_number_</p></td><td><p>$item_name_</p></td><td ><p>$quantity_</p></td><td ><p>$amount_</p></td></tr>
-				    </tbody>
-				</table>
-				<hr>
-				<h3>total<span class='price' style='color:black'><b>$$total</b></span></h3>
-				</div>
-			</div> --}}
-		</div>
-	</div>
+	
 
     {{-- Tính phí vận chuyển --}}
 	<div style="margin-top: 5px" class="container">
@@ -359,7 +225,7 @@ span.price {
                                     </td>
                                     
                                     <td data-th="Price">
-                                        <input type="text" class="form-control price" value="{{number_format($cart['gia_sp'],0,',','.')}}đ" readonly="readonly">
+                                        <input type="text" class="form-control price" value="{{number_format($cart['gia_sp'],0,',','.')}} VNĐ" readonly="readonly">
                                     </td>
                                     <td data-th="Quantity">
                                         {{-- <input type="text" class="form-control qty" value="1" > --}}
@@ -436,14 +302,14 @@ span.price {
                                                         <p>
                                                             @php
                                                             $total_coupon = ($total*$cou['number_coupon'])/100;
-                                                            echo '<p>Tổng giảm: '. number_format($total_coupon,0,',','.').'đ</p>';
+                                                            echo '<p>Tổng giảm: '. number_format($total_coupon,0,',','.').'VNĐ</p>';
                                                             @endphp
                                                         </p>
 														@php
 															$tongdacocoupon = $total-$total_coupon;
 														@endphp
                                                         <p>
-                                                            Tổng đã giảm:  {{number_format($total-$total_coupon,0,',','.').' đ'}}
+                                                            Tổng đã giảm:  {{number_format($total-$total_coupon,0,',','.').' VNĐ'}}
                                                         </p>
                                                     @else
                                                         Mã giảm: {{number_format($cou['number_coupon'],0,',','.')}} đ  
@@ -456,33 +322,33 @@ span.price {
 															$tongdacocoupon = $total_coupon;
 														@endphp
                                                         <p>
-                                                            Tổng đã giảm: {{number_format($total_coupon,0,',','.'). ' đ'}}
+                                                            Tổng đã giảm: {{number_format($total_coupon,0,',','.'). ' VNĐ'}}
                                                         </p>
                                                     @endif
                                                 @endforeach
                                             @endif
 
 											@if(Session::get('fee'))
-												<p>Phí vận chuyển: {{number_format(Session::get('fee'),0,',','.'). ' đ'}}</p>
+												<p>Phí vận chuyển: {{number_format(Session::get('fee'),0,',','.'). ' VNĐ'}}</p>
 												@php $tongphivanchuyen = $total + Session::get('fee'); @endphp
 											@endif
 											<p>Thành tiền: </p>
 											@php
 												if(Session::get('fee') && !Session::get('coupon')){
 													$tongsaugiam = $tongphivanchuyen;
-													echo number_format($tongsaugiam,0,',','.'). ' đ';
+													echo number_format($tongsaugiam,0,',','.'). ' VNĐ';
 												}elseif(!Session::get('fee') && Session::get('coupon')){
 													$tongsaugiam = $tongdacocoupon;
-													echo number_format($tongsaugiam,0,',','.'). ' đ';
+													echo number_format($tongsaugiam,0,',','.'). ' VNĐ';
 
 												}elseif(Session::get('fee') && Session::get('coupon')){
 													$tongsaugiam = $tongdacocoupon;
 													$tongsaugiam = $tongsaugiam + Session::get('fee');
-													echo number_format($tongsaugiam,0,',','.'). ' đ';
+													echo number_format($tongsaugiam,0,',','.'). ' VNĐ';
 
 												}elseif(!Session::get('fee') && !Session::get('coupon')){
 													$tongsaugiam = $total;
-													echo number_format($tongsaugiam,0,',','.'). ' đ';
+													echo number_format($tongsaugiam,0,',','.'). ' VNĐ';
 												}
 											@endphp
                                     
@@ -520,6 +386,141 @@ span.price {
             </div>
         </div>
     </div>
+    {{-- Đặt hàng --}}
+    <div style="margin-top: 10px" class="container">
+		<div class="row-checkout">
+			<div class="col-25">
+				<div class="container-checkout">
+				<form method="POST">
+                    @csrf
+					<div class="row-checkout">
+					<div class="col-50">
+						<h3>Điền thông tin gửi hàng</h3>
+
+						<label for="fname"><i class="fa fa-user" ></i> Họ và tên</label>
+						<input type="text" id="fname" class="form-control ten_tt" name="ten_tt" pattern="^[a-zA-Z ]+$"  value="{{$khachhang->ten_kh}}" readonly="readonly">
+						<label for="email"><i class="fa fa-envelope"></i> Email</label>
+						<input type="text" id="email" name="email_tt" class="form-control email_tt" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$" value="{{$khachhang->email_kh}}" readonly="readonly">
+						<label for="adr"><i class="fa fa-address-card-o"></i> Số điện thoại</label>
+						<input type="text" id="adr" name="sdt_tt" class="form-control sdt_tt" value="{{$khachhang->sdt_kh}}" readonly="readonly">
+
+                        <label for="city"><i class="fa fa-institution"></i> Địa chỉ: 
+                            <a href="{{url('/themdiachi')}}" value="Cập nhật" name="update_cart" class="btn btn-info btn-sm update">Nhập địa chỉ</a>
+                        </label>
+                        
+                        @foreach($diachi as $key => $dia)
+                            {{-- <a href="{{url('/suadiachi/'. $dia->id_dc)}}" value="Cập nhật" name="update_cart" class="btn btn-info btn-sm update">Thay đổi</a> --}}
+                            <input type="text" id="city" name="diachi_tt" class="form-control diachi_tt" value="{{$dia->diachi_dc}}" pattern="^[a-zA-Z ]+$" readonly="readonly">
+                        @endforeach
+						
+						<textarea style="height:100px; margin-top: 10px " class="form-control notes_tt"  name="notes_tt" placeholder="Ghi chú đơn hàng"></textarea>
+
+						<div class="row">
+						<div class="col-50">
+							{{-- <label for="state">State</label>
+							<input type="text" id="state" name="state" class="form-control" pattern="^[a-zA-Z ]+$" required> --}}
+						</div>
+						{{-- <div class="col-50">
+							<label for="zip">Zip</label>
+							<input type="text" id="zip" name="zip" class="form-control" pattern="^[0-9]{6}(?:-[0-9]{4})?$" required>
+						</div> --}}
+						</div>
+					</div>
+					
+					
+					{{-- <div class="col-50">
+						<h3>Payment</h3>
+						<label for="fname">Accepted Cards</label>
+						<div class="icon-container">
+							<i class="fa fa-cc-visa" style="color:navy;"></i>
+							<i class="fa fa-cc-amex" style="color:blue;"></i>
+							<i class="fa fa-cc-mastercard" style="color:red;"></i>
+							<i class="fa fa-cc-discover" style="color:orange;"></i>
+						</div>
+						
+						
+						<label for="cname">Name on Card</label>
+						<input type="text" id="cname" name="cardname" class="form-control" pattern="^[a-zA-Z ]+$" required>
+						
+						<div class="form-group" id="card-number-field">
+							<label for="cardNumber">Card Number</label>
+							<input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
+                    	</div>
+						<label for="expdate">Exp Date</label>
+						<input type="text" id="expdate" name="expdate" class="form-control" pattern="^((0[1-9])|(1[0-2]))\/(\d{2})$" placeholder="12/22"required>
+						
+
+						<div class="row">
+						
+							<div class="col-50">
+								<div class="form-group CVV">
+									<label for="cvv">CVV</label>
+									<input type="text" class="form-control" name="cvv" id="cvv" required>
+								</div>
+							</div>
+						</div>
+					</div> --}}
+					</div>
+					{{-- <label><input type="CHECKBOX" name="" class="roomselect" value="conform" required> Địa chỉ giao hàng giống như địa chỉ thanh toán
+					</label>	 --}}
+
+                    {{-- Oder-Fee --}}
+                    @if(Session::get('fee'))
+					    <input type="hidden" name="oder_fee" class="oder_fee" value="{{Session::get('fee')}}">
+                    @else
+					    <input type="hidden" name="oder_fee" class="oder_fee" value="5000">
+                    @endif
+
+                    {{-- Oder-Coupon --}}
+                    @if(Session::get('coupon'))
+                        @foreach(Session::get('coupon') as $key => $cou)
+                            <input type="hidden" name="oder_coupon" class="oder_coupon" value="{{$cou['ma_coupon']}}">
+                        @endforeach
+                    @else                
+                        <input type="hidden" name="oder_coupon" class="oder_coupon" value="không có mã giảm giá">
+                    @endif
+				    
+					<br>
+                    <div class="flex flex-col justify-center">
+                        <td class="text-black">Chọn hình thức thanh toán</td>
+                        <td>
+                            <select name="method_tt" id="city" class="bg-slate-400 method_tt">
+                                <option value="0">-- Chuyển khoản --</option> 
+                                <option value="1">-- Tiền mặt --</option> 
+                                {{-- <option value="2">-- Chuyển khoản --</option>  --}}
+                            </select>
+                        </td>  
+                    </div>
+					<input type="button" name="send_order" value="Xác nhận đơn hàng" class="checkout-btn send_order">
+				</form>
+				</div>
+			</div>
+			{{-- <div class="col-4">
+				<div class="container-checkout">
+					<h4>Cart 
+					<span class='price' style='color:black'>
+					<i class='fa fa-shopping-cart'></i> 
+					<b>$total_count</b>
+					</span>
+				</h4>
+
+					<table class='table table-condensed'>
+					<thead><tr>
+					<th >no</th>
+					<th >product title</th>
+					<th >	qty	</th>
+					<th >	amount</th></tr>
+					</thead>
+					<tbody>
+						<tr><td><p>$item_number_</p></td><td><p>$item_name_</p></td><td ><p>$quantity_</p></td><td ><p>$amount_</p></td></tr>
+				    </tbody>
+				</table>
+				<hr>
+				<h3>total<span class='price' style='color:black'><b>$$total</b></span></h3>
+				</div>
+			</div> --}}
+		</div>
+	</div>
 </section>
 
 @endsection

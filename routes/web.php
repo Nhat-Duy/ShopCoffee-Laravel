@@ -109,10 +109,14 @@ Route::post('/caculate_fee', [CheckoutController::class, 'caculate_fee']);
 Route::post('/xacnhandonhang', [CheckoutController::class, 'xacnhandonhang']);
 
 Route::get('/themdiachi', [CheckoutController::class, 'themdiachi']);
+Route::get('/suadiachi/{id_dc}', [CheckoutController::class, 'suadiachi']);
+
+Route::post('/thaydoidiachi/{id_dc}', [CheckoutController::class, 'thaydoidiachi']);
 Route::post('/luudiachi', [CheckoutController::class, 'luudiachi']);
 
 
 //Quản lý đơn hàng
+//Frontend
 Route::get('/lichsudonhang', [OderController::class, 'lichsudonhang']);
 Route::get('/chothanhtoan', [OderController::class, 'chothanhtoan']);
 Route::get('/vanchuyen', [OderController::class, 'vanchuyen']);
@@ -120,7 +124,7 @@ Route::get('/danggiao', [OderController::class, 'danggiao']);
 Route::get('/hoanthanh', [OderController::class, 'hoanthanh']);
 Route::get('/huydon', [OderController::class, 'huydon']);
 Route::get('/xemchitietdonhang/{ma_dh}', [OderController::class, 'xemchitietdonhang']);
-
+//Backend
 Route::group(['middleware' => 'admin.author'], function(){
     Route::get('/indonhang/{checkout_code}', [OderController::class, 'indonhang']);
     Route::get('/quanlydonhang', [OderController::class, 'quanlydonhang']);

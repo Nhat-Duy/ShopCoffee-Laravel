@@ -219,10 +219,10 @@ class CheckoutController extends Controller
         $diachi = Diachi::where('id_kh', Session::get('id_kh'))->orderBy('id_dc', 'DESC')->limit(1)->get();
         $city = City::orderby('matp', 'ASC')->get();
         $diachi1 = Diachi::where('id_kh', Session::get('id_kh'))->get();
-        foreach($diachi1 as $key => $dia1){
-            $id_kh = $dia1->id_kh;
-        }
-        $khachhang = Khachhang::where('id_kh', $id_kh)->first();
+        // foreach($diachi1 as $key => $dia1){
+        //     $id_kh = $dia1->id_kh;
+        // }
+        $khachhang = Khachhang::where('id_kh', Session::get('id_kh'))->first();
         return view('page.checkout.thanhtoan')
         ->with('danhmuc',$danhmuc_sp)
         ->with('meta_mota', $meta_mota)
@@ -369,9 +369,9 @@ class CheckoutController extends Controller
 // Địa chỉ 
     public function themdiachi(Request $request){
         //Seo
-        $meta_mota = "Cảm ơn";
-        $meta_keywords = "Cảm ơn";
-        $meta_title = "Cảm ơn";
+        $meta_mota = "Thêm địa chỉ";
+        $meta_keywords = "Thêm địa chỉ";
+        $meta_title = "Thêm địa chỉ";
         $url_canonical = $request->url();
         //EndSeo
         $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
@@ -383,6 +383,27 @@ class CheckoutController extends Controller
             ->with('meta_title', $meta_title)
             ->with('url_canonical', $url_canonical);
     }
+
+    // public function suadiachi(Request $request, $id_dc){
+    //     //Seo
+    //     $meta_mota = "Cảm ơn";
+    //     $meta_keywords = "Cảm ơn";
+    //     $meta_title = "Cảm ơn";
+    //     $url_canonical = $request->url();
+    //     //EndSeo
+    //     $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
+    //     $suadiachi = Diachi::where('id_dc', $id_dc)->get();
+    //     $quanly = view('page.diachi.suadiachi')->with('suadiachi', $suadiachi);
+    //     // return view('admin_layout')->with('admin.suadanhmuc', $quanly);
+
+    //         return view('page.diachi.suadiachi')
+    //         ->with('danhmuc',$danhmuc_sp)
+    //         ->with('meta_mota', $meta_mota)
+    //         ->with('meta_keywords', $meta_keywords)
+    //         ->with('meta_title', $meta_title)
+    //         ->with('suadiachi', $suadiachi)
+    //         ->with('url_canonical', $url_canonical);
+    // }
 
     public function luudiachi(Request $request){
         $data = $request->all();
@@ -396,4 +417,14 @@ class CheckoutController extends Controller
         return Redirect::to('thanhtoan');
         
     }
+
+    // public function thaydoidiachi(Request $request, $id_dc){
+    //     $data = array();
+    //     $data['diachi_dc'] = $request->diachi_dc;
+
+
+    //     Diachi::where('id_dc', $id_dc)->update($data);
+    //     Session::put('message', 'Cập nhật danh mục sản phẩm thành công');
+    //     return Redirect::to('thanhtoan');
+    // }
 }

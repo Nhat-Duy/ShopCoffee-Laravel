@@ -9,7 +9,12 @@ use App\Models\Donhang;
 use App\Models\Chitietdonhang;
 use App\Models\Khachhang;
 use App\Models\Coupon;
+use App\Models\Sanpham;
 use Barryvdh\DomPDF\PDF;
+
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
@@ -21,6 +26,28 @@ class OderController extends Controller
         $donhang = Donhang::find($data['id_dh']);
         $donhang->tinhtrang_dh = $data['tinhtrang_dh'];
         $donhang->save();
+
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
+        $title_mail = "Hoàn tất đơn hàng ".' '.$now;
+
+
+        $khachhang = Khachhang::where('id_kh',$donhang->id_kh)->first();
+        $email = $khachhang->email_kh;
+
+        $chitietdonhang = Chitietdonhang::where('ma_dh',$donhang->ma_dh)->first();
+        $chitietma = $chitietdonhang->ma_dh;
+        $kala = array(
+            'ma_dh' => $chitietma
+        );
+
+        $data = array("name"=>"Mail từ khách hàng", "body"=>"Mail gửi về vấn đề hàng hóa");
+        if($donhang->tinhtrang_dh == 4){
+            Mail::send('admin.mailxacnhandonhang', ['sol'=>$kala, 'data'=>$data], function($message) use($title_mail, $email){
+                $message->to($email)->subject($title_mail);
+                $message->from($email, $title_mail);
+            });
+        }
+ 
     }
 
     public function indonhang($checkout_code){
