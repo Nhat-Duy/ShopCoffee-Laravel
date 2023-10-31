@@ -13,4 +13,8 @@ class Sanpham extends Model
     ];
     protected $primaryKey = 'id_sp';
     protected $table = 'sanpham';
+
+    public function binhluan(){
+        return $this->hasMany('App\Models\Binhluan');
+    }
 }

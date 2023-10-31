@@ -28,6 +28,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class,'index']);
 Route::get('/cafe_sp', [HomeController::class,'cafe_sp']);
 Route::get('/chitietsanpham/{id_sp}', [ProductController::class,'chitietsanpham']);
+//Bình luận
+Route::post('/load_comment', [ProductController::class,'load_comment']);
+Route::post('/send_comment', [ProductController::class,'send_comment']);
+//Quản lý bình luận
+Route::get('/quanlybinhluan', [ProductController::class,'quanlybinhluan']);
+Route::post('/duyet_binhluan', [ProductController::class,'duyet_binhluan']);
+Route::post('/traloi_binhluan', [ProductController::class,'traloi_binhluan']);
+Route::post('/danhgiasao', [ProductController::class,'danhgiasao']);
 
 
 Route::post('/timkiem', [HomeController::class,'timkiem']);

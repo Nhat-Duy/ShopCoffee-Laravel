@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Sanpham;
+use App\Models\Binhluan;
+use App\Models\Danhgiasao;
 use Session;
 use App\Http\Requests;
+use App\Models\Khachhang;
 use Illuminate\Support\Facades\Redirect;
+
+use function Laravel\Prompts\alert;
 
 class ProductController extends Controller
 {
@@ -133,12 +139,19 @@ class ProductController extends Controller
 
         foreach ($chitiet_sp as $key => $value){
             $id_danhmuc = $value->id_danhmuc;
+            $id_sp = $value->id_sp;
         }
 
         $lienquan_sp = DB::table('sanpham')
         ->join('danhmuc','danhmuc.id_danhmuc','=','sanpham.id_danhmuc')
         ->where('danhmuc.id_danhmuc', $id_danhmuc)->whereNotIn('sanpham.id_sp', [$id_sp])->limit(4)->get();
 
+        $danhgiasao = Danhgiasao::where('id_sp',$id_sp)->get();
+        $danhgiasaotb = Danhgiasao::where('id_sp',$id_sp)->avg('sao');
+        $sao = Danhgiasao::where('id_sp',$id_sp)->where('id_kh', Session::get('id_kh'))->avg('sao');
+        $khachhang = Khachhang::where('id_kh', Session::get('id_kh'))->first();
+
+        $danhgiasaotb = round($danhgiasaotb);
         return view('page.sanpham.chitietsanpham')
         ->with('danhmuc',$danhmuc_sp)
         ->with('chitiet_sp', $chitiet_sp)
@@ -146,6 +159,113 @@ class ProductController extends Controller
         ->with('meta_mota', $meta_mota)
         ->with('meta_keywords', $meta_keywords)
         ->with('meta_title', $meta_title)
+        ->with('danhgiasao', $danhgiasao)
+        ->with('danhgiasaotb', $danhgiasaotb)
+        ->with('sao', $sao)
+        ->with('khachhang', $khachhang)
         ->with('url_canonical', $url_canonical);
+    }
+
+    //Bình luận
+
+    public function send_comment(Request $request){
+        $id_sp = $request->id_sp;
+        $ten_bl = $request->ten_bl;
+        $binhluan = $request->binhluan;
+        $binhluan_new = new Binhluan();
+        $binhluan_new->id_sp_bl = $id_sp;
+        $binhluan_new->ten_bl = $ten_bl;
+        $binhluan_new->binhluan = $binhluan;
+        $binhluan_new->tinhtrang_bl = 1;
+        $binhluan_new->save(); 
+
+    }
+
+    public function load_comment(Request $request){
+        $id_sp = $request->id_sp;
+        $binhluan = Binhluan::where('id_sp_bl', $id_sp)->where('tinhtrang_bl', 0)->get();
+        $output = '';
+        foreach($binhluan as $key=> $binh){
+            if($binh->traloi_bl == ''){
+                $output .= '
+                            
+                                <ul class="reviews">
+                                    <li>
+                                        <div class="review-heading">
+                                            <h5 class="name">@'.$binh->ten_bl.'</h5>
+                                            <p class="date">'.$binh->ngay_bl.'</p>
+                                            <div class="review-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o empty"></i>
+                                            </div>
+                                        </div>
+                                        <div class="review-body">
+                                            <p>'.$binh->binhluan.'</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                ';
+            }
+            foreach($binhluan as $key => $traloi){
+                if($traloi->traloi_bl == $binh->id_bl){
+                            
+                $output .= '
+                            <ul class="reviews" style="margin: 5px 20px;">
+                                <li>
+                                    <div class="review-heading">
+                                        <h6 class="name">@ND Coffee</h6>
+                                        <p class="date"></p>
+                                    </div>
+                                    <div>
+                                        <p>'.$traloi->binhluan.'</p>
+                                    </div>
+                                </li>
+                            </ul>
+                ';
+                }
+            }
+                        
+        }
+        echo $output;
+    }
+
+    //Quản lý bình luận
+    public function quanlybinhluan(){
+        $binhluan = Binhluan::with('sanpham')->orderBy('tinhtrang_bl', 'DESC')->get();
+        return view('admin.binhluan.quanlybinhluan')->with(compact('binhluan'));
+    }
+
+    public function duyet_binhluan(Request $request){
+        $data = $request->all();
+        $binhluan = Binhluan::find($data['id_bl']);
+
+        $binhluan->tinhtrang_bl = $data['comment_status'];
+        $binhluan->save();
+    }
+
+    public function traloi_binhluan(Request $request){
+        $data = $request->all();
+        // $binhluan = Binhluan::find($data['id_bl']);
+        $binhluan = new Binhluan();
+        $binhluan->binhluan = $data['binhluan'];
+        $binhluan->id_sp_bl = $data['id_sp_bl'];
+        $binhluan->traloi_bl = $data['id_bl'];
+        $binhluan->tinhtrang_bl = 0;
+        $binhluan->ten_bl = 'Admin';
+        $binhluan->save();
+
+    }
+
+    public function danhgiasao(Request $request){
+        $data = $request->all();
+        $sao = new Danhgiasao();
+        $sao->id_sp = $data['id_sp'];
+        $sao->id_kh = $data['id_kh'];
+        $sao->sao = $data['index'];
+        $sao->save();
+        echo 'done';
     }
 }

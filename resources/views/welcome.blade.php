@@ -470,6 +470,100 @@
                     });
                 });
             </script>
+            <script type="text/javascript">
+                // function remove_background(id_sp)
+                // {
+                //     for(var count = 1; count <= 5; count ++){
+                //         $('#'+ id_sp + '-' + count).css('color', '#ccc');
+                //     }
+                // }
+
+                // hover chuột đánh giá sao
+                // $(document).on('mouseenter', '.sao', function(){
+                //     var index = $(this).data("index");
+                //     var id_sp = $(this).data('id_sp');  
+                //     var id_kh = $(this).data('id_kh');
+                //     alert(index);
+                //     alert(id_sp);
+                //     alert(id_kh);
+                //     remove_background(id_sp);
+
+                //     for(var count = 1; count <= index; count++){
+                //         $('#' + id_sp + '-' + count).css('color', '#db1c1c');
+                //     }
+                // });
+
+                // nhả chuột không đánh giá
+                // $(document).on('mouseleave', '.sao', function(){
+                //     var index = $(this).data("index");
+                //     var id_sp = $(this).data('id_sp');  
+                //     var id_kh = $(this).data('id_kh');
+                //     var sao = $(this).data('sao');
+
+
+                //     remove_background(id_sp);
+
+                //     for(var count = 1; count <= sao; count++){
+                //         $('#' + id_sp + '-' +count).css('color', '#db1c1c');
+                //     }
+                // });
+
+                // click đánh giá
+                $(document).on('click', '.sao', function(){
+                    var index = $(this).data("index");
+                    var id_sp = $(this).data('id_sp');  
+                    var id_kh = $(this).data('id_kh');
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url : '{{url('/danhgiasao')}}',
+                        method: 'POST',
+                        data: {index:index, id_sp:id_sp, id_kh:id_kh, _token:_token},
+                        success:function(data){
+                            if(data == 'done'){
+                                alert("Bạn đã đánh giá" + index + "trên 5");
+                            }else{
+                                alert("Lỗi đánh giá");
+                            }
+                        }
+                    });
+                });
+            </script>
+
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    load_comment();
+                    function load_comment(){
+                        var id_sp = $('.id_sp_bl').val();
+                        var _token = $('input[name="_token"]').val();
+                        $.ajax({
+                            url : '{{url('/load_comment')}}',
+                            method: 'POST',
+                            data: {id_sp:id_sp, _token:_token},
+                            success:function(data){
+                                $('#comment_show').html(data);
+                            }
+                        });
+                    }
+                    $('.send_comment').click(function(){
+                        var id_sp = $('.id_sp_bl').val();
+                        var ten_bl = $('.ten_binhluan').val(); 
+                        var binhluan = $('.binhluan').val(); 
+                        var _token = $('input[name="_token"]').val();
+                        $.ajax({
+                            url : '{{url('/send_comment')}}',
+                            method: 'POST',
+                            data: {id_sp:id_sp, ten_bl:ten_bl, binhluan:binhluan, _token:_token},
+                            success:function(data){
+                                $('#notify_comment').html('<p class="text text-success">Thêm bình luận thành công</p>');
+                                load_comment();
+                                $('.ten_binhluan').val(''); 
+                                $('.binhluan').val(''); 
+                                
+                            }
+                        });
+                    });
+                });
+            </script>
 
         <script type="text/javascript">
             $(document).ready(function(){
