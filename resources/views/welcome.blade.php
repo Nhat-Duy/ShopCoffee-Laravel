@@ -520,7 +520,7 @@
                         data: {index:index, id_sp:id_sp, id_kh:id_kh, _token:_token},
                         success:function(data){
                             if(data == 'done'){
-                                alert("Bạn đã đánh giá" + index + "trên 5");
+                                alert("Bạn đã đánh giá" + index + " trên 5");
                             }else{
                                 alert("Lỗi đánh giá");
                             }

@@ -191,3 +191,8 @@ Route::group(['middleware' => 'auth.roles'], function(){
     Route::get('/xoa_user/{admin_id}', [UserController::class, 'xoa_user']);
     Route::post('/capquyen', [UserController::class, 'capquyen']);
 });
+
+//Quản lý doanh thu
+Route::post('/locngay', [AdminController::class, 'locngay']);
+Route::post('/dashboard_filter', [AdminController::class, 'dashboard_filter']);
+

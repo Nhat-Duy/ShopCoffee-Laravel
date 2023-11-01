@@ -14,8 +14,10 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\MXH;
 use App\Models\MXH_Khachhang;
 use App\Models\Login;
+use App\Models\Thongke;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-
+use Svg\Tag\Rect;
 
 class AdminController extends Controller
 {   
@@ -158,6 +160,65 @@ class AdminController extends Controller
         Session::put('admin_name', $account_name->admin_name);
         Session::put('admin_id', $account_name->admin_id);
         return $duy;
+    }
+
+    public function locngay(Request $request) {
+        $data = $request->all();
+        $from_date = $data['from_date'];
+        $to_date = $data['to_date'];
+    
+        $get = Thongke::whereBetween('order_date', [$from_date, $to_date])
+            ->orderBy('order_date', 'ASC')
+            ->get();
+    
+        // $chart_data = [];
+        foreach ($get as $key => $val) {
+            $chart_data[] = array(
+                'period' => $val->order_date, 
+                'order' => $val->total_order, 
+                'sales' => $val->doanhso_tk, 
+                'profit' => $val->loinhuan_tk, 
+                'quantity' => $val->soluong_tk, 
+            );
+        }
+    
+        $data = json_encode($chart_data);
+        echo $data;
+    }
+
+    public function dashboard_filter(Request $request){
+        $data = $request->all();
+        $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $dauthangtruoc = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $cuoithangtruoc = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+
+        $sub7days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(7)->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        if($data['dashboard_value'] == '7ngay'){
+            $get = Thongke::whereBetween('order_date', [$sub7days,$now])->orderBy('order_date','ASC')->get();
+        }elseif($data['dashboard_value'] == 'thangtruoc'){
+            $get = Thongke::whereBetween('order_date', [$dauthangtruoc,$cuoithangtruoc])->orderBy('order_date','ASC')->get();
+        }elseif($data['dashboard_value'] == 'thangnay'){
+            $get = Thongke::whereBetween('order_date', [$dauthangnay,$now])->orderBy('order_date','ASC')->get();
+        }else{
+            $get = Thongke::whereBetween('order_date', [$sub365days,$now])->orderBy('order_date','ASC')->get();
+        }
+
+        foreach ($get as $key => $val) {
+            $chart_data[] = array(
+                'period' => $val->order_date, 
+                'order' => $val->total_order, 
+                'sales' => $val->doanhso_tk, 
+                'profit' => $val->loinhuan_tk, 
+                'quantity' => $val->soluong_tk, 
+            );
+        }
+    
+        $data = json_encode($chart_data);
+        echo $data;
     }
     
 }

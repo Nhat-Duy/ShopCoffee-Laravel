@@ -11,7 +11,7 @@
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!-- Nucleo Icons -->
-    <link href="cbackend/css/nucleo-icons.css')}}" rel="stylesheet" />
+    <link href="{{asset('public/backend/css/nucleo-icons.css')}}" rel="stylesheet" />
     <link href="{{asset('public/backend/css/nucleo-svg.css')}}" rel="stylesheet" />
     <!-- Popper -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -20,6 +20,9 @@
 
 		<link type="text/css" rel="stylesheet" href="{{asset('public/frontend/css/sweetalert.css')}}"/>
     <meta name="csrf-token" content="{{csrf_token()}}"> 
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
@@ -453,9 +456,83 @@
   <script src="{{asset('public/frontend/js/sweetalert.js')}}"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
   <script>
         CKEDITER.replace('ckeditor');
         CKEDITER.replace('ckeditor1');
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+
+      var chart =  new Morris.Bar({
+            // ID of the element in which to draw the chart.
+            element: 'chart',
+            //Option
+            barColors: ['#a19230', '#c46b56', '#e31e4f', '#2ee31e'],
+            // pointFillColors: ['#ffffff'],
+            // pointStrokeColors: ['black'],
+            //   fillOpacity: 0.3,
+              hideHover: 'auto',
+              parseTime: false,
+            // The name of the data record attribute that contains x-values.
+            xkey: 'period',
+            ykeys: ['order', 'sales', 'profit', 'quantity'],
+            // behaveLikeLine: true,
+            labels: ['Đơn hàng', 'Doanh số', 'Lợi nhuận', 'Số lượng']
+      });
+
+      $('.dashboard_filter').change(function(){
+        var dashboard_value = $(this).val();
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+              url : '{{url('/dashboard_filter')}}',
+              method: 'POST',
+              dataType: "JSON",
+              data: {dashboard_value:dashboard_value, _token:_token},
+              success:function(data){
+                chart.setData(data);
+              }
+        });
+      });
+      
+
+      $('#btn-dashboard-filter').click(function(){
+        var _token = $('input[name="_token"]').val();
+        var from_date = $('#datepicker').val();
+        var to_date = $('#datepicker2').val();
+        // alert(_token);
+        // alert(from_date);
+        // alert(to_date);
+        $.ajax({
+              url : '{{url('/locngay')}}',
+              method: 'POST',
+              dataType: "JSON",
+              data: {from_date:from_date, to_date:to_date, _token:_token},
+              success:function(data){
+                chart.setData(data);
+              }
+        });
+      });
+    });
+          
+
+  </script>
+
+  <script type="text/javascript">
+    $( function() {
+      $( "#datepicker" ).datepicker({
+        dateFormat:"yy-mm-dd"
+      }); 
+    });
+    $( function() {
+      $( "#datepicker2" ).datepicker({
+        dateFormat:"yy-mm-dd"
+      });
+    } );
   </script>
 
   <script type="text/javascript">

@@ -261,7 +261,7 @@
 													id="{{$value->id_sp}} - {{$count}}"
 													data-index="{{$count}}"
 													data-id_sp="{{$value->id_sp}}"
-													data-id_kh="{{$khachhang->id_kh}}"
+													{{-- data-id_kh="{{$khachhang->id_kh}}" --}}
 													data-sao="{{$sao}}"
 													{{-- class="rating" --}}
 													style="cursor:pointer; {{$color}}; font-size:20px;"
@@ -277,7 +277,7 @@
 												<form class="review-form">
 													@csrf
 													<input type="hidden" name="id_sp_bl" class="id_sp_bl" value="{{$value->id_sp}}">
-													<input style="margin-top: 5px" class="input ten_binhluan" type="text" value="{{$khachhang->ten_kh}}">
+													<input style="margin-top: 5px" class="input ten_binhluan" type="text" value="{$khachhang->ten_kh}{}">
 													{{-- <input class="input" type="email" placeholder="Email"> --}}
 													<textarea name="binhluan" class="input binhluan" placeholder="Đánh giá sản phẩm"></textarea>
 													<div id="notify_comment"></div>
