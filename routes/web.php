@@ -195,4 +195,5 @@ Route::group(['middleware' => 'auth.roles'], function(){
 //Quản lý doanh thu
 Route::post('/locngay', [AdminController::class, 'locngay']);
 Route::post('/dashboard_filter', [AdminController::class, 'dashboard_filter']);
+Route::post('/ngay_order', [AdminController::class, 'ngay_order']);
 

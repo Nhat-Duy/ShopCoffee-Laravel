@@ -70,6 +70,10 @@ class CheckoutController extends Controller
 
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $donhang->created_at = now();
+
+        $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        $donhang->order_date = $order_date;
+
         $donhang->save();
 
         if(Session::get('cart')){

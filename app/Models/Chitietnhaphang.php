@@ -9,7 +9,7 @@ class Chitietnhaphang extends Model
 {
     public $timestamps = false; // set thời gian cho nó không chạy 
     protected $fillable = [
-        'ma_nh', 'id_nl', 'ten_nl', 'gia_nl', 'soluong_nl', 'donvi_nl'
+        'ma_nh', 'id_nl', 'ten_nl', 'gia_nl', 'soluong_nl', 'donvi_nl', 'tinhtrang_nl', 'order_date'
     ];
     protected $primaryKey = 'id_ctnh';
     protected $table = 'chitietnhaphang';

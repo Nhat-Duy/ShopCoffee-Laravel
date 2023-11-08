@@ -13,6 +13,7 @@ use App\Models\Nguyenlieu;
 use App\Models\Nhaphang;
 use App\Models\Chitietnhaphang;
 use App\Models\Admin;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class WarehouseController extends Controller
@@ -78,6 +79,9 @@ class WarehouseController extends Controller
                 $chitietnhaphang->gia_nl = $kho['gia_nl'];
                 $chitietnhaphang->donvi_nl = $kho['donvi_nl'];
                 $chitietnhaphang->soluong_nl = $kho['qty_nl'];
+                $chitietnhaphang->tinhtrang_nl = 0;
+                $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+                $chitietnhaphang->order_date = $order_date;
                 $chitietnhaphang->save();
             }
         }

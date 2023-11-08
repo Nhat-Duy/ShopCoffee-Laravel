@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\DB;
 use Session;
 use App\Http\Requests;
 use App\Models\Khachhang;
+use App\Models\Sanpham;
+use App\Models\Donhang;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Redirect;
 
 use Laravel\Socialite\Facades\Socialite;
@@ -88,7 +91,13 @@ class AdminController extends Controller
     }
     public function show_dashboard(){
         $this->AuthLogin();
-        return view('admin.dashboard');
+
+        //Hiển thị donut 
+        $sanpham12 = Sanpham::all()->count();
+        $donhang12 = Donhang::all()->count();
+        $khachhang = Khachhang::all()->count();
+        $admin = Admin::all()->count();
+        return view('admin.dashboard')->with(compact('sanpham12', 'donhang12', 'khachhang', 'admin'));
     }
     public function dashboard(Request $request){
 
@@ -217,6 +226,26 @@ class AdminController extends Controller
             );
         }
     
+        $data = json_encode($chart_data);
+        echo $data;
+    }
+
+    public function ngay_order(){
+        $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(30)->toDateString();
+
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        $get = Thongke::whereBetween('order_date', [$sub30days,$now])->orderBy('order_date','ASC')->get();
+
+        foreach ($get as $key => $val) {
+            $chart_data[] = array(
+                'period' => $val->order_date, 
+                'order' => $val->total_order, 
+                'sales' => $val->doanhso_tk, 
+                'profit' => $val->loinhuan_tk, 
+                'quantity' => $val->soluong_tk, 
+            );
+        }
+
         $data = json_encode($chart_data);
         echo $data;
     }

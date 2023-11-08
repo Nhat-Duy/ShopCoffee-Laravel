@@ -468,6 +468,8 @@
   <script type="text/javascript">
     $(document).ready(function(){
 
+      chart30dayorder();
+
       var chart =  new Morris.Bar({
             // ID of the element in which to draw the chart.
             element: 'chart',
@@ -482,8 +484,21 @@
             xkey: 'period',
             ykeys: ['order', 'sales', 'profit', 'quantity'],
             // behaveLikeLine: true,
-            labels: ['Đơn hàng', 'Doanh số', 'Lợi nhuận', 'Số lượng']
+            labels: ['Sản phẩm bán được', 'Doanh số', 'Lợi nhuận', 'Số lượng']
       });
+
+      function chart30dayorder(){
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+              url : '{{url('/ngay_order')}}',
+              method: 'POST',
+              dataType: "JSON",
+              data: {_token:_token},
+              success:function(data){
+                chart.setData(data);
+              }
+        });
+      }
 
       $('.dashboard_filter').change(function(){
         var dashboard_value = $(this).val();
@@ -520,6 +535,37 @@
     });
           
 
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var colorDanger = "#FF1744";
+        Morris.Donut({
+          element: 'donut-example',
+          resize: true,
+          colors: [
+            '#eb4034',
+            '#1619d9',
+            '#781e6f',
+            '#d97116',
+            '#d6d015',
+            '#00BCD4',
+            '#00ACC1',
+            '#0097A7',
+            '#00838F',
+            '#006064'
+          ],
+          //labelColor:"#cccccc", // text color
+          //backgroundColor: '#333333', // border color
+          data: [
+            {label:"Sản phẩm", value:<?php echo $sanpham12 ?>},
+            {label:"Đơn hàng", value:<?php echo $donhang12 ?>},
+            {label:"User", value:<?php echo $khachhang12 ?>},
+            {label:"Admin", value:<?php echo $admin12 ?>},
+            // {label:"Bài viết", value:357}
+          ]
+        });
+    });
   </script>
 
   <script type="text/javascript">

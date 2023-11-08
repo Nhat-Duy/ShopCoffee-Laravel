@@ -10,6 +10,9 @@ use App\Models\Chitietdonhang;
 use App\Models\Khachhang;
 use App\Models\Coupon;
 use App\Models\Sanpham;
+use App\Models\Thongke;
+use App\Models\Nhaphang;
+use App\Models\Chitietnhaphang;
 use Barryvdh\DomPDF\PDF;
 
 use Carbon\Carbon;
@@ -40,8 +43,60 @@ class OderController extends Controller
             'ma_dh' => $chitietma
         );
 
+
+        //order day 
+        $order_date = $donhang->order_date;
+        $chitietdonhang_order = Chitietdonhang::where('ma_dh', $donhang->ma_dh)->get();
+        $thongke = Thongke::where('order_date', $order_date)->get();
+        if($thongke){
+            $thongke_count = $thongke->count();
+        }else{
+            $thongke_count = 0;
+        }
+        //Lợi nhuận
+        // $chitietnhaphang_tt = Chitietnhaphang::all();
+        $chitietnhaphang = Chitietnhaphang::where('order_date', $order_date)->where('tinhtrang_nl', '0')->get();
+        $total_ctnh = 0;
+        foreach($chitietnhaphang as $key => $ctnh){
+            $total_ctnh +=  ($ctnh->gia_nl * $ctnh->soluong_nl);
+        }
+
+        
+
         $data = array("name"=>"Mail từ khách hàng", "body"=>"Mail gửi về vấn đề hàng hóa");
         if($donhang->tinhtrang_dh == 4){
+            //Thống kê
+            $total_order = 0;
+            $doanhso_tk = 0;
+            // $loinhuan_tk = 0;
+            $soluong_tk = 0;
+            foreach($chitietdonhang_order as $key => $ctdh){
+                $total_order += 1;
+                $doanhso_tk += ($ctdh->gia_sp * $ctdh->soluong_sp);
+                $soluong_tk += $ctdh->soluong_sp;
+            }
+            $loinhuan_tk = $doanhso_tk - $total_ctnh;
+            
+            $chitietnhaphang_update = Chitietnhaphang::where('order_date', $order_date)->update(['tinhtrang_nl' => 1]);
+
+            if($thongke_count > 0){
+                $thongke_update = Thongke::where('order_date', $order_date)->first();
+                $thongke_update->doanhso_tk = $thongke_update->doanhso_tk + $doanhso_tk;
+                $thongke_update->loinhuan_tk = $thongke_update->loinhuan_tk + $loinhuan_tk;
+                $thongke_update->soluong_tk = $thongke_update->soluong_tk + $soluong_tk;
+                $thongke_update->total_order =$thongke_update->total_order + $total_order;
+                $thongke_update->save();
+            }else{
+                $thongke_new = new Thongke();
+                $thongke_new->order_date = $order_date;
+                $thongke_new->doanhso_tk = $doanhso_tk;
+                $thongke_new->loinhuan_tk = $loinhuan_tk;
+                $thongke_new->soluong_tk = $soluong_tk;
+                $thongke_new->total_order = $total_order;
+                $thongke_new->save();
+            }
+            
+            //Gửi mail
             Mail::send('admin.mailxacnhandonhang', ['sol'=>$kala, 'data'=>$data], function($message) use($title_mail, $email){
                 $message->to($email)->subject($title_mail);
                 $message->from($email, $title_mail);

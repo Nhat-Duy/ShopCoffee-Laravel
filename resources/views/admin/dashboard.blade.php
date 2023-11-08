@@ -135,9 +135,9 @@
             </div>
             <div class="py-4 pr-1 mb-4 bg-gradient-to-tl from-gray-900 to-slate-800 rounded-xl">
                 <div id="chart" style="height: 250px;">
-                  
                 </div>
             </div>
+            
           </div>
         </div>
       </div>
@@ -150,8 +150,7 @@
         <div class="border-black/12.5 shadow-soft-xl relative z-20 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
           <div class="flex-auto p-4">
             <div class="py-4 pr-1 mb-4 bg-gradient-to-tl from-gray-900 to-slate-800 rounded-xl">
-              <div>
-                <canvas id="chart-bars" height="170"></canvas>
+              <div id="donut-example" style="height: 250px;">
               </div>
             </div>
             <h6 class="mt-6 mb-0 ml-2">Active Users</h6>
@@ -175,11 +174,11 @@
                         </g>
                       </svg>
                     </div>
-                    <p class="mt-1 mb-0 font-semibold leading-tight text-xs">Users</p>
+                    <p class="mt-1 mb-0 font-semibold leading-tight text-xs">User</p>
                   </div>
-                  <h4 class="font-bold">36K</h4>
+                  <h4 class="font-bold">{{$khachhang12}}</h4>
                   <div class="text-xs h-0.75 flex w-3/4 overflow-visible rounded-lg bg-gray-200">
-                    <div class="duration-600 ease-soft -mt-0.38 -ml-px flex h-1.5 w-3/5 flex-col justify-center overflow-hidden whitespace-nowrap rounded-lg bg-slate-700 text-center text-white transition-all" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="duration-600 ease-soft -mt-0.38 -ml-px flex h-1.5 w-3/5 flex-col justify-center overflow-hidden whitespace-nowrap rounded-lg bg-slate-700 text-center text-white transition-all" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                 </div>
                 <div class="flex-none w-1/4 max-w-full py-4 pl-0 pr-3 mt-0">
@@ -204,11 +203,11 @@
                         </g>
                       </svg>
                     </div>
-                    <p class="mt-1 mb-0 font-semibold leading-tight text-xs">Clicks</p>
+                    <p class="mt-1 mb-0 font-semibold leading-tight text-xs">Đơn hàng</p>
                   </div>
-                  <h4 class="font-bold">2m</h4>
+                  <h4 class="font-bold">{{$donhang12}}</h4>
                   <div class="text-xs h-0.75 flex w-3/4 overflow-visible rounded-lg bg-gray-200">
-                    <div class="duration-600 ease-soft -mt-0.38 w-9/10 -ml-px flex h-1.5 flex-col justify-center overflow-hidden whitespace-nowrap rounded-lg bg-slate-700 text-center text-white transition-all" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="duration-600 ease-soft -mt-0.38 w-9/10 -ml-px flex h-1.5 flex-col justify-center overflow-hidden whitespace-nowrap rounded-lg bg-slate-700 text-center text-white transition-all" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                 </div>
                 <div class="flex-none w-1/4 max-w-full py-4 pl-0 pr-3 mt-0">
@@ -228,9 +227,9 @@
                         </g>
                       </svg>
                     </div>
-                    <p class="mt-1 mb-0 font-semibold leading-tight text-xs">Sales</p>
+                    <p class="mt-1 mb-0 font-semibold leading-tight text-xs">Admin</p>
                   </div>
-                  <h4 class="font-bold">435$</h4>
+                  <h4 class="font-bold">{{$admin12}}</h4>
                   <div class="text-xs h-0.75 flex w-3/4 overflow-visible rounded-lg bg-gray-200">
                     <div class="duration-600 ease-soft -mt-0.38 w-3/10 -ml-px flex h-1.5 flex-col justify-center overflow-hidden whitespace-nowrap rounded-lg bg-slate-700 text-center text-white transition-all" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
@@ -253,9 +252,9 @@
                         </g>
                       </svg>
                     </div>
-                    <p class="mt-1 mb-0 font-semibold leading-tight text-xs">Items</p>
+                    <p class="mt-1 mb-0 font-semibold leading-tight text-xs">Sản phẩm</p>
                   </div>
-                  <h4 class="font-bold">43</h4>
+                  <h4 class="font-bold">{{$sanpham12}}</h4>
                   <div class="text-xs h-0.75 flex w-3/4 overflow-visible rounded-lg bg-gray-200">
                     <div class="duration-600 ease-soft -mt-0.38 -ml-px flex h-1.5 w-1/2 flex-col justify-center overflow-hidden whitespace-nowrap rounded-lg bg-slate-700 text-center text-white transition-all" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
