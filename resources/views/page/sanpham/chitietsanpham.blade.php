@@ -148,7 +148,32 @@
 										<div class="col-md-3">
 											<div id="rating">
 												<div class="rating-avg">
-													<span>4.5</span>
+													<span>{{$danhgiasaotb}}</span>
+													@if($danhgiasaotb == 1)
+														<div class="rating-stars">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+														</div>
+													@elseif($danhgiasaotb == 2)
+													<div class="rating-stars">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star-o"></i>
+														<i class="fa fa-star-o"></i>
+														<i class="fa fa-star-o"></i>
+													</div>
+													@elseif($danhgiasaotb == 3)
+													<div class="rating-stars">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star-o"></i>
+														<i class="fa fa-star-o"></i>
+													</div>
+													@elseif($danhgiasaotb == 4)
 													<div class="rating-stars">
 														<i class="fa fa-star"></i>
 														<i class="fa fa-star"></i>
@@ -156,6 +181,15 @@
 														<i class="fa fa-star"></i>
 														<i class="fa fa-star-o"></i>
 													</div>
+													@elseif($danhgiasaotb == 5)
+													<div class="rating-stars">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													</div>
+													@endif
 												</div>
 												<ul class="rating">
 													<li>
@@ -243,7 +277,7 @@
 										</div>
 
 										
-										
+										@if(Session::get('id_kh'))
 										<!-- /Reviews -->
 										<div class="review-form">
 											<div class="input-rating">
@@ -261,7 +295,7 @@
 													id="{{$value->id_sp}} - {{$count}}"
 													data-index="{{$count}}"
 													data-id_sp="{{$value->id_sp}}"
-													{{-- data-id_kh="{{$khachhang->id_kh}}" --}}
+													data-id_kh="{{$khachhang->id_kh}}"
 													data-sao="{{$sao}}"
 													{{-- class="rating" --}}
 													style="cursor:pointer; {{$color}}; font-size:20px;"
@@ -277,7 +311,7 @@
 												<form class="review-form">
 													@csrf
 													<input type="hidden" name="id_sp_bl" class="id_sp_bl" value="{{$value->id_sp}}">
-													<input style="margin-top: 5px" class="input ten_binhluan" type="text" value="{$khachhang->ten_kh}{}">
+													<input style="margin-top: 5px" class="input ten_binhluan" type="text" value="{{$khachhang->ten_kh}}">
 													{{-- <input class="input" type="email" placeholder="Email"> --}}
 													<textarea name="binhluan" class="input binhluan" placeholder="Đánh giá sản phẩm"></textarea>
 													<div id="notify_comment"></div>
@@ -285,6 +319,7 @@
 												</form>
 											</div>
 										</div>
+										@endif
 										<!-- /Review Form -->
 									</div>
 								</div>

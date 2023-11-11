@@ -11,12 +11,15 @@ use App\Models\Khachhang;
 use App\Models\Sanpham;
 use App\Models\Donhang;
 use App\Models\Admin;
+use App\Models\Chitietdonhang;
+use App\Models\Chitietnhaphang;
 use Illuminate\Support\Facades\Redirect;
 
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\MXH;
 use App\Models\MXH_Khachhang;
 use App\Models\Login;
+use App\Models\Nhaphang;
 use App\Models\Thongke;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -91,13 +94,46 @@ class AdminController extends Controller
     }
     public function show_dashboard(){
         $this->AuthLogin();
+        //Thongke
+        $thongke = Thongke::all();
+        $doanhso = 0;
+        $loinhuan = 0;
+        $soluong = 0;
+        foreach($thongke as $key => $thong){
+            $doanhso = $doanhso + $thong->doanhso_tk;
+            $loinhuan = $loinhuan + $thong->loinhuan_tk;
+            $soluong = $soluong + $thong->soluong_tk;
+        }
+        //Nhap hàng
+        $nhaphang = Chitietnhaphang::all();
+        $doanhsonhaphang = 0;
+        foreach($nhaphang as $key => $nhap){
+            $doanhsonhaphang += ($nhap->gia_nl * $nhap->soluong_nl);
+        }
 
+        $chitietdonhang = Chitietdonhang::all();
+        $soluong_sanpham = [];
+
+        foreach($chitietdonhang as $key => $chitiet){
+            $id_sp = $chitiet->id_sp;
+            $soluong_sp = $chitiet->soluong_sp;
+
+            if (isset($soluong_sanpham[$id_sp])) {
+                // Sản phẩm đã tồn tại trong mảng, cộng thêm số lượng
+                $soluong_sanpham[$id_sp] += $soluong_sp;
+            } else {
+                // Sản phẩm chưa tồn tại trong mảng, thêm vào và gán số lượng
+                $soluong_sanpham[$id_sp] = $soluong_sp;
+            }
+        }
+        arsort($soluong_sanpham);
         //Hiển thị donut 
         $sanpham12 = Sanpham::all()->count();
         $donhang12 = Donhang::all()->count();
-        $khachhang = Khachhang::all()->count();
-        $admin = Admin::all()->count();
-        return view('admin.dashboard')->with(compact('sanpham12', 'donhang12', 'khachhang', 'admin'));
+        $khachhang12 = Khachhang::all()->count();
+        $admin12 = Admin::all()->count();
+        return view('admin.dashboard')
+        ->with(compact('sanpham12', 'donhang12', 'khachhang12', 'admin12', 'doanhso', 'loinhuan', 'soluong', 'soluong_sanpham', 'doanhsonhaphang'));
     }
     public function dashboard(Request $request){
 

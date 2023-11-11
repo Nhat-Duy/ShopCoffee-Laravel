@@ -327,7 +327,7 @@ class CheckoutController extends Controller
 
     public function dangxuat(){
         Session::flush();
-        return Redirect('/login_checkout');
+        return redirect()->back();
     }
 
     public function dangnhap(Request $request){
@@ -338,7 +338,7 @@ class CheckoutController extends Controller
 
         if($result){
             Session::put('id_kh', $result->id_kh);
-            return Redirect('/thanhtoan');
+            return redirect('/thanhtoan');
         }else{
             return Redirect('/login_checkout');
             

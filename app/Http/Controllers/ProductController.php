@@ -151,6 +151,8 @@ class ProductController extends Controller
         $sao = Danhgiasao::where('id_sp',$id_sp)->where('id_kh', Session::get('id_kh'))->avg('sao');
         $khachhang = Khachhang::where('id_kh', Session::get('id_kh'))->first();
 
+        $khachhangdadanhgia = Khachhang::find('id_kh');
+
         $danhgiasaotb = round($danhgiasaotb);
         return view('page.sanpham.chitietsanpham')
         ->with('danhmuc',$danhmuc_sp)
@@ -163,6 +165,7 @@ class ProductController extends Controller
         ->with('danhgiasaotb', $danhgiasaotb)
         ->with('sao', $sao)
         ->with('khachhang', $khachhang)
+        ->with('khachhangdadanhgia', $khachhangdadanhgia)
         ->with('url_canonical', $url_canonical);
     }
 
@@ -184,6 +187,7 @@ class ProductController extends Controller
     public function load_comment(Request $request){
         $id_sp = $request->id_sp;
         $binhluan = Binhluan::where('id_sp_bl', $id_sp)->where('tinhtrang_bl', 0)->get();
+        // $binhluan = Binhluan::where('id_sp_bl', $id_sp)->whereIn('tinhtrang_bl', [0, 2])->get();
         $output = '';
         foreach($binhluan as $key=> $binh){
             if($binh->traloi_bl == ''){

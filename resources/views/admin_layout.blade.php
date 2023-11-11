@@ -474,7 +474,7 @@
             // ID of the element in which to draw the chart.
             element: 'chart',
             //Option
-            barColors: ['#a19230', '#c46b56', '#e31e4f', '#2ee31e'],
+            barColors: ['#a19230', '#2ee31e' , '#c46b56', '#e31e4f'],
             // pointFillColors: ['#ffffff'],
             // pointStrokeColors: ['black'],
             //   fillOpacity: 0.3,
@@ -482,9 +482,9 @@
               parseTime: false,
             // The name of the data record attribute that contains x-values.
             xkey: 'period',
-            ykeys: ['order', 'sales', 'profit', 'quantity'],
+            ykeys: ['order', 'quantity', 'sales', 'profit'],
             // behaveLikeLine: true,
-            labels: ['Sản phẩm bán được', 'Doanh số', 'Lợi nhuận', 'Số lượng']
+            labels: ['Sản phẩm bán được', 'Số lượng', 'Doanh số', 'Lợi nhuận']
       });
 
       function chart30dayorder(){

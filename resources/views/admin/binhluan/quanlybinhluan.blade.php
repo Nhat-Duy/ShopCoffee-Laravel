@@ -31,6 +31,7 @@
               </thead>
               <tbody>
                 @foreach ($binhluan as $key => $binh)  
+                @if($binh->traloi_bl == '')
                 <tr>
                     @if($binh->tinhtrang_bl == 1)
                     <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
@@ -42,7 +43,7 @@
                         </div>
                         </div>
                     </td>
-                    @else
+                    @elseif($binh->tinhtrang_bl == 0)
                     <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                         <div class="flex px-2 py-1">
                         <div class="flex flex-col justify-center">
@@ -101,6 +102,7 @@
                     </div>
                   </td>
                 </tr>
+                @endif
                 @endforeach
               </tbody>
             </table>
