@@ -47,7 +47,7 @@
                 @php
                 $i = 0;
                 @endphp
-                @foreach ($donhang2 as $key => $ord)
+                @foreach ($timdonhang as $key => $tim)
                 @php
                 $i += 1;
                 @endphp
@@ -63,7 +63,7 @@
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
                         {{-- @foreach ($donhang2 as $key => $don2) --}}
-                          <h6 class="ml-2 text-sm leading-normal">{{$ord->ten_kh}}</h6>                 
+                          <h6 class="ml-2 text-sm leading-normal">{{$tim->ten_kh}}</h6>                 
                         {{-- @endforeach --}}
                       </div>
                     </div>
@@ -71,14 +71,14 @@
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="ml-2 text-sm leading-normal">{{$ord->ma_dh}}</h6>
+                        <h6 class="ml-2 text-sm leading-normal">{{$tim->ma_dh}}</h6>
                       </div>
                     </div>
                   </td>
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="ml-2 text-sm leading-normal">{{$ord->created_at}}</h6>
+                        <h6 class="ml-2 text-sm leading-normal">{{$tim->created_at}}</h6>
                       </div>
                     </div>
                   </td>
@@ -86,13 +86,13 @@
                     <div class="flex px-2 py-1">
                       <div class="flex flex-col justify-center">
                         <h6 class="ml-2 text-sm leading-normal">
-                          @if($ord->tinhtrang_dh == 1)
+                          @if($tim->tinhtrang_dh == 1)
                               Chờ thanh toán 
-                          @elseif($ord->tinhtrang_dh == 2)
+                          @elseif($tim->tinhtrang_dh == 2)
                               Vận chuyển
-                          @elseif($ord->tinhtrang_dh == 3)
+                          @elseif($tim->tinhtrang_dh == 3)
                               Đang giao
-                          @elseif($ord->tinhtrang_dh == 4)
+                          @elseif($tim->tinhtrang_dh == 4)
                               Hoàn thành
                           @else
                               Đơn hàng bị hủy
@@ -113,17 +113,14 @@
                   </td> --}}
                   <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                     <div class="ml-auto">
-                        <a class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700" href="{{URL::to('/xemdonhang/'. $ord->ma_dh)}}"><i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Xem chi tiết đơn hàng</a>
-                        <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="relative z-10 inline-block px-4 py-3 mb-0 font-bold text-center text-transparent uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 bg-gradient-to-tl from-red-600 to-rose-400 hover:scale-102 active:opacity-85 bg-x-25 bg-clip-text" href="{{URL::to('/xoadonhang/'. $ord->ma_dh)}}"><i class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-rose-400 bg-x-25 bg-clip-text"></i>Xóa</a>
+                        <a class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700" href="{{URL::to('/xemdonhang/'. $tim->ma_dh)}}"><i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Xem chi tiết đơn hàng</a>
+                        <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="relative z-10 inline-block px-4 py-3 mb-0 font-bold text-center text-transparent uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 bg-gradient-to-tl from-red-600 to-rose-400 hover:scale-102 active:opacity-85 bg-x-25 bg-clip-text" href="{{URL::to('/xoadonhang/'. $tim->ma_dh)}}"><i class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-rose-400 bg-x-25 bg-clip-text"></i>Xóa</a>
                     </div>
                   </td>
                 </tr>
                 @endforeach
               </tbody>
             </table>
-            <div class="flex items-center justify-end mt-4">
-              {{$donhang2->links()}}
-            </div> 
           </div>
         </div>
       </div>

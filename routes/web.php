@@ -39,6 +39,7 @@ Route::post('/danhgiasao', [ProductController::class,'danhgiasao']);
 
 
 Route::post('/timkiem', [HomeController::class,'timkiem']);
+Route::post('/timkiemdonhang', [HomeController::class,'timkiemdonhang']);
 
 
 //Danh mục sản phẩm trang sản phẩm
@@ -197,3 +198,5 @@ Route::post('/locngay', [AdminController::class, 'locngay']);
 Route::post('/dashboard_filter', [AdminController::class, 'dashboard_filter']);
 Route::post('/ngay_order', [AdminController::class, 'ngay_order']);
 
+//Thanh toán VNPAY
+Route::post('/vnpay', [CheckoutController::class, 'vnpay']);

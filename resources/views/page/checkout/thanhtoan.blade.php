@@ -279,6 +279,9 @@ span.price {
                                     <td>
                                         <input type="submit" value="Cập nhật" name="update_cart" class="btn btn-info btn-sm update">
                                     </td>
+                                    <td>        
+                                        <a href="{{url('/xoatatca')}}" class="btn btn-success">Xóa tất cả</a>
+                                    </td>
                                     
                                     {{-- <td colspan="2" class="hidden-xs"></td> --}}
                                     @if(Session::get('coupon'))
@@ -286,9 +289,7 @@ span.price {
                                         <a href="{{url('/unset_coupon')}}" class="btn btn-success">Xóa mã khuyến mãi</a>
                                     </td>
                                     @endif
-                                    <td>        
-                                        <a href="{{url('/xoatatca')}}" class="btn btn-success">Xóa tất cả</a>
-                                    </td>
+                                    
                                     <td class="hidden-xs text-center">
 										<p>Tổng tiền: 
                                             <?php 
@@ -380,8 +381,16 @@ span.price {
                                 
                             </td>
                         </form>
+                        <form action="{{url('/vnpay')}}" method="POST">
+                            @csrf
+                            <td>
+                                <input type="hidden" name="total_vnpay" value="{{$tongsaugiam}}">
+                                <button type="submit" name="redirect" class="btn btn-success">Thanh toán VNPAY</a>
+                            </td>
+                        </form>
                         @endif
                     </tr>
+                        
                 </div>
             </div>
         </div>

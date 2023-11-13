@@ -299,7 +299,12 @@ class OderController extends Controller
     public function quanlydonhang(){
         $donhang = Donhang::orderBy('created_at', 'DESC')->get();
 
-        return view('admin.quanlydonhang')->with(compact('donhang'));
+        $donhang2 = Donhang::join('khachhang', 'donhang.id_kh', '=', 'khachhang.id_kh')
+                            ->select('donhang.*', 'khachhang.ten_kh')
+                            ->orderBy('created_at', 'DESC')
+                            ->paginate(6);
+
+        return view('admin.quanlydonhang')->with(compact('donhang', 'donhang2'));
     }
 
     public function lichsudonhang(Request $request){

@@ -186,7 +186,7 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="#" class="logo">
+								<a href="{{url('/')}}" class="logo">
 								<font style="font-style:normal; font-size: 33px;color: aliceblue;font-family: serif">
                                         ND Coffee
                                     </font>
@@ -202,8 +202,9 @@
                                     {{ csrf_field() }}
 									<select class="input-select">
 										<option value="0">Danh mục</option>
-										<option value="1">Trà Sữa</option>
-										<option value="1">Hồng Trà</option>
+										<option value="1">Cà Phê</option>
+										<option value="2">Trà Sữa</option>
+										<option value="3">Hồng Trà</option>
 									</select>
 									<input class="input" name="key" id="search" type="text" placeholder="Tìm Kiếm...">
 									<button type="submit" name="tim" id="search_btn" class="search-btn">Tìm</button>

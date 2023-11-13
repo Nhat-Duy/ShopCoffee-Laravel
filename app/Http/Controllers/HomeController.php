@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Session;
 use App\Http\Requests;
+use App\Models\Donhang;
 use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
@@ -63,6 +64,18 @@ class HomeController extends Controller
         ->with('meta_keywords', $meta_keywords)
         ->with('meta_title', $meta_title)
         ->with('url_canonical', $url_canonical);
+        
+    }
+
+    public function timkiemdonhang(Request $request){
+        $key = $request->key;
+
+        $timdonhang = Donhang::join('khachhang', 'donhang.id_kh', '=', 'khachhang.id_kh')
+        ->select('donhang.*', 'khachhang.ten_kh')
+        ->where('ten_kh', 'like', '%' .$key. '%')->limit(4)->get();
+
+        return view('admin.donhang.timdonhang')
+        ->with('timdonhang',$timdonhang);
         
     }
 
