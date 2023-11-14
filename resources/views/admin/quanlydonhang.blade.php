@@ -89,7 +89,7 @@
                           @if($ord->tinhtrang_dh == 1)
                               Chờ thanh toán 
                           @elseif($ord->tinhtrang_dh == 2)
-                              Vận chuyển
+                              Đã thanh toán
                           @elseif($ord->tinhtrang_dh == 3)
                               Đang giao
                           @elseif($ord->tinhtrang_dh == 4)

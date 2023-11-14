@@ -357,22 +357,22 @@ class OderController extends Controller
         }
     }
 
-    public function vanchuyen(Request $request){
+    public function dathanhtoan(Request $request){
 
         if(!Session::get('id_kh')){
             return redirect('login_checkout')->with('error', 'Vui lòng đăng nhập để xem lịch sử đơn hàng');
         }else{  
             //Seo
-            $meta_mota = "Vận chuyển";
-            $meta_keywords = "Vận chuyển";
-            $meta_title = "Vận chuyển";
+            $meta_mota = "Đã thanh toán";
+            $meta_keywords = "Đã thanh toán";
+            $meta_title = "Đã thanh toán";
             $url_canonical = $request->url();
             //EndSeo
             $danhmuc_sp = DB::table('danhmuc')->orderBy('id_danhmuc', 'desc')->get();
             $donhang = Donhang::where('id_kh', Session::get('id_kh'))->orderBy('created_at', 'DESC')->get();
             // $chitietdonhang = Chitietdonhang::where('id_kh', Session::get('id_kh'))->orderBy('created_at', 'DESC')->get();
 
-            return view('page.history.vanchuyen')
+            return view('page.history.dathanhtoan')
             ->with('danhmuc_sp', $danhmuc_sp)
             ->with('donhang', $donhang)
             ->with('meta_mota', $meta_mota)
@@ -458,6 +458,7 @@ class OderController extends Controller
     }
 
     public function xemchitietdonhang(Request $request, $ma_dh){
+        $ma_d = $ma_dh;
         if(!Session::get('id_kh')){
             return redirect('login_checkout')->with('error', 'Vui lòng đăng nhập để xem lịch sử đơn hàng');
         }else{  
@@ -507,6 +508,7 @@ class OderController extends Controller
             ->with('chitietdonhang_sp', $chitietdonhang_sp)
             ->with('dieukien_coupon', $dieukien_coupon)
             ->with('number_coupon', $number_coupon)
+            ->with('ma_d', $ma_d)
             ->with('madonhang', $madonhang);
         }
     }

@@ -43,10 +43,7 @@
 		
 		<link type="text/css" rel="stylesheet" href="{{asset('public/frontend/css/sweetalert.css')}}"/>
 
-		
-		
-         
-		
+	
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -690,9 +687,9 @@
                                 }
                             });
 
-                            // window.setTimeout(function(){
-                            //     location.reload();
-                            // }, 3000);
+                            window.setTimeout(function(){
+                                window.location.href = "{{url('/lichsudonhang')}}";
+                            }, 3000);
                             
                         } else {
                             swal("Đóng", "Đơn hàng chưa được gửi, hãy hoàn tất đơn hàng :)", "error");

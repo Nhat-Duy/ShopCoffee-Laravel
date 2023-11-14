@@ -128,7 +128,7 @@ Route::post('/luudiachi', [CheckoutController::class, 'luudiachi']);
 //Frontend
 Route::get('/lichsudonhang', [OderController::class, 'lichsudonhang']);
 Route::get('/chothanhtoan', [OderController::class, 'chothanhtoan']);
-Route::get('/vanchuyen', [OderController::class, 'vanchuyen']);
+Route::get('/dathanhtoan', [OderController::class, 'dathanhtoan']);
 Route::get('/danggiao', [OderController::class, 'danggiao']);
 Route::get('/hoanthanh', [OderController::class, 'hoanthanh']);
 Route::get('/huydon', [OderController::class, 'huydon']);

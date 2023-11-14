@@ -18,9 +18,9 @@ class HomeController extends Controller
         // ->join('danhmuc','danhmuc.id_danhmuc','=','sanpham.id_danhmuc')
         // ->orderBy('sanpham.id_sp','desc')->get();
         //Seo
-        $meta_mota = "Trà Sữa nhà làm";
-        $meta_keywords = "Thực phẩm chức năng";
-        $meta_title = "Thực phẩm chức năng Trà Sữa nhà làm Trà Sữa nhà làm";
+        $meta_mota = "Trang chủ";
+        $meta_keywords = "Trang chủ";
+        $meta_title = "Trang chủ";
         $url_canonical = $request->url();
         //EndSeo
 
@@ -46,9 +46,9 @@ class HomeController extends Controller
 
     public function timkiem(Request $request){
         //Seo
-        $meta_mota = "Trà Sữa nhà làm";
-        $meta_keywords = "Thực phẩm chức năng";
-        $meta_title = "Thực phẩm chức năng Trà Sữa nhà làm Trà Sữa nhà làm";
+        $meta_mota = "Tìm kiếm";
+        $meta_keywords = "Tìm kiếm";
+        $meta_title = "Tìm kiếm";
         $url_canonical = $request->url();
         //EndSeo
 

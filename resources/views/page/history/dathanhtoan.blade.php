@@ -18,7 +18,7 @@
                                 <a href="{{URL::to('/chothanhtoan')}}">Chờ thanh toán</a>
                             </li>
                             <li class="active">
-                                <a href="{{URL::to('/vanchuyen')}}">Vận chuyển</a>
+                              <a href="{{URL::to('/dathanhtoan')}}">Đã thanh toán</a>
                             </li>
                             <li>
                                 <a href="{{URL::to('/danggiao')}}">Đang giao</a>
@@ -87,7 +87,7 @@
                                       @if($ord->tinhtrang_dh == 1)
                                       Chờ thanh toán
                                       @elseif($ord->tinhtrang_dh == 2)
-                                      Vận chuyển
+                                      Đã thanh toán
                                       @elseif($ord->tinhtrang_dh == 3)
                                       Đang giao
                                       @elseif($ord->tinhtrang_dh == 4)

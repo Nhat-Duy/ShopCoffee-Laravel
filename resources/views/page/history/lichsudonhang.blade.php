@@ -20,7 +20,7 @@
                                 <a href="{{URL::to('/chothanhtoan')}}">Chờ thanh toán</a>
                             </li>
                             <li>
-                                <a href="{{URL::to('/vanchuyen')}}">Vận chuyển</a>
+                                <a href="{{URL::to('/dathanhtoan')}}">Đã thanh toán</a>
                             </li>
                             <li>
                                 <a href="{{URL::to('/danggiao')}}">Đang giao</a>
@@ -88,7 +88,7 @@
                                       @if($ord->tinhtrang_dh == 1)
                                       Chờ thanh toán
                                       @elseif($ord->tinhtrang_dh == 2)
-                                      Vận chuyển
+                                      Đã thanh toán
                                       @elseif($ord->tinhtrang_dh == 3)
                                       Đang giao
                                       @elseif($ord->tinhtrang_dh == 4)
@@ -102,10 +102,34 @@
                                         <a class="btn btn-primary" href="{{URL::to('/xemchitietdonhang/'. $ord->ma_dh)}}">
                                           <i class="fas fa-pencil-alt"></i> Xem chi tiết đơn hàng
                                         </a>
-                                        <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="btn btn-danger" href="{{URL::to('/xoadonhang/'. $ord->ma_dh)}}">
-                                          <i class="far fa-trash-alt"></i> Xóa
-                                        </a>
+                                        {{-- <button onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="btn btn-danger">
+                                          <i class="far fa-trash-alt"></i> Hủy đơn hàng
+                                        </button> --}}
+
                                       </div>
+                                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#huydon">Hủy đơn hàng</button>
+
+                                        <!-- Modal -->
+                                        <div id="huydon" class="modal fade" role="dialog">
+                                          <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Lý do hủy đơn hàng</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                <p><textarea class="with-full" required placeholder="Lý do hủy đơn hàng...(bắt buộc nhập)"></textarea></p>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                                <button type="button" class="btn btn-success">Gửi</button>
+                                              </div>
+                                            </div>
+
+                                          </div>
+                                        </div>
                                     </td>
                                   </tr>
                                   @endforeach

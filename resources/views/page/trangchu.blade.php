@@ -150,7 +150,7 @@
 
                                 <div class='product'>
                                     <a href='{{URL::to('/chitietsanpham/'.$sanpham->id_sp)}}'><div class='product-img'>
-                                        <img src='{{URL::to('public/upload/sanpham/'.$sanpham->hinhanh_sp)}}' style='max-height: 170px;' alt=''>
+                                        <img src='{{URL::to('public/upload/sanpham/'.$sanpham->hinhanh_sp)}}' style='max-height: 300px;' alt=''>
                                         <div class='product-label'>
                                             <span class='sale'>-30%</span>
                                             <span class='new'>NEW</span>

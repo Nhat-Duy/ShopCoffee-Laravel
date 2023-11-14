@@ -434,14 +434,14 @@ class CheckoutController extends Controller
 
     public function vnpay(Request $request){
         $data = $request->all();
-        $code_cart = rand(00,9999);
+        // $code_cart = rand(00,9999);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://localhost/shopcoffee/thanhtoan";
+        $vnp_Returnurl = "http://localhost/shopcoffee/dathanhtoan";
         $vnp_TmnCode = "UNIZP7X5";//Mã website tại VNPAY 
         $vnp_HashSecret = "LASEBWPWREBJSNQTPENEQOWJRMORHKCZ"; //Chuỗi bí mật
 
-        $vnp_TxnRef = $code_cart; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        $vnp_OrderInfo = 'Thanh toán đơn hàng test';
+        $vnp_TxnRef = $data['ma_dh']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_OrderInfo = 'Thanh toán đơn hàng';
         $vnp_OrderType = 'billpayment';
         $vnp_Amount = $data['total_vnpay'] * 100;
         $vnp_Locale = 'vn';
@@ -497,9 +497,11 @@ class CheckoutController extends Controller
             , 'message' => 'success'
             , 'data' => $vnp_Url);
             if (isset($_POST['redirect'])) {
+                Donhang::updateDonhangByMaDH($data['ma_dh'], 2);
                 header('Location: ' . $vnp_Url);
                 die();
             } else {
+                Donhang::updateDonhangByMaDH($data['ma_dh'], 2);
                 echo json_encode($returnData);
             }
     }

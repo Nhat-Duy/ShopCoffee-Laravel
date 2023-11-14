@@ -18,7 +18,7 @@
                                 <a href="{{URL::to('/chothanhtoan')}}">Chờ thanh toán</a>
                             </li>
                             <li>
-                                <a href="{{URL::to('/vanchuyen')}}">Vận chuyển</a>
+                                <a href="{{URL::to('/dathanhtoan')}}">Đã thanh toán</a>
                             </li>
                             <li>
                                 <a href="{{URL::to('/danggiao')}}">Đang giao</a>
@@ -38,8 +38,6 @@
                     <div id="cart_checkout">
                         <div class="main">
                             <div class="table-responsive">
-                                <form action="{{url('/update_cart')}}" method="POST">
-                                    @csrf
                                     <div id="issessionset"></div>
                                     <?php
                                     $message = Session::get('message');
@@ -96,7 +94,7 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td></td>
+                                                
                                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                   <div class="flex px-2 py-1">
                                                     <div class="flex flex-col justify-center">
@@ -121,7 +119,7 @@
                               
                                                         @endif
                                                         <br>
-                                                        Phí ship: {{number_format($chitiet->feeship_sp). ' '. 'VNĐ'}}
+                                                            Phí ship: {{number_format($chitiet->feeship_sp). ' '. 'VNĐ'}}
                                                         <br>
                                                         <div class="total" style="position: absolute; right: 5%; margin-top: 5px; margin-right: 89px;">
                                                             <h4>Tổng tiền: <strong style="color: red;">{{number_format($tong_coupon). ' '. 'VNĐ'}}</strong></h4>
@@ -130,11 +128,17 @@
                                                     </div>
                                                   </div>
                                                 </td>
+                                                <form action="{{url('/vnpay')}}" method="POST">
+                                                    @csrf
+                                                    <td>
+                                                        <input type="hidden" name="ma_dh" value="{{$ma_d}}">
+                                                        <input type="hidden" name="total_vnpay" value="{{$tong_coupon}}">
+                                                        <button type="submit" name="redirect" class="btn btn-success">Thanh toán VNPAY</a>
+                                                    </td>
+                                                </form>
                                               </tr>
                                         </tbody>
                                     </table>
-                                    
-                                </form>
                             </div>
                         </div>
                     </div>

@@ -14,4 +14,12 @@ class Donhang extends Model
     protected $primaryKey = 'id_dh';
     protected $table = 'donhang';
 
+    public static function updateDonhangByMaDH($ma_dh, $tinhtrang_dh) {
+        $donhang = Donhang::where('ma_dh', $ma_dh)->first();
+        if ($donhang) {
+            $donhang->tinhtrang_dh = $tinhtrang_dh;
+            $donhang->save();
+        }
+    }
+
 }
