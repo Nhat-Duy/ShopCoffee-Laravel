@@ -272,7 +272,7 @@
                 @php
                     $sanpham = App\Models\Sanpham::find($id_sp);
                 @endphp
-                <h6>{{$sanpham->ten_sp}}: {{$soluong_sp}}</h6>
+                <h6>{{$sanpham->ten_sp}}: {{$soluong_sp}} | Tổng: {{number_format($sanpham->gia_sp*$soluong_sp). ' '. 'VNĐ'}}</h6>
             @endforeach
           </div>
           <div class="flex-auto p-4">

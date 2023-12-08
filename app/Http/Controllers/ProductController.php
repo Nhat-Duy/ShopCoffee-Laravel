@@ -192,46 +192,32 @@ class ProductController extends Controller
         foreach($binhluan as $key=> $binh){
             if($binh->traloi_bl == ''){
                 $output .= '
-                            
-                                <ul class="reviews">
-                                    <li>
-                                        <div class="review-heading">
-                                            <h5 class="name">@'.$binh->ten_bl.'</h5>
-                                            <p class="date">'.$binh->ngay_bl.'</p>
-                                            <div class="review-rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o empty"></i>
-                                            </div>
-                                        </div>
-                                        <div class="review-body">
-                                            <p>'.$binh->binhluan.'</p>
-                                        </div>
-                                    </li>
-                                </ul>
+                
+                    <div class="container-cmt">
+                        <div class="cmt-head size">
+                            <div class="name">@'.$binh->ten_bl.'</div>
+                            <div class="date-cmt">'.$binh->ngay_bl.'</div>
+                        </div>
+                        <div class="content size">'.$binh->binhluan.'</div>
+                    </div>                    
                 ';
             }
+            
             foreach($binhluan as $key => $traloi){
-                if($traloi->traloi_bl == $binh->id_bl){
-                            
+                if($traloi->traloi_bl == $binh->id_bl){                            
                 $output .= '
-                            <ul class="reviews" style="margin: 5px 20px;">
-                                <li>
-                                    <div class="review-heading">
-                                        <h6 class="name">@ND Coffee</h6>
-                                        <p class="date"></p>
-                                    </div>
-                                    <div>
-                                        <p>'.$traloi->binhluan.'</p>
-                                    </div>
-                                </li>
-                            </ul>
+                    <div class="rep-cmt">
+                        <div class="cmt-head">
+                            <div class="name">
+                                Admin
+                            </div>
+                            <div class="content">'.$traloi->binhluan.'</div>
+                        </div>
+                    </div>	
+                    
                 ';
-                }
-            }
-                        
+                }                  
+            }                    
         }
         echo $output;
     }

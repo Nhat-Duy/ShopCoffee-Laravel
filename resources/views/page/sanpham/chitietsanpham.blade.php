@@ -60,14 +60,12 @@
 							</div>
 							<p>{{$value->mota_sp}}</p>
 
-								<div class="add-to-cart">
+								<div class="">
 									<div class="qty-label">
-										Số lượng
+										Số lượng: 1
 										<div class="input-number">
-											<input name="qty" type="number" value="1">
+											<input name="qty" type="hidden" value="1">
 											<input name="idsp_hidden" type="hidden" value="{{$value->id_sp}}">
-											<span class="qty-up">+</span>
-											<span class="qty-down">-</span>
 										</div>
 									</div>
 									<div class="add-to-cart btn-group" data-id="{{$value->id_sp}}" name="add-to-cart" style="margin-left: 25px; margin-top: 15px">
@@ -265,7 +263,9 @@
 										<!-- Reviews -->
 										<div class="col-md-6">
 											<div id="reviews">
-												<div id="comment_show"></div>
+												<div id="comment_show">																																																
+												</div>
+												
 												<ul class="reviews-pagination">
 													<li class="active">1</li>
 													<li><a href="#">2</a></li>

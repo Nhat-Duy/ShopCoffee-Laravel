@@ -87,6 +87,7 @@
                                                 <td style="vertical-align: middle;">{{$chitiet->soluong_sp}}</td>
                                                 <td style="vertical-align: middle;">{{number_format($chitiet->gia_sp). ' '. 'VNĐ'}}</td>
                                                 <td style="vertical-align: middle;">{{number_format($tong). ' '. 'VNĐ'}}</td>
+                                                
                                             </tr>
                                             @endforeach
                                             <tr>
@@ -94,6 +95,10 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
+                                                
+                                                @if($donhangss)
+                                                    <td></td>
+                                                @endif
                                                 
                                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                   <div class="flex px-2 py-1">
@@ -121,13 +126,14 @@
                                                         <br>
                                                             Phí ship: {{number_format($chitiet->feeship_sp). ' '. 'VNĐ'}}
                                                         <br>
-                                                        <div class="total" style="position: absolute; right: 5%; margin-top: 5px; margin-right: 89px;">
+                                                        <div class="total" >
                                                             <h4>Tổng tiền: <strong style="color: red;">{{number_format($tong_coupon). ' '. 'VNĐ'}}</strong></h4>
                                                         </div>
                                                       </h5>
                                                     </div>
                                                   </div>
                                                 </td>
+                                                @if (!$donhangss)  
                                                 <form action="{{url('/vnpay')}}" method="POST">
                                                     @csrf
                                                     <td>
@@ -136,6 +142,21 @@
                                                         <button type="submit" name="redirect" class="btn btn-success">Thanh toán VNPAY</a>
                                                     </td>
                                                 </form>
+                                                @endif
+                                                @if($donhangss)
+                                                    <td>
+                                                        <div id="review-form">
+                                                            <form class="review-form">
+                                                                @csrf
+                                                                <input type="hidden" name="ma_d" class="ma_d" value="{{$ma_d}}">
+                                                                <input type="hidden" name="ten_dgdh" class="ten_dgdh" value="{{Session::get('ten_kh')}}">
+                                                                <textarea name="noidung_dgdh" class="noidung_dgdh" placeholder="Đánh giá đơn hàng"></textarea>
+                                                                <div id="notify_comment"></div>
+                                                                <button type="button" class="primary-btn danhgiadonhang">Gửi</button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                @endif
                                               </tr>
                                         </tbody>
                                     </table>

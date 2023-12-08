@@ -133,6 +133,8 @@ Route::get('/danggiao', [OderController::class, 'danggiao']);
 Route::get('/hoanthanh', [OderController::class, 'hoanthanh']);
 Route::get('/huydon', [OderController::class, 'huydon']);
 Route::get('/xemchitietdonhang/{ma_dh}', [OderController::class, 'xemchitietdonhang']);
+Route::post('/danhgiadonhang', [OderController::class,'danhgiadonhang']);
+
 //Backend
 Route::group(['middleware' => 'admin.author'], function(){
     Route::get('/indonhang/{checkout_code}', [OderController::class, 'indonhang']);

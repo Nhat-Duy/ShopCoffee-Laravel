@@ -304,48 +304,65 @@
                         <form>
                           @csrf
                           <select class="xulydonhang">
-                            <option value="" >--Chọn xử lý đơn hàng--</option>
+                            {{-- <option value="" >--Chọn xử lý đơn hàng--</option> --}}
                             <option value="1" id="{{$don->id_dh}}" selected>Chờ thanh toán</option>
-                            <option value="2" id="{{$don->id_dh}}">Vận chuyển</option>
-                            <option value="3" id="{{$don->id_dh}}">Đang giao</option>
-                            <option value="4" id="{{$don->id_dh}}">Hoàn thành đơn hàng</option>
-                            <option value="5" id="{{$don->id_dh}}">Đơn hàng bị hủy</option>
+                            {{-- <option value="2" id="{{$don->id_dh}}">Đã thanh toán</option> --}}
+                            <option value="6" id="{{$don->id_dh}}">Vận chuyển</option>
+                            {{-- <option value="4" id="{{$don->id_dh}}">Hoàn thành đơn hàng</option>
+                            <option value="5" id="{{$don->id_dh}}">Đơn hàng bị hủy</option> --}}
                           </select>
                         </form>
                       @elseif($don->tinhtrang_dh == 2)
                         <form>
                           @csrf
                           <select class="xulydonhang">
-                            <option value="" >--Chọn xử lý đơn hàng--</option>
+                            {{-- <option value="" >--Chọn xử lý đơn hàng--</option> --}}
+                            {{-- <option value="1" id="{{$don->id_dh}}">Chờ thanh toán</option> --}}
+                            <option value="2" id="{{$don->id_dh}}" selected>Đã thanh toán</option>
+                            <option value="6" id="{{$don->id_dh}}">Vận chuyển</option>
+                            {{-- <option value="4" id="{{$don->id_dh}}">Hoàn thành đơn hàng</option>
+                            <option value="5" id="{{$don->id_dh}}">Đơn hàng bị hủy</option> --}}
+                          </select>
+                        </form>
+                      @elseif($don->tinhtrang_dh == 6)
+                        <form>
+                          @csrf
+                          <p>Chọn hình thức vận chuyển</p>
+                          <input type="checkbox"> Grab
+                          <input type="checkbox"> Shoppe Food
+                          <input type="checkbox"> Baemin
+                          <select class="xulydonhang">
+                            {{-- <option value="" >--Chọn xử lý đơn hàng--</option>
                             <option value="1" id="{{$don->id_dh}}">Chờ thanh toán</option>
-                            <option value="2" id="{{$don->id_dh}}" selected>Vận chuyển</option>
+                            <option value="2" id="{{$don->id_dh}}">Đã thanh toán</option> --}}
+                            <option value="6" id="{{$don->id_dh}}" selected>Vận chuyển</option>
                             <option value="3" id="{{$don->id_dh}}">Đang giao</option>
-                            <option value="4" id="{{$don->id_dh}}">Hoàn thành đơn hàng</option>
-                            <option value="5" id="{{$don->id_dh}}">Đơn hàng bị hủy</option>
+                            {{-- <option value="4" id="{{$don->id_dh}}" selected>Hoàn thành đơn hàng</option> --}}
+                            {{-- <option value="5" id="{{$don->id_dh}}">Đơn hàng bị hủy</option> --}}
                           </select>
                         </form>
                       @elseif($don->tinhtrang_dh == 3)
                         <form>
                           @csrf
                           <select class="xulydonhang">
-                            <option value="" >--Chọn xử lý đơn hàng--</option>
+                            {{-- <option value="" >--Chọn xử lý đơn hàng--</option>
                             <option value="1" id="{{$don->id_dh}}">Chờ thanh toán</option>
-                            <option value="2" id="{{$don->id_dh}}">Vận chuyển</option>
+                            <option value="2" id="{{$don->id_dh}}">Đã thanh toán</option> --}}
                             <option value="3" id="{{$don->id_dh}}" selected>Đang giao</option>
                             <option value="4" id="{{$don->id_dh}}">Hoàn thành đơn hàng</option>
-                            <option value="5" id="{{$don->id_dh}}">Đơn hàng bị hủy</option>
+                            {{-- <option value="5" id="{{$don->id_dh}}">Đơn hàng bị hủy</option> --}}
                           </select>
                         </form>
                       @elseif($don->tinhtrang_dh == 4)
                         <form>
                           @csrf
                           <select class="xulydonhang">
-                            <option value="" >--Chọn xử lý đơn hàng--</option>
+                            {{-- <option value="" >--Chọn xử lý đơn hàng--</option>
                             <option value="1" id="{{$don->id_dh}}">Chờ thanh toán</option>
-                            <option value="2" id="{{$don->id_dh}}">Vận chuyển</option>
-                            <option value="3" id="{{$don->id_dh}}">Đang giao</option>
+                            <option value="2" id="{{$don->id_dh}}">Đã thanh toán</option>
+                            <option value="3" id="{{$don->id_dh}}">Đang giao</option> --}}
                             <option value="4" id="{{$don->id_dh}}" selected>Hoàn thành đơn hàng</option>
-                            <option value="5" id="{{$don->id_dh}}">Đơn hàng bị hủy</option>
+                            {{-- <option value="5" id="{{$don->id_dh}}">Đơn hàng bị hủy</option> --}}
                           </select>
                         </form>
                         @else
@@ -354,7 +371,7 @@
                           <select class="xulydonhang">
                             <option value="" >--Chọn xử lý đơn hàng--</option>
                             <option value="1" id="{{$don->id_dh}}">Chờ thanh toán</option>
-                            <option value="2" id="{{$don->id_dh}}">Vận chuyển</option>
+                            <option value="2" id="{{$don->id_dh}}">Đã thanh toán</option>
                             <option value="3" id="{{$don->id_dh}}">Đang giao</option>
                             <option value="4" id="{{$don->id_dh}}">Hoàn thành đơn hàng</option>
                             <option value="5" id="{{$don->id_dh}}" selected>Đơn hàng bị hủy</option>

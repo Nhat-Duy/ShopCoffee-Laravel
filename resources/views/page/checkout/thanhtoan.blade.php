@@ -115,9 +115,9 @@ span.price {
 								<td>
 									<select name="city" id="city" class="bg-slate-400 choose city">
 										<option value="">-- Chọn thành phố --</option> 
-										@foreach ($city as $key => $ci)
-										  <option value="{{$ci->matp}}">{{$ci ->name_city}}</option>                                    
-										@endforeach
+										{{-- @foreach ($city as $key => $ci) --}}
+										  <option value="92">Thành phố Cần Thơ</option>                                    
+										{{-- @endforeach --}}
 									</select>
 								</td>  
 							  </div>
@@ -381,13 +381,13 @@ span.price {
                                 
                             </td>
                         </form>
-                        <form action="{{url('/vnpay')}}" method="POST">
+                        {{-- <form action="{{url('/vnpay')}}" method="POST">
                             @csrf
                             <td>
                                 <input type="hidden" name="total_vnpay" value="{{$tongsaugiam}}">
                                 <button type="submit" name="redirect" class="btn btn-success">Thanh toán VNPAY</a>
                             </td>
-                        </form>
+                        </form> --}}
                         @endif
                     </tr>
                         

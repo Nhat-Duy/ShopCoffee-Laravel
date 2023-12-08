@@ -36,6 +36,9 @@
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="{{asset('public/frontend/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" 
+        integrity="sha512-HXXR0l2yMwHDrDyxJbrMD9eLvPe3z3qL3PPeozNTsiHJEENxx8DH2CxmV05iwG0dwoz5n4gQZQyYLUNt1Wdgfg==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}"/>
@@ -100,7 +103,9 @@
             box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 
         }
-       
+        .modal-backdrop{
+            display: none;
+        }
         .glyphicon{
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
@@ -698,6 +703,29 @@
                 });
                 
             });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.danhgiadonhang').click(function(){
+                        var ma_d = $('.ma_d').val(); 
+                        var ten_dgdh = $('.ten_dgdh').val(); 
+                        var noidung_dgdh = $('.noidung_dgdh').val(); 
+                        var _token = $('input[name="_token"]').val();
+
+                        // alert(ten_dgdh);
+                        // alert(noidung_dgdh);
+                        // alert(_token);
+                        $.ajax({
+                            url : '{{url('/danhgiadonhang')}}',
+                            method: 'POST',
+                            data: {ten_dgdh:ten_dgdh, noidung_dgdh:noidung_dgdh, ma_d:ma_d, _token:_token},
+                            success:function(data){
+                                $('#notify_comment').html('<p class="text text-success">Đánh giá đơn hàng thành công</p>');       
+                            }
+                        });
+                    });
+                });
         </script>
             
                               

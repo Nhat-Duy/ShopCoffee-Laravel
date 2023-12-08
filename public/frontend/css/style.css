@@ -45,6 +45,7 @@ Table OF Contents
 11 > FOOTER
 11 > SLICK STYLE
 12 > RESPONSIVE
+13 > comment
 ------------------------------------*/
 
 /*=========================================================
@@ -1794,11 +1795,16 @@ background: linear-gradient(to bottom, #f64f59, #c471ed, #12c2e9); /* W3C, IE 10
 /*-- Reviews --*/
 
 .reviews li {
+  display: flex;
+  flex-wrap: wrap;
   position: relative;
   padding-left: 145px;
   margin-bottom: 30px;
+  width: 100%;
 }
-
+.reviews li .size{
+  width: 100%;
+}
 .reviews .review-heading {
   position: absolute;
   width: 130px;
@@ -1854,7 +1860,9 @@ background: linear-gradient(to bottom, #f64f59, #c471ed, #12c2e9); /* W3C, IE 10
   background-color: #E4E7ED;
   color: #D10024;
 }
-
+.container-cmt{
+  display: flex;
+}
 .reviews-pagination li.active {
   background-color: #D10024;
   border-color: #D10024;
@@ -2389,4 +2397,40 @@ background: linear-gradient(to bottom, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, 
     position: relative;
     z-index: 3;
 
+}
+/* comment */
+.container-cmt{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: last baseline;
+}
+.container-cmt .size{
+  width: 100%;
+}
+
+.cmt-head .name{
+  font-weight: 800;
+}
+.cmt-head .date-cmt{
+  font-style: italic;
+  font-size: 11px;
+}
+.rep-cmt{
+  margin-top: 10px;
+  margin-left: 40px;
+}
+/* checkout */
+.them-dia-chi {
+  padding: 30px;
+  width: 40%;
+  margin-left: 30%;
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+}
+.them-dia-chi .title {
+  font-weight: 600;
+}
+.them-dia-chi .input{
+  border: 1.5px solid black;
 }

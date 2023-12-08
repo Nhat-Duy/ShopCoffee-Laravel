@@ -8,7 +8,7 @@
               <div class="p-4 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                 <div class="flex flex-wrap -mx-3">
                   <div class="flex items-center flex-none w-1/2 max-w-full px-3">
-                    <h6 class="mb-0">Nhập Kho</h6>
+                    <h6 class="mb-0">Nhập Hàng</h6>
                   </div>
                   <div class="flex-none w-1/2 max-w-full px-3 text-right">
                     <a class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25" href="{{URL::to('quanlynhaphang')}}"> <i class="fas fa-plus"> </i>&nbsp;&nbsp;Quản lý nhập hàng</a>
@@ -132,7 +132,7 @@
             @csrf
             <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
               <div class="ml-auto">
-                  <a class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25" > <i class="fas fa-plus"> </i>&nbsp;&nbsp;<input type="submit" value="Nhập vào kho" name="xacnhannhapkho" class="btn btn-info btn-sm update"></a>
+                  <a class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25" > <i class="fas fa-plus"> </i>&nbsp;&nbsp;<input type="submit" value="Nhập hàng" name="xacnhannhapkho" class="btn btn-info btn-sm update"></a>
               </div>
           </td>
           </form>

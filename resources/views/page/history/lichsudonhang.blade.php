@@ -105,9 +105,8 @@
                                         {{-- <button onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="btn btn-danger">
                                           <i class="far fa-trash-alt"></i> Hủy đơn hàng
                                         </button> --}}
-
                                       </div>
-                                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#huydon">Hủy đơn hàng</button>
+                                      {{-- <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#huydon">Hủy đơn hàng</button>
 
                                         <!-- Modal -->
                                         <div id="huydon" class="modal fade" role="dialog">
@@ -129,7 +128,7 @@
                                             </div>
 
                                           </div>
-                                        </div>
+                                        </div> --}}
                                     </td>
                                   </tr>
                                   @endforeach

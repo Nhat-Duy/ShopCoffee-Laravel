@@ -96,37 +96,21 @@ span.price {
 }
 </style>
 
-					
+
 <section class="section">       
 	<div class="container">
 		<div>
 			<div>
-				<div class="container-checkout">
+				<div class="them-dia-chi">
 					<div>
-                        <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
+                        
                             <form action="{{URL::to('/luudiachi')}}" method="post">
                               {{csrf_field()}}
-                              <tbody>
-                                <tr>
-                                  <td>
-                                    <div class="">
-                                      <div class="flex flex-col justify-center">
-                                        <td class="text-black">Địa chỉ</td>
-                                        <td><input type="text" name="diachi_dc" class="border-2 border-black" pattern=".{3,}" title="Vui lòng nhập ít nhất 3 ký tự" required></td>  
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <div class="ml-auto text-left">
-                                      <button type="submit" name="themdiachi" class="relative z-10 inline-block px-4 py-3 mb-0 font-bold text-center text-transparent uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 bg-gradient-to-tl from-red-600 to-rose-400 hover:scale-102 active:opacity-85 bg-x-25 bg-clip-text" >Thêm</button>
-                                  </div>
-                                  </td>
-                                </tr>
-                              </tbody>
+                              <label class="title" for="diachi_dc"><i class="ri-home-3-line"></i> Địa chỉ: </label>
+                              <input type="text" id="diachi_dc" name="diachi_dc" class="input" pattern=".{3,}" title="Vui lòng nhập ít nhất 3 ký tự" required>
+                              <button type="submit" name="themdiachi" class="btn btn-info" >Thêm</button>		
                             </form>
-                          </table>
+                      
 					</div>
 				</div>
 			</div>

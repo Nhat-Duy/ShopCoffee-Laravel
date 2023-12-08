@@ -13,6 +13,7 @@ use App\Models\Sanpham;
 use App\Models\Thongke;
 use App\Models\Nhaphang;
 use App\Models\Chitietnhaphang;
+use App\Models\Danhgiadonhang;
 use Barryvdh\DomPDF\PDF;
 
 use Carbon\Carbon;
@@ -474,6 +475,8 @@ class OderController extends Controller
             $chitietdonhang = Chitietdonhang::with('sanpham')->where('ma_dh', $ma_dh)->get();
 
             $madonhang = Donhang::where('ma_dh', $ma_dh)->first();
+            $donhangss = Donhang::where('ma_dh', $ma_dh)->where('tinhtrang_dh', '4')->first();
+
 
             $id_kh = $madonhang->id_kh;
             $id_tt = $madonhang->id_tt;
@@ -482,6 +485,8 @@ class OderController extends Controller
             $thanhtoan = Thanhtoan::where('id_tt', $id_tt)->first();
 
             $chitietdonhang_sp = Chitietdonhang::with('sanpham')->where('ma_dh', $ma_dh)->get();
+
+            // $donhangss = Donhang::getDonhangByTinhtrang(4);
 
             foreach($chitietdonhang_sp as $key => $chitiet){
                 $coupon_sp = $chitiet->coupon_sp;
@@ -509,7 +514,21 @@ class OderController extends Controller
             ->with('dieukien_coupon', $dieukien_coupon)
             ->with('number_coupon', $number_coupon)
             ->with('ma_d', $ma_d)
+            ->with('donhangss', $donhangss)
             ->with('madonhang', $madonhang);
         }
+    }
+
+    public function danhgiadonhang(Request $request){
+        $noidung_dgdh = $request->noidung_dgdh;
+        $ten_dgdh = $request->ten_dgdh;
+        $ma_d = $request->ma_d;
+
+        $danhgiadonhang_new = new Danhgiadonhang();
+        $danhgiadonhang_new->noidung_dgdh = $noidung_dgdh;
+        $danhgiadonhang_new->ten_dgdh = $ten_dgdh;
+        $danhgiadonhang_new->ma_dgdh = $ma_d;
+        $danhgiadonhang_new->save(); 
+
     }
 }   

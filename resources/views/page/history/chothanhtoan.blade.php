@@ -101,9 +101,9 @@
                                         <a class="btn btn-primary" href="{{URL::to('/xemchitietdonhang/'. $ord->ma_dh)}}">
                                           <i class="fas fa-pencil-alt"></i> Xem chi tiết đơn hàng
                                         </a>
-                                        <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="btn btn-danger" href="{{URL::to('/xoadonhang/'. $ord->ma_dh)}}">
+                                        {{-- <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="btn btn-danger" href="{{URL::to('/xoadonhang/'. $ord->ma_dh)}}">
                                           <i class="far fa-trash-alt"></i> Xóa
-                                        </a>
+                                        </a> --}}
                                       </div>
                                     </td>
                                   </tr>

@@ -331,9 +331,9 @@ class CheckoutController extends Controller
     }
 
     public function dangnhap(Request $request){
-        $email = $request->email;
+        $sdt = $request->sdt;
         $matkhau = md5($request->matkhau);
-        $result = DB::table('khachhang')->where('email_kh',$email)->where('matkhau_kh',$matkhau)->first();
+        $result = DB::table('khachhang')->where('sdt_kh',$sdt)->where('matkhau_kh',$matkhau)->first();
 
 
         if($result){
